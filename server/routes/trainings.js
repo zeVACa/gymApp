@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controllerTrainings = require('../controllers/trainings');
 
-router.get('/', controllerTrainings.getRoot);
+router.get('/trainings', controllerTrainings.getRoot);
 
 
 
