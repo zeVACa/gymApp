@@ -3,14 +3,9 @@ const app = require('./app');
 const host = '127.0.0.1';
 const port = 3000;
 
-const cors = require('cors');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
-app.use(cors());
 
 
 async function start() {

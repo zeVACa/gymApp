@@ -3,9 +3,10 @@
 module.exports.getRoot = (req, res) => {
    const Users = require('../models/Users');
 
+
    const user = new Users({
-      email: "test-email@mail.ru",
-      password: "test-password"
+      email: req.body.email,
+      password: req.body.password
    });
 
    res.json(user);

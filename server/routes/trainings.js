@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controllerTrainings = require('../controllers/trainings');
 
-router.get('/trainings', controllerTrainings.getRoot);
-
+router.post('/trainings', controllerTrainings.getRoot);
 
 
 
