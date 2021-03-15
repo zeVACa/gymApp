@@ -1,5 +1,5 @@
 module.exports.register = (req, res) => {
-  res.send('hello from register');
+  res.send('hello from registerrrrrrr');
 };
 
 module.exports.login = (req, res) => {

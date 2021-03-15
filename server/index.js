@@ -1,21 +1,22 @@
+require('dotenv').config();
 const app = require('./app');
 
-const host = '127.0.0.1';
-const port = process.env.PORT;
+const HOST = process.env.HOST;
+const PORT = process.env.PORT;
 
 const mongoose = require('mongoose');
 
 async function start() {
   try {
-    //  const urlDB = `mongodb+srv://logunik:dan555dan@cluster0.6kbtk.mongodb.net/users`;
+    const urlDB = `mongodb+srv://${process.env.dbLogin}:${process.env.dbPassword}@cluster0.6kbtk.mongodb.net/users`;
 
     //  await mongoose.connect(urlDB, {
     //    useNewUrlParser: true,
     //    useUnifiedTopology: true,
     //  });
 
-    app.listen(port, host, async (req, res) => {
-      await console.log(`Server lives on ${port}:${host}`);
+    app.listen(PORT, HOST, async (req, res) => {
+      await console.log(`Server lives on ${PORT}:${HOST}`);
     });
 
     app.get('/', (req, res) => {
