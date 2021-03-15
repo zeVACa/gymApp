@@ -4,6 +4,4 @@ const controllerTrainings = require('../controllers/trainings');
 
 router.post('/trainings', controllerTrainings.getRoot);
 
-
-
 module.exports = router;
