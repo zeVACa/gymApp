@@ -1,0 +1,23 @@
+* {
+  /* border: 1px solid red; */
+}
+
+body {
+  /* background: #000; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-window {
+  padding: 80px 60px;
+  border: 1px solid #e5e5e5;
+  border-radius: 25px;
+}
+
+input,
+button {
+  margin-bottom: 20px;
+  /* background: #000; */
+}

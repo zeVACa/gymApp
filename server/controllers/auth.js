@@ -46,11 +46,23 @@ module.exports.register = async (req, res) => {
 
 module.exports.login = async (req, res) => {
   try {
+    console.log(req.body);
+
+    const candidate = req.body;
+
+    const user = await User.findOne({ username: candidate.username });
+
+    console.log('user from db', user);
+
+    if (!user) {
+      return res.status(401).json({ message: `user ${user.username} is unauthorised` });
+    }
+
+    res.status(200).json({ message: `user ${user.username} is authorised sucessfully` });
   } catch (e) {
     console.log(e);
-    res.status(400).json({ message: 'Login error' });
+    res.status(400).json({ message: 'Something went wrong with login' });
   }
-  res.status(200).json({ message: 'hello from login login ' });
 };
 
 module.exports.getUsers = async (req, res) => {
