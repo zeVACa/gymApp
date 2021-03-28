@@ -6,7 +6,6 @@ import RegistrationPage from './components/RegistrationPage';
 function App() {
   return (
     <div className="App">
-      {/* <LoginPage /> */}
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegistrationPage} />
