@@ -1,7 +1,9 @@
 import React from 'react';
+import classes from './LoginPage.module.css';
+
 import { useState, useEffect } from 'react';
-import './LoginPage.css';
 import { Link, Route } from 'react-router-dom';
+import { Button, TextField, Box } from '@material-ui/core';
 
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState('');
@@ -14,29 +16,33 @@ export default function LoginPage() {
     alert(1);
   }
 
+  console.log(classes);
+
   return (
     <div>
       <div className="register-window">
         <h1>Hello from login page</h1>
+
         <form action="/">
-          <input
-            onChange={(e) => {
-              setEmailValue(e.currentTarget.value);
-            }}
-            type="email"
-            placeholder="email"
-          />
-          <br />
-          <input
-            onChange={(e) => {
-              setPasswordValue(e.currentTarget.value);
-            }}
-            type="password"
-            placeholder="password"
-          />
+          <Box mb={2}>
+            <TextField id="standard-basic" label="Логин" />
+          </Box>
+          <Box mb={2}>
+            <TextField id="standard-basic" label="Пароль" />
+          </Box>
           <br />
           {/* <AuthButton buttonText="Log in"/> */}
-          <button onClick={submitHandler}>Log in</button>
+          <Box mb={3}>
+            <Button
+              onClick={submitHandler}
+              className={classes.loginButton}
+              variant="contained"
+              color="primary">
+              Log in
+            </Button>
+          </Box>
+
+          <Button color="primary">new</Button>
         </form>
         <hr />
         {/* <Route path="/register"> */}

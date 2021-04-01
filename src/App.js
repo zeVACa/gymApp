@@ -1,7 +1,7 @@
-import LoginPage from './components/LoginPage';
+import RegistrationPage from './components/RegistrationPage';
+import LoginPage from './components/LoginPage/LoginPage';
 
 import { Route, Switch } from 'react-router-dom';
-import RegistrationPage from './components/RegistrationPage';
 
 function App() {
   return (
