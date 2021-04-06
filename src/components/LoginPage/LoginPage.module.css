@@ -1,6 +1,14 @@
-* {
-  /* border: 1px solid red; */
-  font-family: sans-serif;
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  /* font: inherit; */
+  font-family: 'roboto';
+  /* color: inherit; */
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
 }
 
 body {

@@ -3,7 +3,7 @@ import classes from './LoginPage.module.css';
 
 import { useState, useEffect } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Button, TextField, Box } from '@material-ui/core';
+import { Button, TextField, Box, Container } from '@material-ui/core';
 
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState('');
@@ -20,15 +20,15 @@ export default function LoginPage() {
 
   return (
     <div>
-      <div className="register-window">
+      <Container style={{ paddingTop: '120px' }}>
         <h1>Hello from login page</h1>
 
         <form action="/">
-          <Box mb={2}>
-            <TextField id="standard-basic" label="Логин" />
+          <Box my={3}>
+            <TextField id="standard-basic" variant="outlined" autoComplete="false" label="Почта" />
           </Box>
-          <Box mb={2}>
-            <TextField id="standard-basic" label="Пароль" />
+          <Box mb={1}>
+            <TextField id="standard-basic" variant="outlined" type="password" label="Пароль" />
           </Box>
           <br />
           {/* <AuthButton buttonText="Log in"/> */}
@@ -41,14 +41,12 @@ export default function LoginPage() {
               Log in
             </Button>
           </Box>
-
-          <Button color="primary">new</Button>
         </form>
         <hr />
         {/* <Route path="/register"> */}
         <Link to="/register">Register</Link>
         {/* </Route> */}
-      </div>
+      </Container>
     </div>
   );
 }

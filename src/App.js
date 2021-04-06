@@ -2,12 +2,14 @@ import RegistrationPage from './components/RegistrationPage';
 import LoginPage from './components/LoginPage/LoginPage';
 
 import { Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navigation';
+import Navigation from './components/Navigation';
+import SideMenu from './components/SideMenu';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navigation /> */}
+      <SideMenu />
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegistrationPage} />
