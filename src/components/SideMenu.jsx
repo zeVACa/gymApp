@@ -18,12 +18,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    flexGrow: 1,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -81,6 +84,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  menuButton: {
+    marginRight: theme.spacing(1),
+  },
+  title: {
+    flexGrow: 1,
+  },
 }));
 
 export default function MiniDrawer() {
@@ -110,14 +119,24 @@ export default function MiniDrawer() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}>
+            className={classes.menuButton}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap className={classes.title}>
             Mini variant drawer
           </Typography>
+          <Box mr={3}>
+            <Button color="inherit" variant="outlined">
+              <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                Войти
+              </Link>
+            </Button>
+          </Box>
+          <Button color="secondary" variant="contained">
+            <Link to="/register" style={{ textDecoration: 'none', color: 'white' }}>
+              Зарегестрироваться
+            </Link>
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer

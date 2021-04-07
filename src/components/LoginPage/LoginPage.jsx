@@ -3,7 +3,8 @@ import classes from './LoginPage.module.css';
 
 import { useState, useEffect } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Button, TextField, Box, Container } from '@material-ui/core';
+import { Button, TextField, Box, Container, Checkbox  } from '@material-ui/core';
+import FormControlLabel from "@material-ui/core/FormControlLabel"
 
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState('');
@@ -16,14 +17,15 @@ export default function LoginPage() {
     alert(1);
   }
 
+
   console.log(classes);
 
   return (
     <div>
-      <Container style={{ paddingTop: '120px' }}>
-        <h1>Hello from login page</h1>
+      <Container style={{ marginTop: '150px', textAlign:'center' }}>
+      <h1>Gym-App</h1>
 
-        <form action="/">
+        <form action="/" >
           <Box my={3}>
             <TextField id="standard-basic" variant="outlined" autoComplete="false" label="Почта" />
           </Box>
@@ -37,15 +39,26 @@ export default function LoginPage() {
               onClick={submitHandler}
               className={classes.loginButton}
               variant="contained"
-              color="primary">
+              color="primary"
+              style={{width: '200px', height: '45px'}}
+              >
               Log in
             </Button>
           </Box>
+          <FormControlLabel
+        control={<Checkbox name="checkedA" />}
+        label="Google"
+      />
+      <FormControlLabel
+        control={<Checkbox name="checkedA" />}
+        label="Facebook"
+      />
+      <FormControlLabel
+        control={<Checkbox name="checkedA" />}
+        label="VK"
+      />
         </form>
         <hr />
-        {/* <Route path="/register"> */}
-        <Link to="/register">Register</Link>
-        {/* </Route> */}
       </Container>
     </div>
   );
