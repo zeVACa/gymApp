@@ -20,7 +20,7 @@ export default function LoginPage() {
 
   return (
     <div>
-      <Container style={{ paddingTop: '120px' }}>
+      <Container centered style={{ paddingTop: '120px' }}>
         <h1>Hello from login page</h1>
 
         <form action="/">
@@ -46,6 +46,7 @@ export default function LoginPage() {
         {/* <Route path="/register"> */}
         <Link to="/register">Register</Link>
         {/* </Route> */}
+        {/* test */}
       </Container>
     </div>
   );
