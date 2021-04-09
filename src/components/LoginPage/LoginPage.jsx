@@ -46,6 +46,7 @@ export default function LoginPage() {
         {/* <Route path="/register"> */}
         <Link to="/register">Register</Link>
         {/* </Route> */}
+        {/* testing new branch */}
       </Container>
     </div>
   );
