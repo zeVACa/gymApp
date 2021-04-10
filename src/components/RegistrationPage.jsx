@@ -79,16 +79,6 @@ function RegistrationPage() {
               type="password"
             />
           </Box>
-          {/* <p>
-          Ваш пол:
-          <FormControlLabel
-            control={<Checkbox name="checkedA" />}
-            label="М"
-            style={{ marginLeft: '13px' }}
-            required
-          />
-          <FormControlLabel control={<Checkbox name="checkedA" />} label="Ж" required />
-        </p> */}
           <div>
             <Button
               variant="contained"
