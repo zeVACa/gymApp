@@ -11,8 +11,18 @@ function App() {
       {/* <Navigation /> */}
       <SideMenu />
       <Switch>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegistrationPage} />
+        <div
+          className="wrapper"
+          style={{
+            display: 'flex',
+            width: '100%',
+            justifyContent: 'center',
+            height: '100vh',
+            alignItems: 'center',
+          }}>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegistrationPage} />
+        </div>
       </Switch>
     </div>
   );
