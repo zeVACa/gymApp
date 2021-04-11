@@ -7,6 +7,30 @@ import { Button, TextField, Box, Container, Checkbox } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FilterCenterFocusTwoTone } from '@material-ui/icons';
 
+// import { createStore } from 'redux';
+
+// const reducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case 'SOME_ACTION':
+//       return { kek: 'mem' };
+//       break;
+
+//     case undefined:
+//       return state;
+//     case 'ANOTHER_ACTION':
+//       return state + 1;
+
+//     default:
+//       return state;
+//   }
+// };
+
+// const store = createStore(reducer);
+
+// console.log('Store: ' + JSON.stringify(store.getState()));
+
+// store.dispatch({ type: 'SOME_ACTION' });
+
 export default function LoginPage() {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -33,15 +57,17 @@ export default function LoginPage() {
       Password: '1234',
     };
 
-    // fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8',
-    //   },
-    //   body: JSON.stringify(requestBody),
-    // }).then((res) => {
-    //   console.log(res.json());
-    // });
+    console.log(JSON.stringify(requestBody));
+
+    fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const inputStyle = { width: '200px', height: '45px' };
