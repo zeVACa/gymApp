@@ -1,5 +1,5 @@
-import RegistrationPage from './components/RegistrationPage';
-import LoginPage from './components/LoginPage/LoginPage';
+import RegistrationPage from './pages/RegisterPage/RegistrationPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
