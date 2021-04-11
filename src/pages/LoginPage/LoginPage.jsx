@@ -28,11 +28,6 @@ export default function LoginPage() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log('is email valid? ', isEmailValid(emailValue));
-    console.log('is password valid? ', isPasswordValid(passwordValue));
-
-    // if (isEmailValid(emailValue))
-    // const requestBody = { email: emailValue, password: passwordValue };
     const requestBody = {
       UserLogin: 'Misha',
       Password: '1234',
@@ -78,7 +73,8 @@ export default function LoginPage() {
               autoComplete="false"
               label="Почта"
               onBlur={(e) => {
-                if (!isEmailDirty) setIsEmailDirty((prev) => !prev);
+                if (!isEmailDirty) setIsEmailDirty(true);
+                // if (!isPasswordDirty) setIsPasswordDirty(true);
               }}
             />
           </Box>
@@ -89,13 +85,14 @@ export default function LoginPage() {
               error={isPasswordDirty && !isPasswordValid(passwordValue)}
               helperText={
                 isPasswordDirty && passwordValue === ''
-                  ? 'введите email'
+                  ? 'введите пароль'
                   : isPasswordDirty && !isPasswordValid(passwordValue)
                   ? 'Введите корректный пароль'
                   : ''
               }
               onBlur={(e) => {
-                if (!isPasswordDirty) setIsPasswordDirty((prev) => !prev);
+                if (!isEmailDirty) setIsEmailDirty(true);
+                if (!isPasswordDirty) setIsPasswordDirty(true);
               }}
               id="standard-basic"
               variant="outlined"
@@ -112,15 +109,26 @@ export default function LoginPage() {
               className={classes.loginButton}
               variant="contained"
               color="primary"
+              disabled={
+                (isEmailDirty && !isEmailValid(emailValue)) ||
+                (isPasswordDirty && !isPasswordValid(passwordValue))
+              }
               style={{ width: '200px', height: '45px' }}>
-              Log in
+              Войти
             </Button>
           </Box>
-          <FormControlLabel control={<Checkbox name="checkedA" />} label="Google" />
+          {/* <FormControlLabel control={<Checkbox name="checkedA" />} label="Google" />
           <FormControlLabel control={<Checkbox name="checkedA" />} label="Facebook" />
-          <FormControlLabel control={<Checkbox name="checkedA" />} label="VK" />
+          <FormControlLabel control={<Checkbox name="checkedA" />} label="VK" /> */}
         </form>
-        <Link to="/register">Зарегистрироваться</Link>
+        <Box mt={3} mb={2}>
+          <Link to="/recover">Восстановить пароль</Link>
+        </Box>
+
+        <Box>
+          <Link to="/register">Регистрация</Link>
+        </Box>
+
         {/* <Route path="/register"> */}
       </Container>
     </div>

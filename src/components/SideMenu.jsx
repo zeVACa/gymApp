@@ -134,7 +134,7 @@ export default function MiniDrawer() {
           </Box>
           <Button color="secondary" variant="contained">
             <Link to="/register" style={{ textDecoration: 'none', color: 'white' }}>
-              Зарегестрироваться
+              Регистрация
             </Link>
           </Button>
         </Toolbar>
