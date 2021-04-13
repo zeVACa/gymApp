@@ -15,14 +15,19 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
+import OutlinedFlagRoundedIcon from '@material-ui/icons/OutlinedFlagRounded';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
+import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
+
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 264;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,18 +152,38 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List style={{ padding: 0 }}>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          <Link to="/session">
+            <ListItem button style={{ height: '56px' }}>
+              <ListItemIcon>
+                <OutlinedFlagRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Начать тренировку'} />
             </ListItem>
-          ))}
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsOutlinedIcon></SettingsOutlinedIcon>
-            </ListItemIcon>
-            <ListItemText primary={'Shinima hyjna'} />
-          </ListItem>
+          </Link>
+          <Link to="/progress">
+            <ListItem button style={{ height: '56px' }}>
+              <ListItemIcon>
+                <TrendingUpOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Мой прогресс'} />
+            </ListItem>
+          </Link>
+          <Link to="/my-training-plan">
+            <ListItem button style={{ height: '56px' }}>
+              <ListItemIcon>
+                <ExploreOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={'План тренировок'} />
+            </ListItem>
+          </Link>
+          <Link to="/training-history">
+            <ListItem button style={{ height: '56px' }}>
+              <ListItemIcon>
+                <HistoryOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={'История тренировок'} />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
         <List
@@ -170,14 +195,14 @@ export default function MiniDrawer() {
             padding: 0,
           }}>
           <Divider />
-          {['Settings'].map((text, index) => (
-            <ListItem style={{ height: '56px' }} button key={text}>
+          <Link to="settings">
+            <ListItem style={{ height: '56px' }} button>
               <ListItemIcon>
-                {index % 2 === 0 ? <SettingsOutlinedIcon /> : <SettingsOutlinedIcon />}
+                <SettingsOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={'Настройки'} />
             </ListItem>
-          ))}
+          </Link>
         </List>
       </Drawer>
       {/* <main className={classes.content}>

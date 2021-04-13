@@ -5,6 +5,12 @@ import RegistrationPage from './pages/RegisterPage/RegistrationPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage';
 
+import PreSesstionPage from './pages/Session/PreSesstionPage';
+import ProgressPage from './pages/ProgressPage';
+import MyTrainingPlan from './pages/MyTrainingPlan';
+import HistoryPage from './pages/HistoryPage';
+import SettingsPage from './pages/SettingsPage';
+
 import Navigation from './components/Navigation';
 import SideMenu from './components/SideMenu';
 
@@ -34,14 +40,21 @@ function App() {
           }}>
           <Route exact path="/" component={LandingPage} />
 
-          {!user ? (
-            [
-              <Route path="/login" component={() => <LoginPage user={user} setUser={setUser} />} />,
-              <Route path="/register" component={RegistrationPage} />,
-            ]
-          ) : (
-            <h1>User is authed</h1>
-          )}
+          {!user
+            ? [
+                <Route
+                  path="/login"
+                  component={() => <LoginPage user={user} setUser={setUser} />}
+                />,
+                <Route path="/register" component={RegistrationPage} />,
+              ]
+            : [
+                <Route path="/session" component={PreSesstionPage} />,
+                <Route path="/progress" component={ProgressPage} />,
+                <Route path="/my-training-plan" component={MyTrainingPlan} />,
+                <Route path="/training-history" component={HistoryPage} />,
+                <Route path="/settings" component={SettingsPage} />,
+              ]}
         </div>
       </Switch>
     </div>
