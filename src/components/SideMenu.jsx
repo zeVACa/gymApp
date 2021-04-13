@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,18 +125,6 @@ export default function MiniDrawer() {
           <Typography variant="h6" noWrap className={classes.title}>
             Mini variant drawer
           </Typography>
-          <Box mr={3}>
-            <Button color="inherit" variant="outlined">
-              <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
-                Войти
-              </Link>
-            </Button>
-          </Box>
-          <Button color="secondary" variant="contained">
-            <Link to="/register" style={{ textDecoration: 'none', color: 'white' }}>
-              Регистрация
-            </Link>
-          </Button>
         </Toolbar>
       </AppBar>
       <Drawer

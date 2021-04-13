@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import RegistrationPage from './pages/RegisterPage/RegistrationPage';
@@ -12,6 +12,10 @@ import './global.css';
 
 function App() {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log('user is: ', user);
+  }, [user]);
 
   return (
     <div className="App" style={{ height: '100vh' }}>
@@ -29,8 +33,15 @@ function App() {
             alignItems: 'center',
           }}>
           <Route exact path="/" component={LandingPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegistrationPage} />
+
+          {!user ? (
+            [
+              <Route path="/login" component={() => <LoginPage user={user} setUser={setUser} />} />,
+              <Route path="/register" component={RegistrationPage} />,
+            ]
+          ) : (
+            <h1>User is authed</h1>
+          )}
         </div>
       </Switch>
     </div>

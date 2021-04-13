@@ -7,7 +7,7 @@ import { Button, TextField, Box, Container, Checkbox } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FilterCenterFocusTwoTone } from '@material-ui/icons';
 
-export default function LoginPage() {
+export default function LoginPage({ setUser }) {
   const [emailValue, setEmailValue] = useState('Andrey');
   const [passwordValue, setPasswordValue] = useState('Admin1.');
 
@@ -60,6 +60,7 @@ export default function LoginPage() {
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
+          setUser({ test: 'testovich' });
           // redirect
           return res.text();
         }
