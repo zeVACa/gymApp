@@ -18,6 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { useState } from 'react';
 import { indigo, red } from '@material-ui/core/colors';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -133,17 +134,19 @@ const Navigation = () => {
       <AppBar position="static" style={{ marginBottom: '24px' }}>
         <Container maxWidth="lg">
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="menu">
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography variant="h6" className={classes.title}>
-              Gym App
+              <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+                Gym App
+              </Link>
             </Typography>
-            {auth ? (
+            {/* {auth ? (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -187,7 +190,19 @@ const Navigation = () => {
                   </Button>
                 </Box>,
               ]
-            )}
+            )} */}
+            <Box mr={3}>
+              <Button color="inherit" variant="outlined">
+                <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>
+                  Войти
+                </Link>
+              </Button>
+            </Box>
+            <Button color="secondary" variant="contained">
+              <Link to="/register" style={{ textDecoration: 'none', color: 'white' }}>
+                Регистрация
+              </Link>
+            </Button>
           </Toolbar>
         </Container>
       </AppBar>
