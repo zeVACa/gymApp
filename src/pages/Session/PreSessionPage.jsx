@@ -4,18 +4,9 @@ import { Button, Box } from '@material-ui/core';
 import TrainingPlanList from './TrainingPlanList';
 
 export default function PreSesstionPage() {
-  const getTrainingPlan = async () => {};
-
-  const fetchedTrainingPlan = [
-    {
-      exerciseId: 1,
-      exercise: 'test',
-    },
-  ];
-
   return (
     <div>
-      <div className="">
+      <div>
         <TrainingPlanList />
       </div>
       <div>

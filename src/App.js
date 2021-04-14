@@ -39,13 +39,12 @@ function App() {
             minHeight: '80%',
             alignItems: 'center',
           }}>
-          <Route exact path="/" component={LandingPage} />
           {!user
             ? [
+                <Route exact path="/" component={LandingPage} />,
                 <Route exact path="/login" component={() => <LoginPage setUser={setUser} />} />,
                 <Route exact path="/register" component={RegistrationPage} />,
-                <Redirect exact path="/register" to="/hey" />,
-                <Route component={NotFoundPage} />,
+                // <Route component={NotFoundPage} />,
               ]
             : [
                 <Route exact path="/session" component={PreSesstionPage} />,
