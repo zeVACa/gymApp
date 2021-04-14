@@ -23,15 +23,22 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 
+import PreSesstionPage from '../pages/Session/PreSesstionPage';
+import ProgressPage from '../pages/ProgressPage';
+import MyTrainingPlan from '../pages/MyTrainingPlan';
+import HistoryPage from '../pages/HistoryPage';
+import SettingsPage from '../pages/SettingsPage';
+
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import { Link, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
+import { Container, Grid } from '@material-ui/core';
 
 const drawerWidth = 264;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: 'flex',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -124,7 +131,12 @@ export default function MiniDrawer() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={classes.menuButton}>
+            className={
+              (classes.menuButton,
+              {
+                [classes.hide]: open,
+              })
+            }>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
@@ -205,32 +217,15 @@ export default function MiniDrawer() {
           </Link>
         </List>
       </Drawer>
-      {/* <main className={classes.content}>
+      <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </main> */}
+
+        <Route exact path="/session" component={PreSesstionPage} />
+        <Route exact path="/progress" component={ProgressPage} />
+        <Route exact path="/my-training-plan" component={MyTrainingPlan} />
+        <Route exact path="/training-history" component={HistoryPage} />
+        <Route exact path="/settings" component={SettingsPage} />
+      </main>
     </div>
   );
 }
