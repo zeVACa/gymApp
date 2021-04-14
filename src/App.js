@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import RegistrationPage from './pages/RegisterPage/RegistrationPage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -10,6 +10,7 @@ import ProgressPage from './pages/ProgressPage';
 import MyTrainingPlan from './pages/MyTrainingPlan';
 import HistoryPage from './pages/HistoryPage';
 import SettingsPage from './pages/SettingsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 import Navigation from './components/Navigation';
 import SideMenu from './components/SideMenu';
@@ -39,21 +40,20 @@ function App() {
             alignItems: 'center',
           }}>
           <Route exact path="/" component={LandingPage} />
-
           {!user
             ? [
-                <Route
-                  path="/login"
-                  component={() => <LoginPage user={user} setUser={setUser} />}
-                />,
-                <Route path="/register" component={RegistrationPage} />,
+                <Route exact path="/login" component={() => <LoginPage setUser={setUser} />} />,
+                <Route exact path="/register" component={RegistrationPage} />,
+                <Redirect exact path="/register" to="/hey" />,
+                <Route component={NotFoundPage} />,
               ]
             : [
-                <Route path="/session" component={PreSesstionPage} />,
-                <Route path="/progress" component={ProgressPage} />,
-                <Route path="/my-training-plan" component={MyTrainingPlan} />,
-                <Route path="/training-history" component={HistoryPage} />,
-                <Route path="/settings" component={SettingsPage} />,
+                <Route exact path="/session" component={PreSesstionPage} />,
+                <Route exact path="/progress" component={ProgressPage} />,
+                <Route exact path="/my-training-plan" component={MyTrainingPlan} />,
+                <Route exact path="/training-history" component={HistoryPage} />,
+                <Route exact path="/settings" component={SettingsPage} />,
+                // <Route component={NotFoundPage} />,
               ]}
         </div>
       </Switch>
