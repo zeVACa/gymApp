@@ -13,7 +13,7 @@ import SettingsPage from './pages/SettingsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 import Navigation from './components/Navigation';
-import SideMenu from './components/SideMenu';
+import SideMenu from './components/AuthedContent';
 
 import './global.css';
 
@@ -27,13 +27,14 @@ function App() {
   return (
     <div className="App" style={{ height: '100vh' }}>
       {user ? <SideMenu /> : <Navigation />}
+
       {/* <SideMenu /> */}
       <Switch>
         <div
           className="wrapper"
           style={{
             display: 'flex',
-            width: '100%',
+            // width: '100%',
             justifyContent: 'center',
             // height: '100vh',
             minHeight: '80%',
@@ -47,11 +48,11 @@ function App() {
                 // <Route component={NotFoundPage} />,
               ]
             : [
-                <Route exact path="/session" component={PreSesstionPage} />,
-                <Route exact path="/progress" component={ProgressPage} />,
-                <Route exact path="/my-training-plan" component={MyTrainingPlan} />,
-                <Route exact path="/training-history" component={HistoryPage} />,
-                <Route exact path="/settings" component={SettingsPage} />,
+                // <Route exact path="/session" component={PreSesstionPage} />,
+                // <Route exact path="/progress" component={ProgressPage} />,
+                // <Route exact path="/my-training-plan" component={MyTrainingPlan} />,
+                // <Route exact path="/training-history" component={HistoryPage} />,
+                // <Route exact path="/settings" component={SettingsPage} />,
                 // <Route component={NotFoundPage} />,
               ]}
         </div>
@@ -61,4 +62,3 @@ function App() {
 }
 
 export default App;
- 

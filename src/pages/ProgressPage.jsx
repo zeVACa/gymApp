@@ -1,5 +1,10 @@
+import { Container } from '@material-ui/core';
 import React from 'react';
 
 export default function ProgressPage() {
-  return <div>Progress</div>;
+  return (
+    <div>
+      <Container>Progress</Container>
+    </div>
+  );
 }
