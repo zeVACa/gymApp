@@ -16,7 +16,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
 import OutlinedFlagRoundedIcon from '@material-ui/icons/OutlinedFlagRounded';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
@@ -24,15 +23,14 @@ import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 
 import PreSesstionPage from '../pages/Session/PreSesstionPage';
+import SessionPage from '../pages/Session/SessionPage';
+
 import ProgressPage from '../pages/ProgressPage';
 import MyTrainingPlan from '../pages/MyTrainingPlan';
 import HistoryPage from '../pages/HistoryPage';
 import SettingsPage from '../pages/SettingsPage';
 
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import { Link, Route, Switch } from 'react-router-dom';
-import { Container, Grid } from '@material-ui/core';
 
 const drawerWidth = 264;
 
@@ -164,7 +162,7 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List style={{ padding: 0 }}>
-          <Link to="/session">
+          <Link to="/pre-session">
             <ListItem button style={{ height: '56px' }}>
               <ListItemIcon>
                 <OutlinedFlagRoundedIcon />
@@ -219,12 +217,15 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Switch>
+          <Route exact path="/pre-session" component={PreSesstionPage} />
+          <Route exact path="/progress" component={ProgressPage} />
+          <Route exact path="/my-training-plan" component={MyTrainingPlan} />
+          <Route exact path="/training-history" component={HistoryPage} />
+          <Route exact path="/settings" component={SettingsPage} />
 
-        <Route exact path="/session" component={PreSesstionPage} />
-        <Route exact path="/progress" component={ProgressPage} />
-        <Route exact path="/my-training-plan" component={MyTrainingPlan} />
-        <Route exact path="/training-history" component={HistoryPage} />
-        <Route exact path="/settings" component={SettingsPage} />
+          <Route exact path="/session" component={SessionPage} />
+        </Switch>
       </main>
     </div>
   );
