@@ -1,27 +1,60 @@
+import { useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 import RegistrationPage from './pages/RegisterPage/RegistrationPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import LandingPage from './pages/LandingPage';
 
-import { Route, Switch } from 'react-router-dom';
+import PreSesstionPage from './pages/Session/PreSesstionPage';
+import ProgressPage from './pages/ProgressPage';
+import MyTrainingPlan from './pages/MyTrainingPlan';
+import HistoryPage from './pages/HistoryPage';
+import SettingsPage from './pages/SettingsPage';
+import NotFoundPage from './pages/NotFoundPage';
+
 import Navigation from './components/Navigation';
-import SideMenu from './components/SideMenu';
+import SideMenu from './components/AuthedContent';
+
+import './global.css';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log('user is: ', user);
+  }, [user]);
+
   return (
-    <div className="App">
-      {/* <Navigation /> */}
-      <SideMenu />
+    <div className="App" style={{ height: '100vh' }}>
+      {user ? <SideMenu /> : <Navigation />}
+
+      {/* <SideMenu /> */}
       <Switch>
         <div
           className="wrapper"
           style={{
             display: 'flex',
-            width: '100%',
+            // width: '100%',
             justifyContent: 'center',
-            height: '100vh',
+            // height: '100vh',
+            minHeight: '80%',
             alignItems: 'center',
           }}>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={RegistrationPage} />
+          {!user
+            ? [
+                <Route exact path="/" component={LandingPage} />,
+                <Route exact path="/login" component={() => <LoginPage setUser={setUser} />} />,
+                <Route exact path="/register" component={RegistrationPage} />,
+                // <Route component={NotFoundPage} />,
+              ]
+            : [
+                // <Route exact path="/session" component={PreSesstionPage} />,
+                // <Route exact path="/progress" component={ProgressPage} />,
+                // <Route exact path="/my-training-plan" component={MyTrainingPlan} />,
+                // <Route exact path="/training-history" component={HistoryPage} />,
+                // <Route exact path="/settings" component={SettingsPage} />,
+                // <Route component={NotFoundPage} />,
+              ]}
         </div>
       </Switch>
     </div>
