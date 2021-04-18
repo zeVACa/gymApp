@@ -309,6 +309,65 @@ export default function PreSesstionPage() {
     },
   ];
 
+  const getPlanTestData = [
+    {
+      id: 3,
+      setsNumber: 5,
+      planId: 1,
+      trainingPlan: {
+        id: 1,
+        discription: 'План для начинающих',
+        name: 'StartPlan',
+        difficulty: 12,
+        price: 25,
+        rating: 20,
+        photo: null,
+      },
+      excerciseId: 3,
+      excercise: {
+        id: 3,
+        name: 'Отжимания',
+        description: 'Стандарнтные отжимания',
+        photo: null,
+      },
+      day: 2,
+      muscleGroupId: 2,
+      muscleGroup: {
+        id: 2,
+        name: 'Бицепс + грудь',
+        photo: null,
+      },
+    },
+    {
+      id: 4,
+      setsNumber: 10,
+      planId: 1,
+      trainingPlan: {
+        id: 1,
+        discription: 'План для начинающих',
+        name: 'StartPlan',
+        difficulty: 12,
+        price: 25,
+        rating: 20,
+        photo: null,
+      },
+      excerciseId: 2,
+      excercise: {
+        id: 2,
+        name: 'Приседания',
+        description: 'Стандартные приседания',
+        photo: null,
+      },
+      day: 2,
+      muscleGroupId: 2,
+      muscleGroup: {
+        id: 2,
+        name: 'Бицепс + грудь',
+        photo: null,
+      },
+    },
+  ];
+
   return (
     <div>
       <div>

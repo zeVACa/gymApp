@@ -138,7 +138,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
-            Mini variant drawer
+            Gym App
           </Typography>
         </Toolbar>
       </AppBar>
