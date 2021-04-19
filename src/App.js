@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import RegistrationPage from './pages/RegisterPage/RegistrationPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage';
+import SesstionResults from './pages/Session/SesstionResults';
 
 import PreSesstionPage from './pages/Session/PreSesstionPage';
 import ProgressPage from './pages/ProgressPage';
@@ -45,6 +46,7 @@ function App() {
                 <Route exact path="/" component={LandingPage} />,
                 <Route exact path="/login" component={() => <LoginPage setUser={setUser} />} />,
                 <Route exact path="/register" component={RegistrationPage} />,
+                <Route exact path="/SesstionResults" component={SesstionResults} />,
                 // <Route component={NotFoundPage} />,
               ]
             : [
