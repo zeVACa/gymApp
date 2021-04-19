@@ -5,6 +5,7 @@ import RegistrationPage from './pages/RegisterPage/RegistrationPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage';
 import SesstionResults from './pages/Session/SesstionResults';
+import RegisterMetrics from './pages/RegisterMetrics/RegisterMetrics';
 
 import PreSesstionPage from './pages/Session/PreSesstionPage';
 import ProgressPage from './pages/ProgressPage';
@@ -47,6 +48,7 @@ function App() {
                 <Route exact path="/login" component={() => <LoginPage setUser={setUser} />} />,
                 <Route exact path="/register" component={RegistrationPage} />,
                 <Route exact path="/SesstionResults" component={SesstionResults} />,
+                <Route path="/register-metrics" component={RegisterMetrics} />,
                 // <Route component={NotFoundPage} />,
               ]
             : [
