@@ -1,10 +1,21 @@
-import { Container } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
+import { LocalHospital } from '@material-ui/icons';
 import React from 'react';
 
-export default function SettingsPage() {
+export default function SettingsPage({ setUser }) {
   return (
     <div>
-      <Container>Settings</Container>
+      <Container>
+        <Button
+          onClick={() => {
+            localStorage.setItem('user', null);
+            setUser(null);
+          }}
+          variant="contained"
+          color="primary">
+          Сменить пользователя
+        </Button>
+      </Container>
     </div>
   );
 }

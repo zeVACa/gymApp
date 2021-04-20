@@ -35,8 +35,6 @@ export default function LoginPage({ setUser }) {
     return password.length >= 6;
   };
 
-  const onBlurHandler = (elem) => {};
-
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -61,20 +59,18 @@ export default function LoginPage({ setUser }) {
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
-          setUser({ test: 'testovich' });
           // redirect
           return res.text();
-        }
-
-        if (res.status === 404) {
-          // display user auth error
         }
       })
       .then((data) => {
         try {
           const candidate = JSON.parse(data);
 
-          console.log(candidate);
+          if (candidate) {
+            setUser(candidate);
+            localStorage.setItem('user', JSON.stringify(candidate));
+          }
 
           if (candidate.name) {
             setIsAuthed(true);
