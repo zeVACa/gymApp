@@ -90,7 +90,7 @@ export default function LoginPage({ setUser }) {
   return (
     <div>
       <Container style={{ textAlign: 'center' }}>
-        <h1>Данные для входа</h1>
+        <h1>Авторизация</h1>
 
         <form action="/">
           <Box my={3}>

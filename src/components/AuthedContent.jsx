@@ -15,6 +15,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import '../components/styleDrawer.css';
 
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
@@ -109,6 +110,8 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
+  const [activeElementMenu, setActiveElementMenu] = React.useState('');
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -116,6 +119,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  console.log(activeElementMenu);
 
   return (
     <div className={classes.root}>
@@ -140,7 +144,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
-            Mini variant drawer
+            Навигация
           </Typography>
         </Toolbar>
       </AppBar>
@@ -165,7 +169,11 @@ export default function MiniDrawer() {
         <Divider />
         <List style={{ padding: 0 }}>
           <Link to="/session">
-            <ListItem button style={{ height: '56px' }}>
+            <ListItem
+              onClick={() => setActiveElementMenu('/session')}
+              selected={activeElementMenu.toString() === '/session'.toString()}
+              button
+              style={{ height: '56px' }}>
               <ListItemIcon>
                 <OutlinedFlagRoundedIcon />
               </ListItemIcon>
@@ -173,7 +181,11 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
           <Link to="/progress">
-            <ListItem button style={{ height: '56px' }}>
+            <ListItem
+              onClick={() => setActiveElementMenu('/progress')}
+              selected={activeElementMenu.toString() === '/progress'.toString()}
+              button
+              style={{ height: '56px' }}>
               <ListItemIcon>
                 <TrendingUpOutlinedIcon />
               </ListItemIcon>
@@ -181,7 +193,11 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
           <Link to="/my-training-plan">
-            <ListItem button style={{ height: '56px' }}>
+            <ListItem
+              onClick={() => setActiveElementMenu('/my-training-plan')}
+              selected={activeElementMenu.toString() === '/my-training-plan'.toString()}
+              button
+              style={{ height: '56px' }}>
               <ListItemIcon>
                 <ExploreOutlinedIcon />
               </ListItemIcon>
@@ -189,7 +205,11 @@ export default function MiniDrawer() {
             </ListItem>
           </Link>
           <Link to="/training-history">
-            <ListItem button style={{ height: '56px' }}>
+            <ListItem
+              onClick={() => setActiveElementMenu('/training-history')}
+              selected={activeElementMenu.toString() === '/training-history'.toString()}
+              button
+              style={{ height: '56px' }}>
               <ListItemIcon>
                 <HistoryOutlinedIcon />
               </ListItemIcon>
@@ -208,7 +228,11 @@ export default function MiniDrawer() {
           }}>
           <Divider />
           <Link to="settings">
-            <ListItem style={{ height: '56px' }} button>
+            <ListItem
+              onClick={() => setActiveElementMenu('settings')}
+              selected={activeElementMenu.toString() === 'settings'.toString()}
+              style={{ height: '56px' }}
+              button>
               <ListItemIcon>
                 <SettingsOutlinedIcon />
               </ListItemIcon>
