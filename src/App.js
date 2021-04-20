@@ -1,18 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import RegistrationPage from './pages/RegisterPage/RegistrationPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage';
-import SesstionResults from './pages/Session/SesstionResults';
 import RegisterMetrics from './pages/RegisterMetrics/RegisterMetrics';
-
-import PreSesstionPage from './pages/Session/PreSesstionPage';
-import ProgressPage from './pages/ProgressPage';
-import MyTrainingPlan from './pages/MyTrainingPlan';
-import HistoryPage from './pages/HistoryPage';
-import SettingsPage from './pages/SettingsPage';
-import NotFoundPage from './pages/NotFoundPage';
 
 import Navigation from './components/Navigation';
 import SideMenu from './components/AuthedContent';
@@ -31,8 +23,6 @@ function App() {
   return (
     <div className="App" style={{ height: '100vh' }}>
       {user ? <SideMenu /> : <Navigation />}
-
-      {/* <SideMenu /> */}
       <Switch>
         <div
           className="wrapper"
@@ -49,7 +39,7 @@ function App() {
                 <Route exact path="/" component={LandingPage} />,
                 <Route exact path="/login" component={() => <LoginPage setUser={setUser} />} />,
                 <Route exact path="/register" component={RegistrationPage} />,
-                <Route exact path="/SesstionResults" component={SesstionResults} />,
+
                 <Route path="/register-metrics" component={RegisterMetrics} />,
                 // <Route component={NotFoundPage} />,
               ]
