@@ -7,7 +7,6 @@ import TimelapseTwoToneIcon from '@material-ui/icons/TimelapseTwoTone';
 import TodayTwoToneIcon from '@material-ui/icons/TodayTwoTone';
 
 export default function TemplateHistoryTrain(props) {
-  console.log(props.toTrain);
   return (
     <div>
       <Box mb={2}>
@@ -17,17 +16,17 @@ export default function TemplateHistoryTrain(props) {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header">
-            <Typography>{props.toTrain.nameTrain}</Typography>
+            <Typography>{props.toTrain.endTime.substr(0, 10)}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <FitnessCenterTwoToneIcon /> Мышечная группа: {props.toTrain.MuscleGroup}
+              <FitnessCenterTwoToneIcon /> Мышечная группа: {props.toTrain.excercise.name}
               <br />
-              <WhatshotTwoToneIcon /> Соженно калорий: {props.toTrain.calories}
+              <WhatshotTwoToneIcon /> Соженно калорий: {props.toTrain.quantity}
               <br />
-              <TimelapseTwoToneIcon /> Продолжительность тренировки: {props.toTrain.time}
+              <TimelapseTwoToneIcon /> Продолжительность тренировки: {props.toTrain.quantity}
               <br />
-              <TodayTwoToneIcon /> Дата : {props.toTrain.data}
+              <TodayTwoToneIcon /> Дата : {props.toTrain.endTime}
             </Typography>
           </AccordionDetails>
         </Accordion>
