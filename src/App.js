@@ -19,6 +19,8 @@ import SideMenu from './components/AuthedContent';
 
 import './global.css';
 
+var userId = null;
+
 function App() {
   const [user, setUser] = useState(null);
 
