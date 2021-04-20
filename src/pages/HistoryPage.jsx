@@ -52,7 +52,7 @@ import Tab from '@material-ui/core/Tab';
 //   },
 // ];
 
-export default function HistoryPage() {
+export default function HistoryPage({ user }) {
   const [periodValue, setPeriodValue] = useState(30);
   const [value, setValue] = useState(2);
 
@@ -60,7 +60,7 @@ export default function HistoryPage() {
 
   useEffect(() => {
     fetch(
-      'http://fitness-app.germanywestcentral.cloudapp.azure.com/api/TrainingHistory/1ec6158d-41d8-4cbf-b728-c29ab64c3ded',
+      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/TrainingHistory/${user.id}`,
       {
         method: 'GET',
         headers: {

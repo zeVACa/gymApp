@@ -26,7 +26,7 @@ export default function TemplateHistoryTrain(props) {
               <br />
               <TimelapseTwoToneIcon /> Продолжительность тренировки: {props.toTrain.quantity}
               <br />
-              <TodayTwoToneIcon /> Дата : {props.toTrain.endTime}
+              <TodayTwoToneIcon /> Дата : {props.toTrain.endTime.substr(0, 10)}
             </Typography>
           </AccordionDetails>
         </Accordion>
