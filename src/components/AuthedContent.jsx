@@ -104,10 +104,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ setUser, user }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  console.log('user in drawer: ', user);
+  console.log('set user is ', setUser);
+
+  // setUser((prevUser) => {
+  //   return null;
+  // });
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
@@ -246,9 +252,9 @@ export default function MiniDrawer() {
           <Route exact path="/progress" component={ProgressPage} />
           <Route exact path="/my-training-plan" component={MyTrainingPlan} />
           <Route exact path="/training-history" component={HistoryPage} />
-          <Route exact path="/settings" component={SettingsPage} />
+          <Route exact path="/settings" component={() => <SettingsPage setUser={setUser} />} />
 
-          <Route exact path="/pre-session" component={PreSessionPage} />
+          <Route exact path="/pre-session" component={() => <PreSessionPage user={user} />} />
           <Route exact path="/session" component={SessionPage} />
           <Route exact path="/SessionResults" component={SessionResults} />
         </Switch>

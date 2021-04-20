@@ -17,12 +17,19 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem('user'));
+
+    if (localUser) {
+      setUser(localUser);
+    }
+
+    console.log('local user: ', localUser);
     console.log('user is: ', user);
-  }, [user]);
+  }, []);
 
   return (
     <div className="App" style={{ height: '100vh' }}>
-      {user ? <SideMenu /> : <Navigation />}
+      {user ? <SideMenu user={user} setUser={setUser} /> : <Navigation />}
       <Switch>
         <div
           className="wrapper"
