@@ -7,40 +7,28 @@ import { Button, TextField, Box, Container, Checkbox } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FilterCenterFocusTwoTone } from '@material-ui/icons';
 
-// import { createStore } from 'redux';
-
-// const reducer = (state = {}, action) => {
-//   switch (action.type) {
-//     case 'SOME_ACTION':
-//       return { kek: 'mem' };
-//       break;
-
-//     case undefined:
-//       return state;
-//     case 'ANOTHER_ACTION':
-//       return state + 1;
-
-//     default:
-//       return state;
-//   }
-// };
-
-// const store = createStore(reducer);
-
-// console.log('Store: ' + JSON.stringify(store.getState()));
-
-// store.dispatch({ type: 'SOME_ACTION' });
-
-export default function LoginPage() {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
+export default function LoginPage({ setUser }) {
+  const [emailValue, setEmailValue] = useState('Andrey');
+  const [passwordValue, setPasswordValue] = useState('Admin1.');
 
   const [isEmailDirty, setIsEmailDirty] = useState(false);
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
 
+  const [isAuthed, setIsAuthed] = useState(false);
+
+  useEffect(() => {
+    if (isAuthed) {
+      // alert(1);
+    } else {
+      // alert(0);
+    }
+  }, [isAuthed]);
+
   const isEmailValid = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    // return re.test(String(email).toLowerCase());
+    console.log(re.test(String(email).toLowerCase()));
+    return true;
   };
 
   const isPasswordValid = (password) => {
@@ -53,21 +41,48 @@ export default function LoginPage() {
     e.preventDefault();
 
     const requestBody = {
-      UserLogin: 'Misha',
-      Password: '1234',
+      UserLogin: emailValue,
+      Password: passwordValue,
+      // UserLogin: 'Andrey',
+      // Password: 'Admin1.',
     };
 
     console.log(JSON.stringify(requestBody));
 
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
       method: 'POST',
+      redirect: 'follow',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(requestBody),
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      // .then((res) => res.text())
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          setUser({ test: 'testovich' });
+          // redirect
+          return res.text();
+        }
+
+        if (res.status === 404) {
+          // display user auth error
+        }
+      })
+      .then((data) => {
+        try {
+          const candidate = JSON.parse(data);
+
+          console.log(candidate);
+
+          if (candidate.name) {
+            setIsAuthed(true);
+          }
+        } catch (error) {
+          throw error;
+        }
+      });
   };
 
   const inputStyle = { width: '200px', height: '45px' };
@@ -75,7 +90,7 @@ export default function LoginPage() {
   return (
     <div>
       <Container style={{ textAlign: 'center' }}>
-        <h1>Данные для входа</h1>
+        <h1>Авторизация</h1>
 
         <form action="/">
           <Box my={3}>
@@ -122,7 +137,8 @@ export default function LoginPage() {
               }}
               id="standard-basic"
               variant="outlined"
-              type="password"
+              // type="password"
+              type="text"
               label="Пароль"
             />
           </Box>

@@ -1,0 +1,47 @@
+.Card {
+  position: relative;
+  z-index: 0;
+  width: 436px;
+  height: 596px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.Card::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #bfe2ff;
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  background-image: linear-gradient(#bfe2ff, #bfe2ff), linear-gradient(#84b494, #84b494),
+    linear-gradient(#bfe2ff, #bfe2ff), linear-gradient(#84b494, #84b494);
+  animation: anim-Card 8s linear infinite;
+}
+.Card::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 5px;
+  top: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 9px);
+  background: white;
+  border-radius: 5px;
+}
+@keyframes anim-Card {
+  100% {
+    transform: rotate(1turn);
+  }
+}
