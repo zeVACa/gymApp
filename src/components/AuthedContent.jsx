@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -111,9 +111,7 @@ export default function MiniDrawer({ setUser, user }) {
   console.log('user in drawer: ', user);
   console.log('set user is ', setUser);
 
-  // setUser((prevUser) => {
-  //   return null;
-  // });
+  const [trainingPlan, setTrainingPlan] = useState(null);
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
@@ -254,8 +252,22 @@ export default function MiniDrawer({ setUser, user }) {
           <Route exact path="/training-history" component={() => <HistoryPage user={user} />} />
           <Route exact path="/settings" component={() => <SettingsPage setUser={setUser} />} />
 
-          <Route exact path="/pre-session" component={() => <PreSessionPage user={user} />} />
-          <Route exact path="/session" component={SessionPage} />
+          <Route
+            exact
+            path="/pre-session"
+            component={() => (
+              <PreSessionPage
+                user={user}
+                setTrainingPlan={setTrainingPlan}
+                trainingPlan={trainingPlan}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/session"
+            component={() => <SessionPage trainingPlan={trainingPlan} />}
+          />
           <Route exact path="/SessionResults" component={SessionResults} />
         </Switch>
       </main>

@@ -1,56 +1,10 @@
-import { Container, Typography, Grid, ButtonGroup, Button } from '@material-ui/core';
+import { Container, Typography, Grid,  } from '@material-ui/core';
 import React from 'react';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TemplateHistoryTrain from './TemplateHistoryTrain';
 import { Pagination } from '@material-ui/lab';
 import { useState, useEffect } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
-// let objTrain = [
-//   {
-//     nameTrain: 'Train1',
-//     time: '45 минут',
-//     calories: '400',
-//     data: '14.04.2021',
-//     MuscleGroup: 'Ноги',
-//   },
-//   {
-//     nameTrain: 'Train2',
-//     time: '50 минут',
-//     calories: '500',
-//     data: '13.04.2021',
-//     MuscleGroup: 'Грудь, Бицепс',
-//   },
-//   {
-//     nameTrain: 'Train3',
-//     time: '55 минут',
-//     calories: '600',
-//     data: '10.04.2021',
-//     MuscleGroup: 'Спина, Трицепс',
-//   },
-//   {
-//     nameTrain: 'Train4',
-//     time: '25 минут',
-//     calories: '800',
-//     data: '07.04.2021',
-//     MuscleGroup: 'Кардио(Бег + Челночный бег)',
-//   },
-//   {
-//     nameTrain: 'Train5',
-//     time: '35 минут',
-//     calories: '400',
-//     data: '03.04.2021',
-//     MuscleGroup: 'Пресс, Боковой пресс',
-//   },
-//   {
-//     nameTrain: 'Train6',
-//     time: '65 минут',
-//     calories: '900',
-//     data: '03.03.2021',
-//     MuscleGroup: 'Ноги, Бицепс',
-//   },
-// ];
 
 export default function HistoryPage({ user }) {
   const [periodValue, setPeriodValue] = useState(30);

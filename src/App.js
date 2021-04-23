@@ -38,7 +38,7 @@ function App() {
             // width: '100%',
             justifyContent: 'center',
             // height: '100vh',
-            minHeight: '80%',
+            // minHeight: '80%',
             alignItems: 'center',
           }}>
           {!user
@@ -50,14 +50,7 @@ function App() {
                 <Route path="/register-metrics" component={RegisterMetrics} />,
                 // <Route component={NotFoundPage} />,
               ]
-            : [
-                // <Route exact path="/session" component={PreSesstionPage} />,
-                // <Route exact path="/progress" component={ProgressPage} />,
-                // <Route exact path="/my-training-plan" component={MyTrainingPlan} />,
-                // <Route exact path="/training-history" component={HistoryPage} />,
-                // <Route exact path="/settings" component={SettingsPage} />,
-                // <Route component={NotFoundPage} />,
-              ]}
+            : []}
         </div>
       </Switch>
     </div>
