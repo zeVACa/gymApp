@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import {
-  Button,
-  Box,
-  Grid,
-  Typography,
-  Container,
-  Card,
-  CardContent,
-  CardMedia,
-  CardHeader,
-} from '@material-ui/core';
+import { Button, Grid, Typography, Container, Card, CardContent } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import TrainingPlanList from './TrainingPlanList';
-import { grey } from '@material-ui/core/colors';
 
-export default function PreSesstionPage({ user, trainingPlan = [], setTrainingPlan }) {
-  // const [trainingPlan, setTrainingPlan] = useState([]);
-
+function PreSessionPage({ user, trainingPlan = [], setTrainingPlan }) {
   useEffect(() => {
     console.log('user ID in pressesion page: ', user.id);
 
@@ -41,7 +29,7 @@ export default function PreSesstionPage({ user, trainingPlan = [], setTrainingPl
           {!trainingPlan ? (
             <h1>План загружается</h1>
           ) : (
-            trainingPlan.map((exerciseItem) => {
+            trainingPlan.excercises.map((exerciseItem) => {
               return (
                 <Grid style={{ minWidth: '400px' }} item sm={3}>
                   <div style={{ height: 240, backgroundColor: '#ececec' }} />
@@ -54,9 +42,9 @@ export default function PreSesstionPage({ user, trainingPlan = [], setTrainingPl
                         color="textPrimary"
                         component="h5"
                         variant="h5"
-                        paragraph>{`${exerciseItem.excercise.name}`}</Typography>
+                        paragraph>{`${exerciseItem.name}`}</Typography>
                       <Typography align="left" paragraph color="textSecondary">
-                        {exerciseItem.excercise.description}
+                        {exerciseItem.description}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -76,3 +64,9 @@ export default function PreSesstionPage({ user, trainingPlan = [], setTrainingPl
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return state.test;
+}
+
+export default connect(mapStateToProps)(PreSessionPage);

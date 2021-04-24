@@ -29,6 +29,8 @@ const rows = [
   createData(1, 356, 16.0),
 ];
 
+// http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/{PlanId}/{MuscleGroupId}/{UserId}
+
 // let lastTrainingTest = {
 //   traningPlanId: 1,
 //   exercises: [
@@ -55,7 +57,7 @@ export default function SessionPage({ trainingPlan }) {
 
   const [page, setPage] = useState(0);
 
-  let pageAmount = trainingPlan ? trainingPlan.length : 0;
+  let pageAmount = trainingPlan ? trainingPlan.excercises.length : 0;
   console.log('page amount', pageAmount);
 
   useEffect(() => {
@@ -75,7 +77,7 @@ export default function SessionPage({ trainingPlan }) {
                   component="h4"
                   variant="h4"
                   style={{ display: 'block', marginRight: '16px' }}>
-                  {trainingPlan[page].excercise.name}
+                  {trainingPlan.excercises[page].name}
                 </Typography>
               </Box>
               <TableContainer component={Paper}>
@@ -146,75 +148,4 @@ export default function SessionPage({ trainingPlan }) {
       )}
     </div>
   );
-
-  // return (
-  //   <Container>
-  //     <Grid container>
-  //       <Box my={2}>
-  //         <Typography component="h3" variant="h3" style={{ display: 'block', marginRight: '16px' }}>
-  //           Жим лежа
-  //         </Typography>
-  //       </Box>
-  //       <TableContainer component={Paper}>
-  //         <Table className={classes.table} aria-label="simple table">
-  //           <TableHead>
-  //             <TableRow>
-  //               <TableCell>Подход</TableCell>
-  //               <TableCell align="right">Вес, кг</TableCell>
-  //               <TableCell align="right">Количество повторений</TableCell>
-  //             </TableRow>
-  //           </TableHead>
-  //           <TableBody>
-  //             {rows.map((row, index) => (
-  //               <TableRow key={row.name}>
-  //                 <TableCell component="th" scope="row">
-  //                   {index + 1}
-  //                 </TableCell>
-  //                 <TableCell align="right">
-  //                   <TextField
-  //                     type="number"
-  //                     InputProps={{
-  //                       inputProps: {
-  //                         max: 100,
-  //                         min: 10,
-  //                       },
-  //                     }}
-  //                     style={{ width: '40px' }}
-  //                   />
-  //                 </TableCell>
-  //                 <TableCell align="right">
-  //                   <TextField
-  //                     type="number"
-  //                     InputProps={{
-  //                       inputProps: {
-  //                         max: 100,
-  //                         min: 10,
-  //                       },
-  //                     }}
-  //                     style={{ width: '40px' }}
-  //                   />
-  //                 </TableCell>
-  //               </TableRow>
-  //             ))}
-  //           </TableBody>
-  //         </Table>
-  //       </TableContainer>
-  //     </Grid>
-  //     <Grid container style={{ marginTop: '24px', display: 'flex', justifyContent: 'center' }}>
-  //       <Typography component="h5" variant="h5" style={{ display: 'block', color: '#a5a5a5' }}>
-  //         Упражнение {page + 1} / {pageAmount}
-  //       </Typography>
-  //     </Grid>
-  //     <Grid container pt={3}>
-  //       <Grid item md={12} xs={12} pt={3}>
-  //         <StepperProgress
-  //           handleBack={() => setPage((prevPage) => prevPage - 1)}
-  //           handleNext={() => setPage((prevPage) => prevPage + 1)}
-  //           page={page}
-  //           pageAmount={pageAmount}
-  //         />
-  //       </Grid>
-  //     </Grid>
-  //   </Container>
-  // );
 }
