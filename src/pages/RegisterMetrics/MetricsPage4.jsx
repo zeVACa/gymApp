@@ -8,6 +8,12 @@ function MetricsPage4(props) {
   React.useEffect(() => {
     props.DataMetricsUser['MetricPushUps'] = MetricPushUps;
     props.DataMetricsUser['MetricPullUps'] = MetricPullUps;
+
+    if ((MetricPushUps != '') & (MetricPullUps != '')) {
+      props.setValidPage(true);
+    } else {
+      props.setValidPage(false);
+    }
   }, [MetricPushUps, MetricPullUps]);
 
   console.log(props.DataMetricsUser);
@@ -37,6 +43,7 @@ function MetricsPage4(props) {
             required
             id="standard-basic"
             variant="outlined"
+            type="number"
             autoComplete="false"
             fullWidth
             label="Максимальное количество отжимания от пола"
@@ -51,6 +58,7 @@ function MetricsPage4(props) {
             required
             id="standard-basic"
             variant="outlined"
+            type="number"
             autoComplete="false"
             fullWidth
             label="Максимальное количество подтягивания от перекладины"

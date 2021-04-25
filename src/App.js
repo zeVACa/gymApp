@@ -16,6 +16,8 @@ var userId = null;
 function App() {
   const [user, setUser] = useState(null);
 
+  console.log('Вернулся сука');
+
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
 
@@ -27,17 +29,25 @@ function App() {
     console.log('user is: ', user);
   }, []);
 
+  console.log('isMetrics = ', user === null ? 'null' : user['isMetrics']);
   return (
     <div className="App" style={{ height: '100vh' }}>
-      {user ? <SideMenu user={user} setUser={setUser} /> : <Navigation />}
+      {/* {user ? <SideMenu user={user} setUser={setUser} /> : <Navigation />} */}
+      {user ? (
+        user['isMetrics'] === true ? (
+          <SideMenu user={user} setUser={setUser} />
+        ) : (
+          <RegisterMetrics user={user} setUser={setUser} />
+        )
+      ) : (
+        <Navigation />
+      )}
       <Switch>
         <div
           className="wrapper"
           style={{
             display: 'flex',
-            // width: '100%',
             justifyContent: 'center',
-            // height: '100vh',
             minHeight: '80%',
             alignItems: 'center',
           }}>
@@ -48,16 +58,8 @@ function App() {
                 <Route exact path="/register" component={RegistrationPage} />,
 
                 <Route path="/register-metrics" component={RegisterMetrics} />,
-                // <Route component={NotFoundPage} />,
               ]
-            : [
-                // <Route exact path="/session" component={PreSesstionPage} />,
-                // <Route exact path="/progress" component={ProgressPage} />,
-                // <Route exact path="/my-training-plan" component={MyTrainingPlan} />,
-                // <Route exact path="/training-history" component={HistoryPage} />,
-                // <Route exact path="/settings" component={SettingsPage} />,
-                // <Route component={NotFoundPage} />,
-              ]}
+            : []}
         </div>
       </Switch>
     </div>

@@ -3,6 +3,7 @@ import { Box, FormControlLabel, Typography, Checkbox, RadioGroup } from '@materi
 
 function MetricsPage3(props) {
   let MetricHealth = [];
+
   // const [MetricHealth, setMetricHealth] = React.useState([]);
 
   const onClickHandle = (e) => {
@@ -24,11 +25,6 @@ function MetricsPage3(props) {
 
     // console.log(MetricHealth);
   };
-
-  // React.useEffect(() => {
-  //   props.DataMetricsUser['MetricHealth'] = MetricHealth;
-  //   console.log(props.DataMetricsUser);
-  // }, [MetricHealth]);
 
   return (
     <div>
@@ -65,11 +61,6 @@ function MetricsPage3(props) {
               value="Руки"
               control={<Checkbox size="medium" onChange={onClickHandle} />}
               label="Руки"
-            />
-            <FormControlLabel
-              value="Отсутствуют"
-              control={<Checkbox size="medium" onChange={onClickHandle} />}
-              label="Отсутствуют"
             />
           </RadioGroup>
         </Box>

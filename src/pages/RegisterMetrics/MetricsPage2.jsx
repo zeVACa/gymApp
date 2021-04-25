@@ -14,6 +14,10 @@ function MetricsPage2(props) {
   React.useEffect(() => {
     props.DataMetricsUser['MetricGoal'] = MetricGoal;
     console.log(props.DataMetricsUser);
+
+    if (MetricGoal != '') {
+      props.setValidPage(true);
+    }
   }, [MetricGoal]);
 
   return (
