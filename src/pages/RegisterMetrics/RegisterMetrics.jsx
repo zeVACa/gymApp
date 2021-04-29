@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import RegisterCardPage from './RegisterCardPage';
 
 const DataMetricsUser = {

@@ -4,7 +4,7 @@ import MetricsPage1 from './MetricsPage1';
 import MetricsPage2 from './MetricsPage2';
 import MetricsPage3 from './MetricsPage3';
 import MetricsPage4 from './MetricsPage4';
-import { Card, Button } from '@material-ui/core';
+import { Card, Button, Box } from '@material-ui/core';
 
 // import SideMenu from '.../components/AuthedContent';
 import SideMenu from '../../components/AuthedContent';
@@ -12,7 +12,7 @@ import SideMenu from '../../components/AuthedContent';
 function RegisterCardPage(props) {
   function handleSubmit(e) {
     // console.log(e);
-    // console.log(e.target.innerHTML);
+    console.log(e.target.innerHTML);
     // console.log('myUser', props.user);
 
     if (e.target.innerHTML !== 'Завершить') {
@@ -39,6 +39,7 @@ function RegisterCardPage(props) {
         })
         .then((data) => console.log(data));
 
+      props.user['isMetrics'] = true;
       props.setisMetricscollected(true);
     }
   }
@@ -92,8 +93,10 @@ function RegisterCardPage(props) {
         padding: '40px',
         maxWidth: '900px',
       }}>
+      <Box style={{ float: 'right' }} component="span" m={1}>
+        {props.registrationPage + 1} / 4
+      </Box>
       {arr[props.registrationPage]}
-
       {props.registrationPage != 0 ? (
         <Button
           variant="contained"

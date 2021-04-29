@@ -20,11 +20,10 @@ function App() {
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
-
     if (localUser) {
+      if (localUser['name']) localUser['isMetrics'] = true;
       setUser(localUser);
     }
-
     console.log('local user: ', localUser);
     console.log('user is: ', user);
   }, []);

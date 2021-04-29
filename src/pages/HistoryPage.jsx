@@ -53,7 +53,7 @@ import Tab from '@material-ui/core/Tab';
 // ];
 
 export default function HistoryPage({ user }) {
-  const [periodValue, setPeriodValue] = useState(30);
+  const [periodValue, setPeriodValue] = useState(90);
   const [value, setValue] = useState(2);
 
   const [objTrain, setObjTrain] = useState([]);

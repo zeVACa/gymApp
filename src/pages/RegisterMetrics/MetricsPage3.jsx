@@ -9,13 +9,17 @@ function MetricsPage3(props) {
   const onClickHandle = (e) => {
     // e.preventDefault();
 
+    let collectingHealthMetricsInObject = {
+      Problem: e.target.value,
+    };
+
     if (e.target.checked) {
-      MetricHealth.push(e.target.value);
+      MetricHealth.push(collectingHealthMetricsInObject);
       console.log(MetricHealth.indexOf(e.target.value));
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
       console.log(props.DataMetricsUser);
     } else {
-      MetricHealth.splice(MetricHealth.indexOf(e.target.value), 1);
+      MetricHealth.splice(MetricHealth.indexOf(collectingHealthMetricsInObject), 1);
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
       console.log(props.DataMetricsUser);
     }
