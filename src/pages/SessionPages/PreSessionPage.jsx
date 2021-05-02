@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { Button, Grid, Typography, Container, Card, CardContent } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  Typography,
+  Container,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActionArea,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 function PreSessionPage({ user, trainingPlan = [], setTrainingPlan }) {
@@ -32,7 +41,21 @@ function PreSessionPage({ user, trainingPlan = [], setTrainingPlan }) {
             trainingPlan.excercises.map((exerciseItem) => {
               return (
                 <Grid style={{ minWidth: '400px' }} item sm={3}>
-                  <div style={{ height: 240, backgroundColor: '#ececec' }} />
+                  {/* <div style={{ height: 240, backgroundColor: '#ececec' }}>
+                    <img
+                      src="http://fitness-app.germanywestcentral.cloudapp.azure.com/Images/%D0%B0%D1%80%D0%B1%D1%83%D0%B7.jpg"
+                      alt=""
+                    />
+                  </div> */}
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      image
+                      // className={classes.media}
+                      image="http://fitness-app.germanywestcentral.cloudapp.azure.com/Images/%D0%B0%D1%80%D0%B1%D1%83%D0%B7.jpg"
+                      title="Contemplative Reptile"
+                    />
+                  </CardActionArea>
 
                   <Card style={{ height: '55%' }}>
                     <CardContent style={{ padding: '24px 16px' }}>
