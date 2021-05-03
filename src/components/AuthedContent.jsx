@@ -23,9 +23,9 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 
-import PreSessionPage from '../pages/SessionPages/PreSessionPage';
-import SessionPage from '../pages/SessionPages/SessionPage';
-import SessionResults from '../pages/SessionPages/SessionResults';
+import PreSessionPage from './SessionPages/PreSessionPage/PreSessionPage';
+import SessionPage from './SessionPages/SessionPage/SessionPage';
+import SessionResults from './SessionPages/SessionResultsPage';
 
 import ProgressPage from '../pages/ProgressPage';
 import MyTrainingPlan from '../pages/MyTrainingPlan';
