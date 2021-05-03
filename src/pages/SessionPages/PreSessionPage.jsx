@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
+
 import { connect } from 'react-redux';
 
 import {
@@ -14,15 +15,12 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-function PreSessionPage({ user, trainingPlan = [], setTrainingPlan }) {
+function PreSessionPage({ user, trainingPlan = [], setTrainingPlan, test }) {
   useEffect(() => {
-    console.log('user ID in pressesion page: ', user.id);
-
     if (!trainingPlan) {
-      fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/1/1/${user.id}`)
+      fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/1/3/${user.id}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log('plan: ', data);
           setTrainingPlan(data);
         });
     }
@@ -31,6 +29,7 @@ function PreSessionPage({ user, trainingPlan = [], setTrainingPlan }) {
   return (
     <div>
       <Container>
+        <div>{JSON.stringify(test)}</div>
         <Grid
           container
           spacing={3}
@@ -89,7 +88,7 @@ function PreSessionPage({ user, trainingPlan = [], setTrainingPlan }) {
 }
 
 function mapStateToProps(state) {
-  return state.test;
+  return { test: state.user };
 }
 
 export default connect(mapStateToProps)(PreSessionPage);

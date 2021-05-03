@@ -108,21 +108,13 @@ export default function MiniDrawer({ setUser, user }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-  console.log('user in drawer: ', user);
-  console.log('set user is ', setUser);
 
   const [trainingPlan, setTrainingPlan] = useState(null);
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  console.log(activeElementMenu);
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
 
   return (
     <div className={classes.root}>
@@ -266,7 +258,7 @@ export default function MiniDrawer({ setUser, user }) {
           <Route
             exact
             path="/session"
-            component={() => <SessionPage trainingPlan={trainingPlan} />}
+            component={() => <SessionPage trainingPlan={trainingPlan} user={user} />}
           />
           <Route exact path="/SessionResults" component={SessionResults} />
         </Switch>
