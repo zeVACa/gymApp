@@ -1,2 +1,3 @@
-import { createStore } from 'redux';
-// import reducer from './reducer';
+export const SET_USER = 'SET_USER';
+export const TRAINING_DAY_EXERCISES_LOADED = 'TRAINING_DAY_EXERCISES_LOADED';
+export const SET_LAST_TRAINING_BY_DAY = 'SET_LAST_TRAINING_BY_DAY';

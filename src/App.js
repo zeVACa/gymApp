@@ -21,8 +21,8 @@ function App() {
       setUser(localUser);
     }
 
-    console.log('local user: ', localUser);
-    console.log('user is: ', user);
+    // console.log('local user: ', localUser);
+    // console.log('user is: ', user);
   }, []);
 
   return (

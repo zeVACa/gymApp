@@ -46,7 +46,7 @@ export default function SesstionResults() {
           </Typography>
         </Box>
         <Typography variant="subtitle2" gutterBottom style={{ textAlign: 'center' }}>
-          Оцените тренировку:{' '}
+          Оцените тренировку:
           <Rating
             name="simple-controlled"
             value={valueRating}
