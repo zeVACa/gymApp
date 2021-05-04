@@ -4,21 +4,38 @@ import { Box, Container, Grid, Hidden, Typography } from '@material-ui/core';
 
 import StepperProgress from '../../StepperProgress';
 import Timer from './Timer';
-import TableSession from './TableSession';
+import TableSession from './TableSession/TableSession';
 
 export default function SessionPage({ trainingPlan, user }) {
-  const [page, setPage] = useState(0);
-  const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
-  const [currentTrainingExercises, setCurrentTrainingExercises] = useState([]);
-
   let pageAmount = trainingPlan ? trainingPlan.excercises.length : 0;
 
-  useEffect(() => {
-    console.log('page: ', page);
-    console.log('plan: ', trainingPlan);
-    console.log('sets: ', trainingPlan.excercises[page].setsNumber);
-    console.log('user in session', user);
+  const [page, setPage] = useState(0);
+  const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
+  const [currentTrainingExercises, setCurrentTrainingExercises] = useState(
+    new Array(pageAmount).fill([]),
+  );
 
+  let responseAccum = {
+    trainingPlanId: trainingPlan.planId,
+    muscleGroupId: trainingPlan.muscleGroupId,
+    exercises: [
+      // {
+      //   exerciseId: 1,
+      //   kg: 60,
+      //   quantity: 1,
+      //   startTime: '2019-01-06T17:16:40',
+      //   endTime: '2019-01-08T17:16:40',
+      // },
+    ],
+  };
+
+  const tableDataPerPages = [[], [], [], [], []];
+
+  useEffect(() => {
+    // console.log('page: ', page);
+    // console.log('plan: ', trainingPlan);
+    // console.log('sets: ', trainingPlan.excercises[page].setsNumber);
+    // console.log('user in session', user);
     // fetch(
     //   `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/1/${trainingPlan.muscleGroupId}/${user.id}`,
     //   // `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/1/3/${user.id}`,
@@ -28,9 +45,12 @@ export default function SessionPage({ trainingPlan, user }) {
     //     // setTrainingPlan(data);
     //     console.log('fetched prev training: ', data);
     //   });
-
     // console.log('sendidngData: ', sendidngData);
   }, [page]);
+
+  useEffect(() => {
+    console.log('currentTrainingExercises', currentTrainingExercises);
+  }, [currentTrainingExercises]);
 
   return (
     <div>
@@ -73,7 +93,12 @@ export default function SessionPage({ trainingPlan, user }) {
                     Данное упражнение делается на время
                   </Typography>
                 ) : (
-                  <TableSession page={page} trainingPlan={trainingPlan} />
+                  <TableSession
+                    page={page}
+                    trainingPlan={trainingPlan}
+                    currentTrainingExercises={currentTrainingExercises}
+                    setCurrentTrainingExercises={setCurrentTrainingExercises}
+                  />
                 )}
               </Grid>
               <Grid item md={1} implementation="css" smDown component={Hidden} />

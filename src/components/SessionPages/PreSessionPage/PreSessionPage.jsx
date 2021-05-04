@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 function PreSessionPage({ user, trainingPlan = [], setTrainingPlan, test }) {
   useEffect(() => {
     if (!trainingPlan) {
-      fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/1/3/${user.id}`)
+      fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/1/1/${user.id}`)
         .then((res) => res.json())
         .then((data) => {
           setTrainingPlan(data);

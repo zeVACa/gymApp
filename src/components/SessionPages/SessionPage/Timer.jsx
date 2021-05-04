@@ -1,7 +1,6 @@
-import { Box, Paper, Typography } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import React, { useState } from 'react';
-import Icon from '@material-ui/core/Icon';
 
 export default function Timer() {
   const [timeInSeconds, setTimeInSeconds] = useState(3600);
