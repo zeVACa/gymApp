@@ -1,4 +1,5 @@
 import { makeStyles, TableCell, TableRow, TextField } from '@material-ui/core';
+import { StayCurrentPortrait } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 
 const useStyles = makeStyles({
@@ -15,8 +16,12 @@ const makeDataRow = (kg = 0, quantity = 0, exerciseId) => {
   const stamp = new Date();
 
   const fullDate = `${stamp.getFullYear()}-${
-    stamp.getMonth() + 1
-  }-${stamp.getDate()}T${stamp.getHours()}:${stamp.getMinutes()}:${stamp.getSeconds()}`;
+    stamp.getMonth() + 1 < 10 ? '0' + stamp.getMonth() : stamp.getMonth()
+  }-${stamp.getDate() < 10 ? '0' + stamp.getDate() : stamp.getDate()}T${
+    stamp.getHours() < 10 ? '0' + stamp.getHours() : stamp.getHours()
+  }:${stamp.getMinutes() < 10 ? '0' + stamp.getMinutes() : stamp.getMinutes()}:${
+    stamp.getSeconds() < 10 ? '0' + stamp.getSeconds() : stamp.getSeconds()
+  }`;
   return {
     exerciseId,
     kg,
@@ -39,22 +44,18 @@ export default function DataRow({
 }) {
   const classes = useStyles();
 
-  // const kgExists = ;
-  // const quantityExists = ;
-
-  // console.log('kgExists, quantityExists', kgExists, quantityExists);
-
   const [weightValue, setWeightValue] = useState(
     currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].kg : '',
   );
+
   const [quantityValue, setQuantityValue] = useState(
     currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].quantity : '',
   );
 
-  const [weightIsDirty, setWeightIsDirty] = useState(false);
-  const [quantityIsDirty, setQuantityIsDirty] = useState(false);
+  // const [weightIsDirty, setWeightIsDirty] = useState(false);
+  // const [quantityIsDirty, setQuantityIsDirty] = useState(false);
 
-  const [isRowFilled, setIsRowFilled] = useState(false);
+  // const [isRowFilled, setIsRowFilled] = useState(false);
 
   useEffect(() => {
     setWeightValue(
@@ -63,14 +64,11 @@ export default function DataRow({
     setQuantityValue(
       currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].quantity : '',
     );
-
-    setWeightIsDirty(currentTrainingExercises[page][index] ? true : false);
-    setQuantityIsDirty(currentTrainingExercises[page][index] ? true : false);
-    // setEnabledRows(1);
   }, [page]);
 
   const inputChangeHandle = (setStateHandle) => (e) => {
     const inputValue = e.currentTarget.value;
+
     // console.log('inputValue.len = ', inputValue.length);
     if (inputValue.length < 3) {
       setStateHandle(Math.floor(inputValue));
@@ -84,32 +82,24 @@ export default function DataRow({
       </TableCell>
       <TableCell align="right">
         <TextField
-          //  disabled={weightIsDirty}
+          disabled={isDisabled}
           onBlur={(e) => {
             if (quantityValue) {
               console.log(makeDataRow(weightValue || 0, quantityValue || 0, exerciseId));
             }
-
-            setWeightIsDirty(true);
           }}
           onBlur={(e) => {
-            setWeightIsDirty(true);
-            if (quantityValue && !isRowFilled) {
-              setIsRowFilled(true);
+            if (weightValue && quantityValue) {
               setEnabledRows((prevEnabledRows) => prevEnabledRows + 1);
-              const data = makeDataRow(weightValue || 0, quantityValue || 0, exerciseId);
-              setCurrentTrainingExercises((prevArray) => {
-                const cloneArray = JSON.parse(JSON.stringify(prevArray));
-
-                // if (!cloneArray[page][index]) {
-                //   cloneArray[page] = [];
-                // }
-                cloneArray[page].push(data);
-                return cloneArray;
-              });
             }
+            const data = makeDataRow(weightValue || 0, quantityValue || 0, exerciseId);
+
+            setCurrentTrainingExercises((prevArray) => {
+              const cloneArray = JSON.parse(JSON.stringify(prevArray));
+              cloneArray[page][index] = data;
+              return cloneArray;
+            });
           }}
-          // disabled={isDisabled}
           onChange={inputChangeHandle(setWeightValue)}
           //  classes={weightIsDirty ? { root: classes.customTextField } : null}
           placeholder={prevWeight}
@@ -129,24 +119,17 @@ export default function DataRow({
         <TextField
           placeholder={prevQuantity}
           value={quantityValue}
-          // disabled={isDisabled}
-          //  disabled={quantityIsDirty}
+          disabled={isDisabled}
           onBlur={(e) => {
-            setQuantityIsDirty(true);
-            if (weightValue && !isRowFilled) {
-              setIsRowFilled(true);
+            if (weightValue && quantityValue) {
               setEnabledRows((prevEnabledRows) => prevEnabledRows + 1);
-              const data = makeDataRow(weightValue || 0, quantityValue || 0, exerciseId);
-              setCurrentTrainingExercises((prevArray) => {
-                const cloneArray = JSON.parse(JSON.stringify(prevArray));
-
-                // if (!cloneArray[page][index]) {
-                //   cloneArray[page] = [];
-                // }
-                cloneArray[page].push(data);
-                return cloneArray;
-              });
             }
+            const data = makeDataRow(weightValue || 0, quantityValue || 0, exerciseId);
+            setCurrentTrainingExercises((prevArray) => {
+              const cloneArray = JSON.parse(JSON.stringify(prevArray));
+              cloneArray[page][index] = data;
+              return cloneArray;
+            });
           }}
           onChange={inputChangeHandle(setQuantityValue)}
           //  classes={quantityIsDirty ? { root: classes.customTextField } : null}

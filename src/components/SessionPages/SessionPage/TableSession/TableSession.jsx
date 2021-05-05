@@ -58,6 +58,7 @@ export default function TableSession({
               currentTrainingExercises={currentTrainingExercises}
               setCurrentTrainingExercises={setCurrentTrainingExercises}
               isDisabled={index + 1 > enabledRows}
+              // isDisabled={index < trainingPlan.excercises[page].length}
               setEnabledRows={setEnabledRows}
             />
           ))}
