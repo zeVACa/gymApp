@@ -13,9 +13,53 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProgressMobileStepper({ handleBack, handleNext, page, pageAmount }) {
+export default function ProgressMobileStepper({
+  handleBack,
+  handleNext,
+  page,
+  pageAmount,
+  currentTrainingExercises,
+  user,
+  trainingPlan,
+}) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const handleSubmit = (exercises) => {
+    const clone = exercises.slice().flat(2);
+
+    console.log('clone', clone);
+
+    const filteredData = clone.filter((item) => (item ? true : false));
+    console.log('filtered', filteredData);
+
+    const requestBody = {
+      trainingPlanId: trainingPlan.planId,
+      muscleGroupId: trainingPlan.muscleGroupId,
+      exercises: filteredData,
+    };
+
+    console.log('requestBody', requestBody);
+
+    fetch(
+      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(requestBody),
+      },
+    ).then((res) => {
+      console.log(res.status);
+      if (res.status === 200) {
+        // redirect
+        console.log('training send sucessfully');
+      } else {
+        console.log('something wents wrong', res.status);
+      }
+    });
+  };
 
   return (
     <MobileStepper
@@ -33,7 +77,11 @@ export default function ProgressMobileStepper({ handleBack, handleNext, page, pa
       nextButton={
         page === pageAmount - 1 ? (
           <Link to="/SessionResults">
-            <Button size="small" onClick={handleNext} color="primary" variant="contained">
+            <Button
+              size="small"
+              onClick={() => handleSubmit(currentTrainingExercises)}
+              color="primary"
+              variant="contained">
               Завершить
               <KeyboardArrowRight />
             </Button>

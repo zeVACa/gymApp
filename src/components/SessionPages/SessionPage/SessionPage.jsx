@@ -12,44 +12,20 @@ export default function SessionPage({ trainingPlan, user }) {
   const [page, setPage] = useState(0);
   const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
   const [currentTrainingExercises, setCurrentTrainingExercises] = useState(
-    new Array(pageAmount).fill([]),
+    Array(pageAmount).fill([]),
   );
-
-  let responseAccum = {
-    trainingPlanId: trainingPlan.planId,
-    muscleGroupId: trainingPlan.muscleGroupId,
-    exercises: [
-      // {
-      //   exerciseId: 1,
-      //   kg: 60,
-      //   quantity: 1,
-      //   startTime: '2019-01-06T17:16:40',
-      //   endTime: '2019-01-08T17:16:40',
-      // },
-    ],
-  };
-
-  const tableDataPerPages = [[], [], [], [], []];
 
   useEffect(() => {
     // console.log('page: ', page);
     // console.log('plan: ', trainingPlan);
     // console.log('sets: ', trainingPlan.excercises[page].setsNumber);
     // console.log('user in session', user);
-    // fetch(
-    //   `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/1/${trainingPlan.muscleGroupId}/${user.id}`,
-    //   // `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/1/3/${user.id}`,
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // setTrainingPlan(data);
-    //     console.log('fetched prev training: ', data);
-    //   });
-    // console.log('sendidngData: ', sendidngData);
+
+    console.log('current state', currentTrainingExercises);
   }, [page]);
 
   useEffect(() => {
-    console.log('currentTrainingExercises', currentTrainingExercises);
+    console.log('state was changed', currentTrainingExercises);
   }, [currentTrainingExercises]);
 
   return (
@@ -64,7 +40,10 @@ export default function SessionPage({ trainingPlan, user }) {
                 handleBack={() => setPage((prevPage) => prevPage - 1)}
                 handleNext={() => setPage((prevPage) => prevPage + 1)}
                 page={page}
+                user={user}
                 pageAmount={pageAmount}
+                currentTrainingExercises={currentTrainingExercises}
+                trainingPlan={trainingPlan}
               />
               <Typography component="h5" variant="h5" align="center" color="textSecondary">
                 Упражнение {page + 1} / {pageAmount}

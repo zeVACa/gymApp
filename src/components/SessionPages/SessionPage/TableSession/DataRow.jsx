@@ -34,20 +34,22 @@ export default function DataRow({
   currentTrainingExercises,
   setCurrentTrainingExercises,
   page,
+  isDisabled,
+  setEnabledRows,
 }) {
   const classes = useStyles();
 
-  const kgExists = currentTrainingExercises[page][index]
-    ? currentTrainingExercises[page][index].kg
-    : '';
-  const quantityExists = currentTrainingExercises[page][index]
-    ? currentTrainingExercises[page][index].quantity
-    : '';
+  // const kgExists = ;
+  // const quantityExists = ;
 
-  console.log('kgExists, quantityExists', kgExists, quantityExists);
+  // console.log('kgExists, quantityExists', kgExists, quantityExists);
 
-  const [weightValue, setWeightValue] = useState(kgExists || '');
-  const [quantityValue, setQuantityValue] = useState(quantityExists || '');
+  const [weightValue, setWeightValue] = useState(
+    currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].kg : '',
+  );
+  const [quantityValue, setQuantityValue] = useState(
+    currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].quantity : '',
+  );
 
   const [weightIsDirty, setWeightIsDirty] = useState(false);
   const [quantityIsDirty, setQuantityIsDirty] = useState(false);
@@ -55,20 +57,28 @@ export default function DataRow({
   const [isRowFilled, setIsRowFilled] = useState(false);
 
   useEffect(() => {
-    setWeightValue(kgExists || '');
-    setQuantityValue(quantityExists || '');
+    setWeightValue(
+      currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].kg : '',
+    );
+    setQuantityValue(
+      currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].quantity : '',
+    );
+
+    setWeightIsDirty(currentTrainingExercises[page][index] ? true : false);
+    setQuantityIsDirty(currentTrainingExercises[page][index] ? true : false);
+    // setEnabledRows(1);
   }, [page]);
 
   const inputChangeHandle = (setStateHandle) => (e) => {
     const inputValue = e.currentTarget.value;
-    console.log('inputValue.len = ', inputValue.length);
+    // console.log('inputValue.len = ', inputValue.length);
     if (inputValue.length < 3) {
       setStateHandle(Math.floor(inputValue));
     }
   };
 
   return (
-    <TableRow key={index}>
+    <TableRow key={index} style={isDisabled ? { backgroundColor: '#f8f8f8' } : null}>
       <TableCell component="th" scope="row">
         {index + 1}
       </TableCell>
@@ -82,6 +92,24 @@ export default function DataRow({
 
             setWeightIsDirty(true);
           }}
+          onBlur={(e) => {
+            setWeightIsDirty(true);
+            if (quantityValue && !isRowFilled) {
+              setIsRowFilled(true);
+              setEnabledRows((prevEnabledRows) => prevEnabledRows + 1);
+              const data = makeDataRow(weightValue || 0, quantityValue || 0, exerciseId);
+              setCurrentTrainingExercises((prevArray) => {
+                const cloneArray = JSON.parse(JSON.stringify(prevArray));
+
+                // if (!cloneArray[page][index]) {
+                //   cloneArray[page] = [];
+                // }
+                cloneArray[page].push(data);
+                return cloneArray;
+              });
+            }
+          }}
+          // disabled={isDisabled}
           onChange={inputChangeHandle(setWeightValue)}
           //  classes={weightIsDirty ? { root: classes.customTextField } : null}
           placeholder={prevWeight}
@@ -101,16 +129,21 @@ export default function DataRow({
         <TextField
           placeholder={prevQuantity}
           value={quantityValue}
+          // disabled={isDisabled}
           //  disabled={quantityIsDirty}
           onBlur={(e) => {
             setQuantityIsDirty(true);
             if (weightValue && !isRowFilled) {
               setIsRowFilled(true);
+              setEnabledRows((prevEnabledRows) => prevEnabledRows + 1);
               const data = makeDataRow(weightValue || 0, quantityValue || 0, exerciseId);
               setCurrentTrainingExercises((prevArray) => {
                 const cloneArray = JSON.parse(JSON.stringify(prevArray));
 
-                cloneArray[page][index] = data;
+                // if (!cloneArray[page][index]) {
+                //   cloneArray[page] = [];
+                // }
+                cloneArray[page].push(data);
                 return cloneArray;
               });
             }

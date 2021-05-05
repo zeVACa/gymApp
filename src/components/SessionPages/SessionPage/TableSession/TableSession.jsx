@@ -33,9 +33,12 @@ export default function TableSession({
 }) {
   const classes = useStyles();
 
-  const [pageData, setPageData] = useState([]);
+  const [enabledRows, setEnabledRows] = useState(1);
 
-  useEffect(() => {}, [page]);
+  useEffect(() => {
+    console.log('exercises on page', currentTrainingExercises[page]);
+    setEnabledRows(currentTrainingExercises[page].length + 1);
+  }, [page]);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -54,6 +57,8 @@ export default function TableSession({
               page={page}
               currentTrainingExercises={currentTrainingExercises}
               setCurrentTrainingExercises={setCurrentTrainingExercises}
+              isDisabled={index + 1 > enabledRows}
+              setEnabledRows={setEnabledRows}
             />
           ))}
         </TableBody>
