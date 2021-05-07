@@ -11,6 +11,8 @@ import SideMenu from './components/AuthedContent';
 
 import './global.css';
 
+import RecoverPasswordPage from './pages/RecoverPassword/RecoverPasswordPage';
+
 var userId = null;
 
 function App() {
@@ -57,6 +59,8 @@ function App() {
                 <Route exact path="/register" component={RegistrationPage} />,
 
                 <Route path="/register-metrics" component={RegisterMetrics} />,
+
+                <Route path="/recover" component={RecoverPasswordPage} />,
               ]
             : []}
         </div>

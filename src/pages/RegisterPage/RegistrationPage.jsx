@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './RegisterPageStyle/stylesheet.css';
 import ReactDOM from 'react-dom';
 import { Redirect, Route } from 'react-router';
+import { isEmailValid, isPasswordValid } from '../Validation/Valid';
 
 function RegistrationPage() {
   function handleSubmit(e) {
@@ -41,12 +42,6 @@ function RegistrationPage() {
   const [isValidLogin, setValidLogin] = useState('');
 
   const [redirect, setRedirect] = useState(false);
-
-  const isEmailValid = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // return re.test(String(email).toLowerCase());
-    return !re.test(String(email).toLowerCase());
-  };
 
   return (
     <Container>
@@ -138,6 +133,25 @@ function RegistrationPage() {
                 onChange={(e) => {
                   setinputPassword1(e.target.value);
                 }}
+                error={
+                  isPasswordValid(inputPassword1) ? (inputPassword1 === '' ? false : true) : false
+                }
+                helperText={
+                  isPasswordValid(inputPassword1) ? (
+                    inputPassword1 === '' ? (
+                      false
+                    ) : (
+                      <p>
+                        Пароль должен быть не короче
+                        <br /> 8 символов и содержать строч-
+                        <br />
+                        ную и заглавную буквы и цифру
+                      </p>
+                    )
+                  ) : (
+                    false
+                  )
+                }
                 type="password"
               />
             </Box>
@@ -153,8 +167,16 @@ function RegistrationPage() {
                   setinputPassword2(e.target.value);
                 }}
                 type="password"
-                error={inputPassword1 != inputPassword2 ? true : false}
-                helperText={inputPassword1 != inputPassword2 ? 'Пароли не совпадают' : false}
+                error={
+                  inputPassword1 !== inputPassword2 && inputPassword2.length > 0 ? true : false
+                }
+                helperText={
+                  inputPassword1 != inputPassword2
+                    ? inputPassword2 !== ''
+                      ? 'Пароли не совпадают'
+                      : ''
+                    : false
+                }
               />
             </Box>
             <div>

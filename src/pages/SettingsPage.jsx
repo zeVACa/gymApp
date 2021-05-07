@@ -9,6 +9,8 @@ import {
   InputLabel,
   Popover,
   Box,
+  MenuItem,
+  Card,
 } from '@material-ui/core';
 import { LocalHospital } from '@material-ui/icons';
 import React from 'react';
@@ -24,6 +26,11 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone';
 import Image from 'material-ui-image';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+import ChangingPassword from './ChangingPassword/ChangingPassword';
+import StatusChangePassword from './ChangingPassword/StatusChangePassword';
+
+import { isPasswordValid } from './Validation/Valid';
 
 import './Settings.css';
 
@@ -42,12 +49,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '10px',
     textAlign: 'end',
   },
-  // contentMetrics: {
-  //   marginLeft: 100,
-  //   marginTop: 35,
-  //   display: 'flex',
-  //   flexWrap: 'wrap',
-  // },
   Avatar: {
     padding: '50px  40px',
   },
@@ -87,32 +88,41 @@ const useStyles = makeStyles((theme) => ({
   },
   SaveButton: {
     margin: '25px 27%',
+    background: '#239546',
+  },
+  Card: {
+    margin: '0 auto',
+    color: '#8E8E8E',
+    fontFamily: 'Roboto',
+    lineHeight: '50px',
+    padding: '40px',
+    maxWidth: '900px',
+    textAlign: 'center',
   },
 }));
-
-let metricsUser = {
-  Name: 'Никита',
-  Height: '180',
-  Weight: '100',
-  Age: '25',
-  CalorieAllowance: '2200',
-  gender: 'M',
-  Goal: 'Похудение',
-  Health: 'Ноги',
-  indexBody: '7',
-};
 
 const Goals = [
   { title: 'Похудение' },
   { title: 'Набор мышечной массы' },
   { title: 'Поддержание фигуры' },
 ];
+
 export default function SettingsPage({ user, setUser }) {
   const classes = useStyles();
 
   const [UserMetrics, setUserMetrics] = useState({});
 
   const [loading, SetLoading] = useState(false);
+
+  const [SaveUpdateButton, setSaveUpdateButton] = useState(false);
+
+  const [isComponentChangePassword, setIsComponentChangePage] = useState(false);
+
+  const [inputCodeFromEmail, setInputCodeFromEmail] = useState('');
+  const [inputPassword1, setinputPassword1] = useState('');
+  const [inputPassword2, setinputPassword2] = useState('');
+
+  const [statusChangePassword, setStatusChangePassword] = useState(false);
 
   useEffect(() => {
     fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/UserMetrics/${user.id}`, {
@@ -124,9 +134,9 @@ export default function SettingsPage({ user, setUser }) {
       .then((res) => res.json())
       .then(
         (data) => setUserMetrics(data),
-        setTimeout(() => SetLoading(true), 1100),
+        setTimeout(() => SetLoading(true), 800),
       );
-  }, []);
+  }, isComponentChangePassword);
 
   console.log('Data', UserMetrics);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -135,209 +145,408 @@ export default function SettingsPage({ user, setUser }) {
     setAnchorEl(event.currentTarget);
   };
 
-  const updateDataOfUSer = (e) => {
-    console.log(e);
-    UserMetrics.name = 'Dima';
+  const updateDataOfUSer = (label, e) => {
+    console.log(label);
+    console.log(e.target.value);
+    switch (label) {
+      case 'Age':
+        UserMetrics.metricAge = e.target.value;
+        break;
+      case 'Weight':
+        UserMetrics.metricWeight = e.target.value;
+        break;
+      case 'Height':
+        UserMetrics.metricHeight = e.target.value;
+        break;
+      case 'Name':
+        UserMetrics.name = e.target.value;
+        break;
+      case 'Goal':
+        UserMetrics.metricGoal = e.target.value;
+        break;
+      default:
+        break;
+    }
     console.log(UserMetrics);
+    setSaveUpdateButton(e.target.value);
   };
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
 
+  const handleOpenPageCHangePassword = () => {
+    let body = {
+      Email: user.email,
+    };
+    fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/ForgotPassword`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => console.log('status', res.status))
+      .then((data) => console.log(data));
+
+    setIsComponentChangePage((previsComponentChangePassword) => !previsComponentChangePassword);
+  };
+
+  const handleChangePassword = (e) => {
+    // e.preventDefault();
+    let body = {
+      Email: user.email,
+      Password: inputPassword1,
+      ConfirmPassword: inputPassword1,
+      Code: inputCodeFromEmail,
+    };
+    fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/ResetPassword`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        console.log('status', res.status);
+        setStatusChangePassword(res.status);
+      })
+      .then((data) => console.log(data));
+
+    // setIsComponentChangePage((previsComponentChangePassword) => !previsComponentChangePassword);
+  };
+
+  const sendUpdateDate = (e) => {
+    let MetricHealth = [];
+
+    if (UserMetrics.healthProblems !== null) {
+      for (let index = 0; index < UserMetrics.healthProblems.length; index++) {
+        let collectingHealthMetricsInObject = {
+          Problem: UserMetrics.healthProblems[index],
+        };
+        MetricHealth.push(collectingHealthMetricsInObject);
+      }
+      console.log(UserMetrics.healthProblems[0]);
+      UserMetrics.healthProblems = MetricHealth;
+    }
+    console.log(UserMetrics);
+    console.log();
+
+    fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/UserMetrics/${user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(UserMetrics),
+    })
+      .then((res) => {
+        console.log('status', res.status);
+        res.text();
+      })
+      .then((data) => console.log(data));
+
+    setTimeout(() => window.location.reload(), 200);
+  };
+
   const open = Boolean(anchorEl);
 
-  return (
-    <div>
-      {loading === true && Object.keys(UserMetrics).length ? (
-        <Container className={classes.Container}>
-          <div className={classes.Avatar}>
-            <Avatar className={classes.orange}>{UserMetrics.name[0]}</Avatar>
-            <FormControl className={classes.FormControl}>
-              <InputLabel htmlFor="input-with-icon-adornment">Имя</InputLabel>
-              <Input
-                id="input-with-icon-adornment"
-                defaultValue={'Данные загружаются...'}
-                value={UserMetrics.name}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-            <div className={classes.Buttons}>
-              <Button
-                onClick={() => {
-                  localStorage.setItem('user', null);
-                  setUser(null);
-                }}
-                style={{ padding: '10px', background: 'slategray' }}
-                variant="contained"
-                color="primary">
-                Сменить пароль
-              </Button>
-
-              <Button
-                className={classes.ButtonExit}
-                onClick={() => {
-                  localStorage.setItem('user', null);
-                  setUser(null);
-                }}
-                variant="contained"
-                color="primary">
-                Выйти
-              </Button>
-            </div>
-          </div>
-
-          <div
-            className="contentMetrics"
-            style={{ marginLeft: 100, marginTop: 35, display: 'flex', flexWrap: 'wrap' }}>
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Возраст"
-              defaultValue={UserMetrics.metricAge}
-              // value={UserMetrics.metricAge}
-              // type="number"
-              onChange={(e) => updateDataOfUSer(e)}
-              fullWidth
-            />
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Вес"
-              defaultValue={UserMetrics.metricWeight}
-              // value={UserMetrics.metricWeight}
-              // type="number"
-              fullWidth
-            />
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Рост"
-              defaultValue={UserMetrics.metricHeight}
-              // value={UserMetrics.metricHeight}
-              // type="number"
-              fullWidth
-            />
-            <Autocomplete
-              fullWidth
-              className={classes.child}
-              id="free-solo-demo"
-              freeSolo
-              defaultValue={metricsUser.Goal}
-              clearOnEscape="true"
-              options={Goals.map((option) => option.title)}
-              renderInput={(params) => (
-                <TextField
-                  className="Auxiliary-class-for-AutoComplete-component"
-                  {...params}
-                  style={{ input: { marginRight: '-25px' } }}
-                  label="Цель"
-                  margin="normal"
+  if (!isComponentChangePassword) {
+    return (
+      <div>
+        {loading === true && Object.keys(UserMetrics).length ? (
+          <Container className={classes.Container}>
+            <div className={classes.Avatar}>
+              <Avatar className={classes.orange}>{UserMetrics.name[0]}</Avatar>
+              <FormControl className={classes.FormControl}>
+                <InputLabel htmlFor="input-with-icon-adornment">Имя</InputLabel>
+                <Input
+                  id="input-with-icon-adornment"
+                  defaultValue={UserMetrics.name}
+                  // value={UserMetrics.name}
+                  onChange={(e) => updateDataOfUSer('Name', e)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
                 />
-              )}
-            />
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Необходимое количество суточной нормы калорий для поставленной цели"
-              value={
-                metricsUser.Goal === 'Похудение'
-                  ? UserMetrics.metricWeight * 34 - 900
-                  : metricsUser.Goal === 'Набор мышечной массы'
-                  ? UserMetrics.metricWeight * 36
-                  : 'Не определено'
-              }
-              fullWidth
-            />
+              </FormControl>
+              <div className={classes.Buttons}>
+                <Button
+                  onClick={handleOpenPageCHangePassword}
+                  style={{ padding: '10px', background: 'slategray' }}
+                  variant="contained"
+                  color="primary">
+                  Сменить пароль
+                </Button>
 
-            <Box className={classes.Box}>
+                <Button
+                  className={classes.ButtonExit}
+                  onClick={() => {
+                    localStorage.setItem('user', null);
+                    setUser(null);
+                  }}
+                  variant="contained"
+                  color="primary">
+                  Выйти
+                </Button>
+              </div>
+            </div>
+
+            <div
+              className="contentMetrics"
+              style={{ marginLeft: 100, marginTop: 35, display: 'flex', flexWrap: 'wrap' }}>
               <TextField
                 className={classes.child}
                 id="standard-basic"
-                label="Индекс массы тела"
-                value={(
-                  (UserMetrics.metricWeight * 10000) /
-                  (UserMetrics.metricHeight * UserMetrics.metricHeight)
-                ).toFixed(1)}
+                label="Возраст"
+                defaultValue={UserMetrics.metricAge}
+                onChange={(e) => updateDataOfUSer('Age', e)}
+                fullWidth
+              />
+              <TextField
+                className={classes.child}
+                id="standard-basic"
+                label="Вес"
+                defaultValue={UserMetrics.metricWeight}
+                onChange={(e) => updateDataOfUSer('Weight', e)}
+                fullWidth
+              />
+              <TextField
+                className={classes.child}
+                id="standard-basic"
+                label="Рост"
+                defaultValue={UserMetrics.metricHeight}
+                onChange={(e) => updateDataOfUSer('Height', e)}
+                fullWidth
+              />
+              <TextField
+                className={classes.child}
+                id="standard-select-currency"
+                select
+                label="Текущая цель"
+                defaultValue={UserMetrics.metricGoal}
+                onChange={(e) => updateDataOfUSer('Goal', e)}>
+                {Goals.map((option) => (
+                  <MenuItem key={option.title} value={option.title}>
+                    {option.title}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                className={classes.child}
+                id="standard-basic"
+                label="Необходимое количество суточной нормы калорий для поставленной цели"
+                value={
+                  UserMetrics.metricGoal === 'Похудение'
+                    ? UserMetrics.metricWeight * 34 - 900
+                    : UserMetrics.metricGoal === 'Набор мышечной массы'
+                    ? UserMetrics.metricWeight * 37
+                    : 'Не определено'
+                }
                 fullWidth
               />
 
-              <HelpTwoToneIcon
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
-                className={classes.HintToMetrica}>
-                <Typography
-                  aria-owns={open ? 'mouse-over-popover' : undefined}
-                  aria-haspopup="true"
+              <Box className={classes.Box}>
+                <TextField
+                  className={classes.child}
+                  id="standard-basic"
+                  label="Индекс массы тела"
+                  value={(
+                    (UserMetrics.metricWeight * 10000) /
+                    (UserMetrics.metricHeight * UserMetrics.metricHeight)
+                  ).toFixed(1)}
+                  fullWidth
                 />
-              </HelpTwoToneIcon>
 
-              <Popover
-                id="mouse-over-popover"
-                className={classes.popover}
-                classes={{
-                  paper: classes.paper,
-                }}
-                open={open}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus>
-                <Image
-                  style={{ height: '100px', width: '380px' }}
-                  src="https://cf.ppt-online.org/files2/slide/a/AeZGfbFXwigaBvpkrCJM1E6NzmKq4sc3Y8SWtQ0PT5/slide-16.jpg"
-                />
-              </Popover>
-            </Box>
+                <HelpTwoToneIcon
+                  onMouseEnter={handlePopoverOpen}
+                  onMouseLeave={handlePopoverClose}
+                  className={classes.HintToMetrica}>
+                  <Typography
+                    aria-owns={open ? 'mouse-over-popover' : undefined}
+                    aria-haspopup="true"
+                  />
+                </HelpTwoToneIcon>
 
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Пол"
-              defaultValue={UserMetrics.metricGender}
-              fullWidth
-            />
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Единицы измения"
-              value="Кг/см"
-              fullWidth
-            />
-            <TextField
-              className={classes.child}
-              id="standard-basic"
-              label="Язык интерфейса"
-              value="RU"
-              fullWidth
-            />
+                <Popover
+                  id="mouse-over-popover"
+                  className={classes.popover}
+                  classes={{
+                    paper: classes.paper,
+                  }}
+                  open={open}
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  onClose={handlePopoverClose}
+                  disableRestoreFocus>
+                  <Image
+                    style={{ height: '100px', width: '380px' }}
+                    src="https://cf.ppt-online.org/files2/slide/a/AeZGfbFXwigaBvpkrCJM1E6NzmKq4sc3Y8SWtQ0PT5/slide-16.jpg"
+                  />
+                </Popover>
+              </Box>
 
-            <Button
-              disabled
-              className={classes.SaveButton}
-              size="large"
-              variant="contained"
-              color="primary">
-              Сохранить измнения
-            </Button>
+              <TextField
+                className={classes.child}
+                id="standard-basic"
+                label="Пол"
+                defaultValue={UserMetrics.metricGender}
+                fullWidth
+              />
+              <TextField
+                className={classes.child}
+                id="standard-basic"
+                label="Единицы измения"
+                value="Кг/см"
+                fullWidth
+              />
+              <TextField
+                className={classes.child}
+                id="standard-basic"
+                label="Язык интерфейса"
+                value="RU"
+                fullWidth
+              />
+
+              <Button
+                disabled={!SaveUpdateButton}
+                className={classes.SaveButton}
+                size="large"
+                onClick={sendUpdateDate}
+                variant="contained"
+                color="primary">
+                Сохранить измнения
+              </Button>
+            </div>
+          </Container>
+        ) : (
+          <div className={classes.Loading}>
+            <CircularProgress className={classes.BootScreen} />
           </div>
-        </Container>
-      ) : (
-        <div className={classes.Loading}>
-          <CircularProgress className={classes.BootScreen} />
-        </div>
-      )}
-    </div>
-  );
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Card style={{ height: '900px' }}>
+          <Button
+            style={{ margin: '35px', background: 'slategray' }}
+            size="large"
+            onClick={() => {
+              setIsComponentChangePage(
+                (previsComponentChangePassword) => !previsComponentChangePassword,
+              );
+              setStatusChangePassword(false);
+            }}
+            variant="contained"
+            color="primary">
+            Назад
+          </Button>
+
+          {statusChangePassword !== false ? (
+            <div style={{ margin: '0 27%', textAlign: 'center', marginTop: '15%' }}>
+              <StatusChangePassword status={statusChangePassword} />
+            </div>
+          ) : (
+            <div className={classes.Card}>
+              <h2>
+                Хей! <br /> На вашу почту направлен код для подтвержления смены пароля :){' '}
+              </h2>
+              <form autoComplete="off">
+                <Box my={5}>
+                  <TextField
+                    onChange={(e) => {
+                      setInputCodeFromEmail(e.target.value);
+                    }}
+                    id="outlined-basic"
+                    label="Код с вашей почты"
+                    variant="outlined"
+                    value={inputCodeFromEmail}
+                  />
+                </Box>
+                <Box my={5}>
+                  <TextField
+                    error={
+                      isPasswordValid(inputPassword1)
+                        ? inputPassword1 === ''
+                          ? false
+                          : true
+                        : false
+                    }
+                    onChange={(e) => {
+                      isPasswordValid(setinputPassword1(e.target.value));
+                    }}
+                    helperText={
+                      isPasswordValid(inputPassword1) ? (
+                        inputPassword1 === '' ? (
+                          false
+                        ) : (
+                          <p>
+                            Пароль должен быть не короче
+                            <br /> 8 символов и содержать строч-
+                            <br />
+                            ную и заглавную буквы и цифру
+                          </p>
+                        )
+                      ) : (
+                        false
+                      )
+                    }
+                    value={inputPassword1}
+                    id="outlined-basic"
+                    label="Новый пароль"
+                    type="password"
+                    variant="outlined"
+                  />
+                </Box>
+                <Box my={5}>
+                  <TextField
+                    onChange={(e) => {
+                      setinputPassword2(e.target.value);
+                    }}
+                    id="outlined-basic"
+                    label="Повторите пароль"
+                    type="password"
+                    value={inputPassword2}
+                    error={
+                      inputPassword1 !== inputPassword2 && inputPassword2.length > 0 ? true : false
+                    }
+                    helperText={inputPassword1 !== inputPassword2 ? 'Пароли не совпадают' : false}
+                    variant="outlined"
+                  />
+                </Box>
+              </form>
+
+              <Button
+                size="large"
+                onClick={handleChangePassword}
+                disabled={
+                  inputPassword1 === inputPassword2 &&
+                  inputCodeFromEmail.length > 5 &&
+                  !isPasswordValid(inputPassword1)
+                    ? inputPassword1 === ''
+                      ? true
+                      : false
+                    : true
+                }
+                variant="contained"
+                color="primary">
+                Изменить пароль
+              </Button>
+            </div>
+          )}
+        </Card>
+      </div>
+    );
+  }
 }
