@@ -1,11 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, TextField, Box, Container, Checkbox, Card, Typography } from '@material-ui/core';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useState } from 'react';
+import { Button, TextField, Box, Container, Card, Typography } from '@material-ui/core';
 import './RegisterPageStyle/stylesheet.css';
-import ReactDOM from 'react-dom';
-import { Redirect, Route } from 'react-router';
+import { Redirect } from 'react-router';
 import { isEmailValid, isPasswordValid } from '../Validation/Valid';
 
 function RegistrationPage() {
@@ -24,9 +21,8 @@ function RegistrationPage() {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(userData),
-    })
-      .then((res) => res.text())
-      .then((data) => console.log(data));
+    }).then((res) => res.text());
+    // .then((data) => console.log(data));
 
     setRedirect(true);
   }
@@ -54,7 +50,7 @@ function RegistrationPage() {
             lineHeight: '50px',
             fontSize: '18px',
             padding: '50px 105px',
-            maxHeight: '487px',
+            maxHeight: '486px',
             maxWidth: '500px',
             display: 'flex',
             justifyContent: 'center',
@@ -171,7 +167,7 @@ function RegistrationPage() {
                   inputPassword1 !== inputPassword2 && inputPassword2.length > 0 ? true : false
                 }
                 helperText={
-                  inputPassword1 != inputPassword2
+                  inputPassword1 !== inputPassword2
                     ? inputPassword2 !== ''
                       ? 'Пароли не совпадают'
                       : ''
@@ -185,7 +181,7 @@ function RegistrationPage() {
                 color="primary"
                 type="submit"
                 disabled={
-                  inputPassword1 != inputPassword2 ||
+                  inputPassword1 !== inputPassword2 ||
                   isValidLogin.length < 6 ||
                   inputPassword1.length < 1
                     ? true
@@ -209,7 +205,5 @@ function RegistrationPage() {
     </Container>
   );
 }
-
-const styleCard = {};
 
 export default RegistrationPage;

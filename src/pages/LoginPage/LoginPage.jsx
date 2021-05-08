@@ -2,10 +2,8 @@ import React from 'react';
 import classes from './LoginPage.module.css';
 
 import { useState, useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
-import { Button, TextField, Box, Container, Checkbox } from '@material-ui/core';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { FilterCenterFocusTwoTone } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import { Button, TextField, Box, Container } from '@material-ui/core';
 
 export default function LoginPage({ setUser }) {
   const [emailValue, setEmailValue] = useState('Andrey');
@@ -27,7 +25,6 @@ export default function LoginPage({ setUser }) {
   const isEmailValid = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     // return re.test(String(email).toLowerCase());
-    console.log(re.test(String(email).toLowerCase()));
     return true;
   };
 
@@ -45,8 +42,6 @@ export default function LoginPage({ setUser }) {
       // Password: 'Admin1.',
     };
 
-    console.log(JSON.stringify(requestBody));
-
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
       method: 'POST',
       redirect: 'follow',
@@ -57,7 +52,6 @@ export default function LoginPage({ setUser }) {
     })
       // .then((res) => res.text())
       .then((res) => {
-        console.log(res.status);
         if (res.status === 200) {
           // redirect
           return res.text();
@@ -80,8 +74,6 @@ export default function LoginPage({ setUser }) {
         }
       });
   };
-
-  const inputStyle = { width: '200px', height: '45px' };
 
   return (
     <div>
@@ -108,7 +100,7 @@ export default function LoginPage({ setUser }) {
               }
               variant="outlined"
               autoComplete="false"
-              label="Почта"
+              label="Логин"
               onBlur={(e) => {
                 if (!isEmailDirty) setIsEmailDirty(true);
                 // if (!isPasswordDirty) setIsPasswordDirty(true);
@@ -133,8 +125,8 @@ export default function LoginPage({ setUser }) {
               }}
               id="standard-basic"
               variant="outlined"
-              // type="password"
-              type="text"
+              type="password"
+              // type="text"
               label="Пароль"
             />
           </Box>

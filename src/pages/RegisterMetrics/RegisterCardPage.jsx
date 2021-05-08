@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import MetricsPage1 from './MetricsPage1';
 import MetricsPage2 from './MetricsPage2';
 import MetricsPage3 from './MetricsPage3';
@@ -21,8 +20,6 @@ function RegisterCardPage(props) {
         return prevregistrationPage + 1;
       });
     } else {
-      console.log('propsi', props.DataMetricsUser);
-
       fetch(
         `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/sendMetrics/${props.user.id}`,
         {
@@ -32,18 +29,16 @@ function RegisterCardPage(props) {
           },
           body: JSON.stringify(props.DataMetricsUser),
         },
-      )
-        .then((res) => {
-          console.log('status', res.status);
-          res.text();
-        })
-        .then((data) => console.log(data));
+      ).then((res) => {
+        // console.log('status', res.status);
+        res.text();
+      });
+      // .then((data) => console.log(data));
 
       props.user['isMetrics'] = true;
       props.setisMetricscollected(true);
     }
   }
-  console.log('Я тут', props.isMetricscollected);
 
   if (props.registrationPage === 3) {
     props.SetButtonNextorEnd('Завершить');
@@ -87,17 +82,18 @@ function RegisterCardPage(props) {
     <Card
       style={{
         marginTop: '150px',
-        color: '#8E8E8E',
+        color: '#hsl(0deg 2% 29%)',
         fontFamily: 'Roboto',
         lineHeight: '50px',
-        padding: '40px',
+        padding: '50px 150px',
         maxWidth: '900px',
+        width: '100%',
       }}>
       <Box style={{ float: 'right' }} component="span" m={1}>
         {props.registrationPage + 1} / 4
       </Box>
       {arr[props.registrationPage]}
-      {props.registrationPage != 0 ? (
+      {props.registrationPage !== 0 ? (
         <Button
           variant="contained"
           color="primary"

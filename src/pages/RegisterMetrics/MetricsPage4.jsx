@@ -9,14 +9,12 @@ function MetricsPage4(props) {
     props.DataMetricsUser['MetricPushUps'] = MetricPushUps;
     props.DataMetricsUser['MetricPullUps'] = MetricPullUps;
 
-    if ((MetricPushUps != '') & (MetricPullUps != '')) {
+    if ((MetricPushUps !== '') & (MetricPullUps !== '')) {
       props.setValidPage(true);
     } else {
       props.setValidPage(false);
     }
   }, [MetricPushUps, MetricPullUps]);
-
-  console.log(props.DataMetricsUser);
 
   return (
     <div>

@@ -11,11 +11,10 @@ function MetricsPage1(props) {
     props.DataMetricsUser['MetricWeight'] = MetricWeight;
     props.DataMetricsUser['MetricAge'] = MetricAge;
 
-    if ((MetricAge != '') & (MetricWeight != '') & (MetricHeight != '')) {
+    if ((MetricAge !== '') & (MetricWeight !== '') & (MetricHeight !== '')) {
       props.setValidPage(true);
     }
   }, [MetricHeight, MetricWeight, MetricAge]);
-  console.log(props.DataMetricsUser);
 
   return (
     <div>

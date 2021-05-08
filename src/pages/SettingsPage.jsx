@@ -12,22 +12,17 @@ import {
   MenuItem,
   Card,
 } from '@material-ui/core';
-import { LocalHospital } from '@material-ui/icons';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import CardMedia from '@material-ui/core/CardMedia';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import { deepOrange } from '@material-ui/core/colors';
 import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone';
 import Image from 'material-ui-image';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-import ChangingPassword from './ChangingPassword/ChangingPassword';
 import StatusChangePassword from './ChangingPassword/StatusChangePassword';
 
 import { isPasswordValid } from './Validation/Valid';
@@ -99,6 +94,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '900px',
     textAlign: 'center',
   },
+  ChangeYourPassword: {
+    padding: '10px',
+    backgroundColor: 'slategray',
+  },
 }));
 
 const Goals = [
@@ -136,9 +135,8 @@ export default function SettingsPage({ user, setUser }) {
         (data) => setUserMetrics(data),
         setTimeout(() => SetLoading(true), 800),
       );
-  }, isComponentChangePassword);
+  }, [isComponentChangePassword]);
 
-  console.log('Data', UserMetrics);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -146,8 +144,6 @@ export default function SettingsPage({ user, setUser }) {
   };
 
   const updateDataOfUSer = (label, e) => {
-    console.log(label);
-    console.log(e.target.value);
     switch (label) {
       case 'Age':
         UserMetrics.metricAge = e.target.value;
@@ -167,7 +163,6 @@ export default function SettingsPage({ user, setUser }) {
       default:
         break;
     }
-    console.log(UserMetrics);
     setSaveUpdateButton(e.target.value);
   };
 
@@ -185,9 +180,7 @@ export default function SettingsPage({ user, setUser }) {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(body),
-    })
-      .then((res) => console.log('status', res.status))
-      .then((data) => console.log(data));
+    });
 
     setIsComponentChangePage((previsComponentChangePassword) => !previsComponentChangePassword);
   };
@@ -206,14 +199,9 @@ export default function SettingsPage({ user, setUser }) {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(body),
-    })
-      .then((res) => {
-        console.log('status', res.status);
-        setStatusChangePassword(res.status);
-      })
-      .then((data) => console.log(data));
-
-    // setIsComponentChangePage((previsComponentChangePassword) => !previsComponentChangePassword);
+    }).then((res) => {
+      setStatusChangePassword(res.status);
+    });
   };
 
   const sendUpdateDate = (e) => {
@@ -226,24 +214,17 @@ export default function SettingsPage({ user, setUser }) {
         };
         MetricHealth.push(collectingHealthMetricsInObject);
       }
-      console.log(UserMetrics.healthProblems[0]);
       UserMetrics.healthProblems = MetricHealth;
     }
-    console.log(UserMetrics);
-    console.log();
-
     fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/UserMetrics/${user.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(UserMetrics),
-    })
-      .then((res) => {
-        console.log('status', res.status);
-        res.text();
-      })
-      .then((data) => console.log(data));
+    }).then((res) => {
+      res.text();
+    });
 
     setTimeout(() => window.location.reload(), 200);
   };
@@ -273,8 +254,8 @@ export default function SettingsPage({ user, setUser }) {
               </FormControl>
               <div className={classes.Buttons}>
                 <Button
+                  className={classes.ChangeYourPassword}
                   onClick={handleOpenPageCHangePassword}
-                  style={{ padding: '10px', background: 'slategray' }}
                   variant="contained"
                   color="primary">
                   Сменить пароль

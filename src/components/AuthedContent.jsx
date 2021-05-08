@@ -55,9 +55,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: 36,
-  },
+  // menuButton: {
+  //   marginRight: 36,
+  // },
   hide: {
     display: 'none',
   },
@@ -108,8 +108,6 @@ export default function MiniDrawer({ setUser, user }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-  console.log('user in drawer: ', user);
-  console.log('set user is ', setUser);
 
   // setUser((prevUser) => {
   //   return null;
@@ -124,13 +122,13 @@ export default function MiniDrawer({ setUser, user }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  console.log(activeElementMenu);
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
+        style={{ backgroundColor: '#3c3e48' }}
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}>

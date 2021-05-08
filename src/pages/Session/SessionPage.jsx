@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Box, Button, Container, Grid, Select, TextField, Typography } from '@material-ui/core';
+import { Box, Container, Grid, TextField, Typography } from '@material-ui/core';
 
 import StepperProgress from '../../components/StepperProgress';
 
@@ -28,27 +28,6 @@ const rows = [
   createData(1, 305, 3.7),
   createData(1, 356, 16.0),
 ];
-
-let lastTrainingTest = {
-  traningPlanId: 1,
-  exercises: [
-    { exerciseId: 1, exerciseName: 'Жим лежа', weight: 60, quantity: 12 },
-    { exerciseId: 1, exerciseName: 'Жим лежа', weight: 60, quantity: 10 },
-    { exerciseId: 1, exerciseName: 'Жим лежа', weight: 60, quantity: 8 },
-    { exerciseId: 1, exerciseName: 'Жим лежа', weight: 55, quantity: 10 },
-    { exerciseId: 1, exerciseName: 'Жим лежа', weight: 55, quantity: 9 },
-    { exerciseId: 1, exerciseName: 'Жим лежа', weight: 55, quantity: 8 },
-
-    { exerciseId: 2, exerciseName: 'Подъем штанги на бицепс', weight: 20, quantity: 12 },
-    { exerciseId: 2, exerciseName: 'Подъем штанги на бицепс', weight: 20, quantity: 10 },
-    { exerciseId: 2, exerciseName: 'Подъем штанги на бицепс', weight: 20, quantity: 8 },
-    { exerciseId: 2, exerciseName: 'Подъем штанги на бицепс', weight: 15, quantity: 10 },
-    { exerciseId: 2, exerciseName: 'Подъем штанги на бицепс', weight: 15, quantity: 9 },
-    { exerciseId: 2, exerciseName: 'Подъем штанги на бицепс', weight: 15, quantity: 8 },
-
-    // .........................................
-  ],
-};
 
 export default function SessionPage() {
   const classes = useStyles();

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, Box, Grid, Typography, Container } from '@material-ui/core';
+import { Button, Grid, Typography, Container } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import TrainingPlanList from './TrainingPlanList';
 
 export default function PreSesstionPage({ user }) {
   const [trainingPlan, setTrainingPlan] = useState([]);
@@ -13,7 +12,6 @@ export default function PreSesstionPage({ user }) {
     fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/1/1/${user.id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('plan: ', data);
         setTrainingPlan(data);
       });
   }, []);

@@ -1,6 +1,5 @@
-import { Container, Typography, Grid, ButtonGroup, Button } from '@material-ui/core';
+import { Container, Typography, Grid } from '@material-ui/core';
 import React from 'react';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TemplateHistoryTrain from './TemplateHistoryTrain';
 import { Pagination } from '@material-ui/lab';
 import { useState, useEffect } from 'react';
@@ -8,51 +7,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// let objTrain = [
-//   {
-//     nameTrain: 'Train1',
-//     time: '45 минут',
-//     calories: '400',
-//     data: '14.04.2021',
-//     MuscleGroup: 'Ноги',
-//   },
-//   {
-//     nameTrain: 'Train2',
-//     time: '50 минут',
-//     calories: '500',
-//     data: '13.04.2021',
-//     MuscleGroup: 'Грудь, Бицепс',
-//   },
-//   {
-//     nameTrain: 'Train3',
-//     time: '55 минут',
-//     calories: '600',
-//     data: '10.04.2021',
-//     MuscleGroup: 'Спина, Трицепс',
-//   },
-//   {
-//     nameTrain: 'Train4',
-//     time: '25 минут',
-//     calories: '800',
-//     data: '07.04.2021',
-//     MuscleGroup: 'Кардио(Бег + Челночный бег)',
-//   },
-//   {
-//     nameTrain: 'Train5',
-//     time: '35 минут',
-//     calories: '400',
-//     data: '03.04.2021',
-//     MuscleGroup: 'Пресс, Боковой пресс',
-//   },
-//   {
-//     nameTrain: 'Train6',
-//     time: '65 минут',
-//     calories: '900',
-//     data: '03.03.2021',
-//     MuscleGroup: 'Ноги, Бицепс',
-//   },
-// ];
 
 const useStyles = makeStyles((theme) => ({
   Loading: {
@@ -99,7 +53,6 @@ export default function HistoryPage({ user }) {
   var CurrentDate = new Date();
   var days = 86400000;
   var FromDataFormated = new Date(CurrentDate - periodValue * days);
-  console.log('current-data = ', FromDataFormated);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -137,7 +90,6 @@ export default function HistoryPage({ user }) {
                     toTrain.endTime.substr(0, 10).replace(/(\d+).(\d+).(\d+)/, '$1/$2/$3'),
                   );
                   date >= FromDataFormated ? (len = len + 1) : (len = len);
-                  console.log(date);
                   return date >= FromDataFormated;
                 })
                 .map((toTrain) => {
@@ -152,7 +104,7 @@ export default function HistoryPage({ user }) {
               </Typography>
             )}
           </Grid>
-          {objTrain.length != 0 ? <Pagination count={Math.floor(len / 2)} size="small" /> : <br />}
+          {objTrain.length !== 0 ? <Pagination count={Math.floor(len / 5)} size="small" /> : <br />}
         </Container>
       ) : (
         <div className={classes.Loading}>

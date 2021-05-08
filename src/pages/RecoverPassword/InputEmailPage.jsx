@@ -13,9 +13,9 @@ export default function RecoverPasswordPage({ email, setEmail, page, setPage }) 
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(body),
-    })
-      .then((res) => console.log('status', res.status))
-      .then((data) => console.log(data));
+    });
+    // .then((res) => console.log('status', res.status))
+    // .then((data) => console.log(data));
 
     setPage((prevPage) => prevPage + 1);
   };

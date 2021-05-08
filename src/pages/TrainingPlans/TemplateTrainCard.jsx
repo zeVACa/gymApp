@@ -1,13 +1,12 @@
-import { Container, Card } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
 
 import '../TrainingPlans/TepmplateTrainCard.css';
 
 const useStyles = makeStyles((theme) => ({
   Card: {
-    padding: '200px 170px',
+    padding: '150px 160px',
     cursor: 'pointer',
     transition: 'all 0.5s',
     background: '#bab5b5',
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   isActiveCard: {
-    padding: '200px 170px',
+    padding: '150px 160px',
     background: '#5ed95e',
     transition: 'all 0.5s ',
     cursor: 'pointer',
@@ -47,22 +46,31 @@ const useStyles = makeStyles((theme) => ({
     '&:hover descr': {
       display: 'block',
     },
+    marginTop: '50px',
   },
   PlanName: {
     fontFamily: 'Times New Roman, Georgia, Serif',
     fontSize: '20px',
     fontWeight: 'bold',
     marginTop: '15px',
-    color: 'rgba(0, 0, 0, 0.54)',
+    color: 'rgb(60 62 72)',
   },
 }));
 
 export default function MyTrainingPlan(props) {
   const classes = useStyles();
+
+  const handleClick = (event) => {
+    // console.log(event.currentTarget.id);
+    props.SetIdPlan(event.currentTarget.id);
+  };
+
   return (
     <div>
       <div className={`${classes.Wrapper}`}>
-        <span className={`${classes.descr} descr`}>Нажмите, чтобы перейти к описанию палана</span>
+        <span id={props.plan.id} onClick={handleClick} className={`${classes.descr} descr`}>
+          Нажмите, чтобы перейти к описанию палана
+        </span>
         {props.plan.isActive ? (
           <Card
             className={classes.isActiveCard}

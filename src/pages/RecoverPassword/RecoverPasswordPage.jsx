@@ -27,11 +27,11 @@ export default function RecoverPasswordPage() {
   const [email, setEmail] = useState('lol');
   const [page, setPage] = useState(0);
 
-  const isPasswordValid = (password) => {
-    const re = /(?=.*\d)(?=.*[A-ZА-ЯЁ])(?=.*[a-zа-яё]).{8,}/;
-    // return re.test(String(email).toLowerCase());
-    return !re.test(String(password));
-  };
+  // const isPasswordValid = (password) => {
+  //   const re = /(?=.*\d)(?=.*[A-ZА-ЯЁ])(?=.*[a-zа-яё]).{8,}/;
+  //   // return re.test(String(email).toLowerCase());
+  //   return !re.test(String(password));
+  // };
 
   const arr = [
     <InputEmailPage email={email} setEmail={setEmail} page={page} setPage={setPage} />,

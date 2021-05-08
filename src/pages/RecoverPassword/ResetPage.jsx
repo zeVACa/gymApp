@@ -41,18 +41,12 @@ export default function RecoverPasswordPage({ page, setPage, email }) {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(body),
-    })
-      .then((res) => {
-        console.log('status', console.log(res.status));
-        setTimeout(() => setstatusSend(res.status), 600);
-      })
-      .then((data) => console.log(data));
-
-    console.log(statusSend);
+    }).then((res) => {
+      // console.log('status', console.log(res.status));
+      setTimeout(() => setstatusSend(res.status), 600);
+    });
 
     setStatus(true);
-
-    console.log(body);
   };
 
   return (

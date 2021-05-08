@@ -13,12 +13,8 @@ import './global.css';
 
 import RecoverPasswordPage from './pages/RecoverPassword/RecoverPasswordPage';
 
-var userId = null;
-
 function App() {
   const [user, setUser] = useState(null);
-
-  console.log('Вернулся сука');
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
@@ -26,11 +22,11 @@ function App() {
       if (localUser['name']) localUser['isMetrics'] = true;
       setUser(localUser);
     }
-    console.log('local user: ', localUser);
-    console.log('user is: ', user);
+    // console.log('local user: ', localUser);
+    // console.log('user is: ', user);
   }, []);
 
-  console.log('isMetrics = ', user === null ? 'null' : user['isMetrics']);
+  // console.log('isMetrics = ', user === null ? 'null' : user['isMetrics']);
   return (
     <div className="App" style={{ height: '100vh' }}>
       {/* {user ? <SideMenu user={user} setUser={setUser} /> : <Navigation />} */}
@@ -44,14 +40,7 @@ function App() {
         <Navigation />
       )}
       <Switch>
-        <div
-          className="wrapper"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            minHeight: '80%',
-            alignItems: 'center',
-          }}>
+        <div className="wrapper">
           {!user
             ? [
                 <Route exact path="/" component={LandingPage} />,

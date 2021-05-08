@@ -15,13 +15,10 @@ function MetricsPage3(props) {
 
     if (e.target.checked) {
       MetricHealth.push(collectingHealthMetricsInObject);
-      console.log(MetricHealth.indexOf(e.target.value));
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
-      console.log(props.DataMetricsUser);
     } else {
       MetricHealth.splice(MetricHealth.indexOf(collectingHealthMetricsInObject), 1);
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
-      console.log(props.DataMetricsUser);
     }
 
     // console.log(e.target.value);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import RegisterCardPage from './RegisterCardPage';
 
 const DataMetricsUser = {
@@ -21,7 +21,12 @@ function RegisterMetrics(props) {
   const [isMetricscollected, setisMetricscollected] = React.useState(false);
 
   return (
-    <Container>
+    <Container
+      style={{
+        display: ' flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       <RegisterCardPage
         registrationPage={registrationPage}
         setregistrationPage={setregistrationPage}
