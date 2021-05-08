@@ -21,6 +21,7 @@ export default function ProgressMobileStepper({
   currentTrainingExercises,
   user,
   trainingPlan,
+  currentDayIndex,
 }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -28,18 +29,13 @@ export default function ProgressMobileStepper({
   const handleSubmit = (exercises) => {
     const clone = exercises.slice().flat(2);
 
-    console.log('clone', clone);
-
     const filteredData = clone.filter((item) => (item ? true : false));
-    console.log('filtered', filteredData);
 
     const requestBody = {
-      trainingPlanId: trainingPlan.planId,
-      muscleGroupId: trainingPlan.muscleGroupId,
+      trainingPlanId: trainingPlan[currentDayIndex].planId,
+      muscleGroupId: trainingPlan[currentDayIndex].muscleGroupId,
       exercises: filteredData,
     };
-
-    console.log('requestBody', requestBody);
 
     fetch(
       `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
@@ -50,15 +46,7 @@ export default function ProgressMobileStepper({
         },
         body: JSON.stringify(requestBody),
       },
-    ).then((res) => {
-      console.log(res.status);
-      if (res.status === 200) {
-        // redirect
-        console.log('training send sucessfully');
-      } else {
-        console.log('something wents wrong', res.status);
-      }
-    });
+    );
   };
 
   return (

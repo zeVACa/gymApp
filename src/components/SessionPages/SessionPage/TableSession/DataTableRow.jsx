@@ -1,11 +1,9 @@
 import { makeStyles, TableCell, TableRow, TextField } from '@material-ui/core';
-import { StayCurrentPortrait } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 
 const useStyles = makeStyles({
   customTextField: {
     '& input::placeholder': {
-      // fontSize: '20px',
       color: 'green',
       fontWeight: 'bolder',
     },
@@ -52,11 +50,6 @@ export default function DataRow({
     currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].quantity : '',
   );
 
-  // const [weightIsDirty, setWeightIsDirty] = useState(false);
-  // const [quantityIsDirty, setQuantityIsDirty] = useState(false);
-
-  // const [isRowFilled, setIsRowFilled] = useState(false);
-
   useEffect(() => {
     setWeightValue(
       currentTrainingExercises[page][index] ? currentTrainingExercises[page][index].kg : '',
@@ -69,7 +62,6 @@ export default function DataRow({
   const inputChangeHandle = (setStateHandle) => (e) => {
     const inputValue = e.currentTarget.value;
 
-    // console.log('inputValue.len = ', inputValue.length);
     if (inputValue.length < 3) {
       setStateHandle(Math.floor(inputValue));
     }
@@ -101,7 +93,6 @@ export default function DataRow({
             });
           }}
           onChange={inputChangeHandle(setWeightValue)}
-          //  classes={weightIsDirty ? { root: classes.customTextField } : null}
           placeholder={prevWeight}
           type="number"
           value={weightValue}
@@ -132,7 +123,6 @@ export default function DataRow({
             });
           }}
           onChange={inputChangeHandle(setQuantityValue)}
-          //  classes={quantityIsDirty ? { root: classes.customTextField } : null}
           type="number"
           InputProps={{
             inputProps: {

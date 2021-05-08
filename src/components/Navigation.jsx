@@ -12,12 +12,9 @@ import {
   Button,
   Box,
 } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 
 import { useState } from 'react';
-import { indigo, red } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

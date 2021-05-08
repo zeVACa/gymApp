@@ -109,7 +109,8 @@ export default function MiniDrawer({ setUser, user }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
-  const [trainingPlan, setTrainingPlan] = useState(null);
+  const [trainingPlan, setTrainingPlan] = useState([]);
+  const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
@@ -144,7 +145,6 @@ export default function MiniDrawer({ setUser, user }) {
         </Toolbar>
       </AppBar>
       <Drawer
-        // style={{ display: 'flex', alignContent: 'space-between' }}
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
@@ -252,13 +252,22 @@ export default function MiniDrawer({ setUser, user }) {
                 user={user}
                 setTrainingPlan={setTrainingPlan}
                 trainingPlan={trainingPlan}
+                currentDayIndex={currentDayIndex}
+                setCurrentDayIndex={setCurrentDayIndex}
               />
             )}
           />
           <Route
             exact
             path="/session"
-            component={() => <SessionPage trainingPlan={trainingPlan} user={user} />}
+            component={() => (
+              <SessionPage
+                trainingPlan={trainingPlan}
+                setCurrentDayIndex={setCurrentDayIndex}
+                currentDayIndex={currentDayIndex}
+                user={user}
+              />
+            )}
           />
           <Route exact path="/SessionResults" component={SessionResults} />
         </Switch>

@@ -20,9 +20,6 @@ function App() {
     if (localUser) {
       setUser(localUser);
     }
-
-    // console.log('local user: ', localUser);
-    // console.log('user is: ', user);
   }, []);
 
   return (
@@ -33,10 +30,7 @@ function App() {
           className="wrapper"
           style={{
             display: 'flex',
-            // width: '100%',
             justifyContent: 'center',
-            // height: '100vh',
-            // minHeight: '80%',
             alignItems: 'center',
           }}>
           {!user

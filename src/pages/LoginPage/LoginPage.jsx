@@ -48,11 +48,7 @@ export default function LoginPage({ setUser }) {
     const requestBody = {
       UserLogin: loginValue,
       Password: passwordValue,
-      // UserLogin: 'Andrey',
-      // Password: 'Admin1.',
     };
-
-    console.log(JSON.stringify(requestBody));
 
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
       method: 'POST',
@@ -62,11 +58,8 @@ export default function LoginPage({ setUser }) {
       },
       body: JSON.stringify(requestBody),
     })
-      // .then((res) => res.text())
       .then((res) => {
-        console.log(res.status);
         if (res.status === 200) {
-          // redirect
           return res.text();
         }
       })
