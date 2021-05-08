@@ -13,9 +13,41 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProgressMobileStepper({ handleBack, handleNext, page, pageAmount }) {
+export default function ProgressMobileStepper({
+  handleBack,
+  handleNext,
+  page,
+  pageAmount,
+  currentTrainingExercises,
+  user,
+  trainingPlan,
+  currentDayIndex,
+}) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const handleSubmit = (exercises) => {
+    const clone = exercises.slice().flat(2);
+
+    const filteredData = clone.filter((item) => (item ? true : false));
+
+    const requestBody = {
+      trainingPlanId: trainingPlan[currentDayIndex].planId,
+      muscleGroupId: trainingPlan[currentDayIndex].muscleGroupId,
+      exercises: filteredData,
+    };
+
+    fetch(
+      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(requestBody),
+      },
+    );
+  };
 
   return (
     <MobileStepper
@@ -33,7 +65,11 @@ export default function ProgressMobileStepper({ handleBack, handleNext, page, pa
       nextButton={
         page === pageAmount - 1 ? (
           <Link to="/SessionResults">
-            <Button size="small" onClick={handleNext} color="primary" variant="contained">
+            <Button
+              size="small"
+              onClick={() => handleSubmit(currentTrainingExercises)}
+              color="primary"
+              variant="contained">
               Завершить
               <KeyboardArrowRight />
             </Button>

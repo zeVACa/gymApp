@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Grid, Box, Card } from '@material-ui/core';
+import { Container, Typography, Box, Card } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import WhatshotTwoToneIcon from '@material-ui/icons/WhatshotTwoTone';
 import TimelapseTwoToneIcon from '@material-ui/icons/TimelapseTwoTone';
@@ -46,7 +46,7 @@ export default function SesstionResults() {
           </Typography>
         </Box>
         <Typography variant="subtitle2" gutterBottom style={{ textAlign: 'center' }}>
-          Оцените тренировку:{' '}
+          Оцените тренировку:
           <Rating
             name="simple-controlled"
             value={valueRating}

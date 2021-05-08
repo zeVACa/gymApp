@@ -23,9 +23,9 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 
-import PreSessionPage from '../pages/SessionPages/PreSessionPage';
-import SessionPage from '../pages/SessionPages/SessionPage';
-import SessionResults from '../pages/SessionPages/SessionResults';
+import PreSessionPage from './SessionPages/PreSessionPage/PreSessionPage';
+import SessionPage from './SessionPages/SessionPage/SessionPage';
+import SessionResults from './SessionPages/SessionResultsPage';
 
 import ProgressPage from '../pages/ProgressPage';
 import MyTrainingPlan from '../pages/MyTrainingPlan';
@@ -108,21 +108,14 @@ export default function MiniDrawer({ setUser, user }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-  console.log('user in drawer: ', user);
-  console.log('set user is ', setUser);
 
-  const [trainingPlan, setTrainingPlan] = useState(null);
+  const [trainingPlan, setTrainingPlan] = useState([]);
+  const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  console.log(activeElementMenu);
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
 
   return (
     <div className={classes.root}>
@@ -152,7 +145,6 @@ export default function MiniDrawer({ setUser, user }) {
         </Toolbar>
       </AppBar>
       <Drawer
-        // style={{ display: 'flex', alignContent: 'space-between' }}
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
@@ -260,13 +252,22 @@ export default function MiniDrawer({ setUser, user }) {
                 user={user}
                 setTrainingPlan={setTrainingPlan}
                 trainingPlan={trainingPlan}
+                currentDayIndex={currentDayIndex}
+                setCurrentDayIndex={setCurrentDayIndex}
               />
             )}
           />
           <Route
             exact
             path="/session"
-            component={() => <SessionPage trainingPlan={trainingPlan} />}
+            component={() => (
+              <SessionPage
+                trainingPlan={trainingPlan}
+                setCurrentDayIndex={setCurrentDayIndex}
+                currentDayIndex={currentDayIndex}
+                user={user}
+              />
+            )}
           />
           <Route exact path="/SessionResults" component={SessionResults} />
         </Switch>
