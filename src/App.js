@@ -11,28 +11,32 @@ import SideMenu from './components/AuthedContent';
 
 import './global.css';
 
+import RecoverPasswordPage from './pages/RecoverPassword/RecoverPasswordPage';
+
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
-
     if (localUser) {
+      if (localUser['name']) localUser['isMetrics'] = true;
       setUser(localUser);
     }
   }, []);
 
   return (
     <div className="App" style={{ height: '100vh' }}>
-      {user ? <SideMenu user={user} setUser={setUser} /> : <Navigation />}
+      {user ? (
+        user['isMetrics'] === true ? (
+          <SideMenu user={user} setUser={setUser} />
+        ) : (
+          <RegisterMetrics user={user} setUser={setUser} />
+        )
+      ) : (
+        <Navigation />
+      )}
       <Switch>
-        <div
-          className="wrapper"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <div className="wrapper">
           {!user
             ? [
                 <Route exact path="/" component={LandingPage} />,
@@ -40,7 +44,8 @@ function App() {
                 <Route exact path="/register" component={RegistrationPage} />,
 
                 <Route path="/register-metrics" component={RegisterMetrics} />,
-                // <Route component={NotFoundPage} />,
+
+                <Route path="/recover" component={RecoverPasswordPage} />,
               ]
             : []}
         </div>

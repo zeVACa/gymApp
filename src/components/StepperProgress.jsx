@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -24,7 +24,6 @@ export default function ProgressMobileStepper({
   currentDayIndex,
 }) {
   const classes = useStyles();
-  const theme = useTheme();
 
   const handleSubmit = (exercises) => {
     const clone = exercises.slice().flat(2);

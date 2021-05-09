@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './LoginPage.module.css';
 
 import { useState, useEffect } from 'react';
+
 import { Link, Route } from 'react-router-dom';
 import {
   Button,
@@ -34,12 +35,12 @@ export default function LoginPage({ setUser }) {
     }
   }, [isAuthed]);
 
-  const isLoginValid = (login) => {
-    return login.length >= 6;
-  };
-
   const isPasswordValid = (password) => {
     return password.length >= 6;
+  };
+
+  const isLoginValid = (login) => {
+    return login.length > 6;
   };
 
   const submitHandler = (e) => {

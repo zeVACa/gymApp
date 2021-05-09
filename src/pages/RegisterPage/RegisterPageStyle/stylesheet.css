@@ -21,12 +21,12 @@
   top: -50%;
   width: 200%;
   height: 200%;
-  background-color: #bfe2ff;
+  background-color: #788b9a;
   background-repeat: no-repeat;
   background-size: 50% 50%, 50% 50%;
   background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-  background-image: linear-gradient(#bfe2ff, #bfe2ff), linear-gradient(#84b494, #84b494),
-    linear-gradient(#bfe2ff, #bfe2ff), linear-gradient(#84b494, #84b494);
+  background-image: linear-gradient(#788b9a, #788b9a), linear-gradient(#3c3e48, #3c3e48),
+    linear-gradient(#788b9a, #788b9a), linear-gradient(#3c3e48, #3c3e48);
   animation: anim-Card 8s linear infinite;
 }
 .Card::after {

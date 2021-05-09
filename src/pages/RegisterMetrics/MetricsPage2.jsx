@@ -6,14 +6,15 @@ function MetricsPage2(props) {
 
   const onClickHandle = (e) => {
     e.preventDefault();
-    console.log('tut');
-    console.log(e.target.value);
     setMetricGoal(e.target.value);
   };
 
   React.useEffect(() => {
     props.DataMetricsUser['MetricGoal'] = MetricGoal;
-    console.log(props.DataMetricsUser);
+
+    if (MetricGoal !== '') {
+      props.setValidPage(true);
+    }
   }, [MetricGoal]);
 
   return (

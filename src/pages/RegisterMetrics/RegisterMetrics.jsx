@@ -7,23 +7,38 @@ const DataMetricsUser = {
   MetricWeight: '',
   MetricAge: '',
   MetricGoal: '',
-  MetricHealth: '',
+  MetricHealth: [],
   MetricPushUps: '',
   MetricPullUps: '',
 };
 
-function RegisterMetrics() {
+function RegisterMetrics(props) {
   const [registrationPage, setregistrationPage] = React.useState(0);
   const [ButtonNextorEnd, SetButtonNextorEnd] = React.useState('Далее');
 
+  const [validPage, setValidPage] = React.useState(false);
+
+  const [isMetricscollected, setisMetricscollected] = React.useState(false);
+
   return (
-    <Container>
+    <Container
+      style={{
+        display: ' flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       <RegisterCardPage
         registrationPage={registrationPage}
         setregistrationPage={setregistrationPage}
         ButtonNextorEnd={ButtonNextorEnd}
         SetButtonNextorEnd={SetButtonNextorEnd}
         DataMetricsUser={DataMetricsUser}
+        validPage={validPage}
+        setValidPage={setValidPage}
+        user={props.user}
+        setUser={props.setUser}
+        isMetricscollected={isMetricscollected}
+        setisMetricscollected={setisMetricscollected}
       />
     </Container>
   );
