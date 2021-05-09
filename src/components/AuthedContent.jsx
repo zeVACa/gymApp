@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,9 +23,9 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 
-import PreSessionPage from '../pages/Session/PreSessionPage';
-import SessionPage from '../pages/Session/SessionPage';
-import SessionResults from '../pages/Session/SessionResults';
+import PreSessionPage from './SessionPages/PreSessionPage/PreSessionPage';
+import SessionPage from './SessionPages/SessionPage/SessionPage';
+import SessionResults from './SessionPages/SessionResultsPage';
 
 import ProgressPage from '../pages/ProgressPage';
 import MyTrainingPlan from '../pages/MyTrainingPlan';
@@ -109,19 +109,13 @@ export default function MiniDrawer({ setUser, user }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
-  // setUser((prevUser) => {
-  //   return null;
-  // });
+  const [trainingPlan, setTrainingPlan] = useState([]);
+  const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
 
   return (
     <div className={classes.root}>
@@ -152,7 +146,6 @@ export default function MiniDrawer({ setUser, user }) {
         </Toolbar>
       </AppBar>
       <Drawer
-        // style={{ display: 'flex', alignContent: 'space-between' }}
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
@@ -256,8 +249,31 @@ export default function MiniDrawer({ setUser, user }) {
             component={() => <SettingsPage user={user} setUser={setUser} />}
           />
 
-          <Route exact path="/pre-session" component={() => <PreSessionPage user={user} />} />
-          <Route exact path="/session" component={SessionPage} />
+          <Route
+            exact
+            path="/pre-session"
+            component={() => (
+              <PreSessionPage
+                user={user}
+                setTrainingPlan={setTrainingPlan}
+                trainingPlan={trainingPlan}
+                currentDayIndex={currentDayIndex}
+                setCurrentDayIndex={setCurrentDayIndex}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/session"
+            component={() => (
+              <SessionPage
+                trainingPlan={trainingPlan}
+                setCurrentDayIndex={setCurrentDayIndex}
+                currentDayIndex={currentDayIndex}
+                user={user}
+              />
+            )}
+          />
           <Route exact path="/SessionResults" component={SessionResults} />
         </Switch>
       </main>

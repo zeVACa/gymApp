@@ -10,7 +10,6 @@ export const InputEmail = () => {
       }}
       id="standard-basic"
       type="email"
-      // required
       error={isEmailDirty && !isEmailValid(emailValue)}
       helperText={
         isEmailDirty && emailValue === ''
@@ -24,7 +23,6 @@ export const InputEmail = () => {
       label="Почта"
       onBlur={(e) => {
         if (!isEmailDirty) setIsEmailDirty(true);
-        // if (!isPasswordDirty) setIsPasswordDirty(true);
       }}
     />
   );

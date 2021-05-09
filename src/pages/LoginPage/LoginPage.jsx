@@ -2,15 +2,28 @@ import React from 'react';
 import classes from './LoginPage.module.css';
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, TextField, Box, Container } from '@material-ui/core';
+
+import { Link, Route } from 'react-router-dom';
+import {
+  Button,
+  TextField,
+  Box,
+  Container,
+  Checkbox,
+  InputAdornment,
+  IconButton,
+  Paper,
+} from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginPage({ setUser }) {
-  const [emailValue, setEmailValue] = useState('Andrey');
-  const [passwordValue, setPasswordValue] = useState('Admin1.');
+  const [loginValue, setLoginValue] = useState('Andrey');
+  const [isLoginDirty, setIsLoginDirty] = useState(false);
 
-  const [isEmailDirty, setIsEmailDirty] = useState(false);
+  const [passwordValue, setPasswordValue] = useState('Admin1.');
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
+  const [isPasswordShowing, setIsPasswordShowing] = useState(false);
 
   const [isAuthed, setIsAuthed] = useState(false);
 
@@ -22,24 +35,26 @@ export default function LoginPage({ setUser }) {
     }
   }, [isAuthed]);
 
-  const isEmailValid = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // return re.test(String(email).toLowerCase());
-    return true;
-  };
+  // const isEmailValid = (email) => {
+  //   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   // return re.test(String(email).toLowerCase());
+  //   return true;
+  // };
 
   const isPasswordValid = (password) => {
     return password.length >= 6;
+  };
+
+  const isLoginValid = (login) => {
+    return login.length > 6;
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     const requestBody = {
-      UserLogin: emailValue,
+      UserLogin: loginValue,
       Password: passwordValue,
-      // UserLogin: 'Andrey',
-      // Password: 'Admin1.',
     };
 
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
@@ -50,10 +65,8 @@ export default function LoginPage({ setUser }) {
       },
       body: JSON.stringify(requestBody),
     })
-      // .then((res) => res.text())
       .then((res) => {
         if (res.status === 200) {
-          // redirect
           return res.text();
         }
       })
@@ -77,37 +90,36 @@ export default function LoginPage({ setUser }) {
 
   return (
     <div>
-      <Container style={{ textAlign: 'center' }}>
+      <Container style={{ textAlign: 'center', padding: '48px 64x' }}>
         <h1>Авторизация</h1>
 
         <form action="/">
           <Box my={3}>
             <TextField
-              value={emailValue}
+              value={loginValue}
               onChange={(e) => {
-                setEmailValue(e.target.value);
+                setLoginValue(e.target.value);
               }}
               id="standard-basic"
               type="email"
-              // required
-              error={isEmailDirty && !isEmailValid(emailValue)}
+              fullWidth={true}
+              error={isLoginDirty && !isLoginValid(loginValue)}
               helperText={
-                isEmailDirty && emailValue === ''
-                  ? 'введите email'
-                  : isEmailDirty && !isEmailValid(emailValue)
-                  ? 'Введите корректный email'
+                isLoginDirty && loginValue === ''
+                  ? 'введите логин'
+                  : isLoginDirty && !isLoginValid(loginValue)
+                  ? 'Введите корректный логин'
                   : ''
               }
               variant="outlined"
               autoComplete="false"
               label="Логин"
               onBlur={(e) => {
-                if (!isEmailDirty) setIsEmailDirty(true);
-                // if (!isPasswordDirty) setIsPasswordDirty(true);
+                if (!isLoginDirty) setIsLoginDirty(true);
               }}
             />
           </Box>
-          <Box mb={1}>
+          <Box mb={2}>
             <TextField
               value={passwordValue}
               onChange={(e) => setPasswordValue(e.target.value)}
@@ -120,18 +132,27 @@ export default function LoginPage({ setUser }) {
                   : ''
               }
               onBlur={(e) => {
-                if (!isEmailDirty) setIsEmailDirty(true);
+                if (!isLoginDirty) setIsLoginDirty(true);
                 if (!isPasswordDirty) setIsPasswordDirty(true);
               }}
-              id="standard-basic"
               variant="outlined"
-              type="password"
-              // type="text"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment>
+                    <IconButton
+                      onClick={() =>
+                        setIsPasswordShowing((isPasswordShowing) => !isPasswordShowing)
+                      }>
+                      {isPasswordShowing ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              type={isPasswordShowing ? 'text' : 'password'}
               label="Пароль"
             />
           </Box>
           <br />
-          {/* <AuthButton buttonText="Log in"/> */}
           <Box mb={3}>
             <Button
               type="submit"
@@ -140,16 +161,13 @@ export default function LoginPage({ setUser }) {
               variant="contained"
               color="primary"
               disabled={
-                (isEmailDirty && !isEmailValid(emailValue)) ||
+                (isLoginDirty && !isLoginValid(loginValue)) ||
                 (isPasswordDirty && !isPasswordValid(passwordValue))
               }
               style={{ width: '200px', height: '45px' }}>
               Войти
             </Button>
           </Box>
-          {/* <FormControlLabel control={<Checkbox name="checkedA" />} label="Google" />
-          <FormControlLabel control={<Checkbox name="checkedA" />} label="Facebook" />
-          <FormControlLabel control={<Checkbox name="checkedA" />} label="VK" /> */}
         </form>
         <Box mt={3} mb={2}>
           <Link to="/recover">Восстановить пароль</Link>
@@ -158,8 +176,6 @@ export default function LoginPage({ setUser }) {
         <Box>
           <Link to="/register">Регистрация</Link>
         </Box>
-
-        {/* <Route path="/register"> */}
       </Container>
     </div>
   );

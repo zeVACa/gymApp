@@ -22,8 +22,6 @@ function App() {
       if (localUser['name']) localUser['isMetrics'] = true;
       setUser(localUser);
     }
-    // console.log('local user: ', localUser);
-    // console.log('user is: ', user);
   }, []);
 
   // console.log('isMetrics = ', user === null ? 'null' : user['isMetrics']);
