@@ -1,9 +1,6 @@
 import { AppBar, Container, Toolbar, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 
-import { useState } from 'react';
-import { indigo, red } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,15 +17,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Navigation = () => {
   const classes = useStyles();
-  const [auth, setAuth] = useState(true);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ marginBottom: '24px' }}>
+      <AppBar position="static" style={{ backgroundColor: '#3c3e48' }}>
         <Container maxWidth="lg">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>

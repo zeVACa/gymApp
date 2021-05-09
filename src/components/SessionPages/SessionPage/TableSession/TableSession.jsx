@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, TextField } from '@material-ui/core';
-import DataRow from './DataRow';
+import DataTableRow from './DataTableRow';
 
 const useStyles = makeStyles({
   table: {
@@ -15,21 +15,12 @@ const useStyles = makeStyles({
   },
 });
 
-let mockData = [
-  {
-    exerciseId: 1,
-    kg: 60,
-    quantity: 1,
-    startTime: '2019-01-06T17:16:40',
-    endTime: '2019-01-08T17:16:40',
-  },
-];
-
 export default function TableSession({
   page,
   trainingPlan,
   currentTrainingExercises,
   setCurrentTrainingExercises,
+  currentDayIndex,
 }) {
   const classes = useStyles();
 
@@ -50,18 +41,19 @@ export default function TableSession({
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.from({ length: trainingPlan.excercises[page].setsNumber }).map((row, index) => (
-            <DataRow
-              exerciseId={trainingPlan.excercises[page].id}
-              index={index}
-              page={page}
-              currentTrainingExercises={currentTrainingExercises}
-              setCurrentTrainingExercises={setCurrentTrainingExercises}
-              isDisabled={index + 1 > enabledRows}
-              // isDisabled={index < trainingPlan.excercises[page].length}
-              setEnabledRows={setEnabledRows}
-            />
-          ))}
+          {Array.from({ length: trainingPlan[currentDayIndex].excercises[page].setsNumber }).map(
+            (row, index) => (
+              <DataTableRow
+                exerciseId={trainingPlan[currentDayIndex].excercises[page].id}
+                index={index}
+                page={page}
+                currentTrainingExercises={currentTrainingExercises}
+                setCurrentTrainingExercises={setCurrentTrainingExercises}
+                isDisabled={index + 1 > enabledRows}
+                setEnabledRows={setEnabledRows}
+              />
+            ),
+          )}
         </TableBody>
       </Table>
     </TableContainer>

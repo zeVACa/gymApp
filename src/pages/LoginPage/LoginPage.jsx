@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './LoginPage.module.css';
 
 import { useState, useEffect } from 'react';
+
 import { Link, Route } from 'react-router-dom';
 import {
   Button,
@@ -34,12 +35,12 @@ export default function LoginPage({ setUser }) {
     }
   }, [isAuthed]);
 
-  const isLoginValid = (login) => {
-    return login.length >= 6;
-  };
-
   const isPasswordValid = (password) => {
     return password.length >= 6;
+  };
+
+  const isLoginValid = (login) => {
+    return login.length > 6;
   };
 
   const submitHandler = (e) => {
@@ -48,11 +49,7 @@ export default function LoginPage({ setUser }) {
     const requestBody = {
       UserLogin: loginValue,
       Password: passwordValue,
-      // UserLogin: 'Andrey',
-      // Password: 'Admin1.',
     };
-
-    console.log(JSON.stringify(requestBody));
 
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/login', {
       method: 'POST',
@@ -62,11 +59,8 @@ export default function LoginPage({ setUser }) {
       },
       body: JSON.stringify(requestBody),
     })
-      // .then((res) => res.text())
       .then((res) => {
-        console.log(res.status);
         if (res.status === 200) {
-          // redirect
           return res.text();
         }
       })

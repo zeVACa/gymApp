@@ -11,12 +11,10 @@ function MetricsPage1(props) {
     props.DataMetricsUser['MetricWeight'] = MetricWeight;
     props.DataMetricsUser['MetricAge'] = MetricAge;
 
-    // props.setMetricObject(props.DataMetricsUser);
+    if ((MetricAge !== '') & (MetricWeight !== '') & (MetricHeight !== '')) {
+      props.setValidPage(true);
+    }
   }, [MetricHeight, MetricWeight, MetricAge]);
-  // props.DataMetricsUser['MetricHeight'] = MetricHeight;
-  // props.DataMetricsUser['MetricWeight'] = MetricWeight;
-  // props.DataMetricsUser['MetricAge'] = MetricAge;
-  console.log(props.DataMetricsUser);
 
   return (
     <div>
@@ -46,6 +44,7 @@ function MetricsPage1(props) {
           id="standard-basic"
           variant="outlined"
           autoComplete="false"
+          type="number"
           label="Рост"
         />
       </Box>
@@ -59,6 +58,7 @@ function MetricsPage1(props) {
           id="standard-basic"
           variant="outlined"
           autoComplete="false"
+          type="number"
           label="Вес"
         />
       </Box>
@@ -72,6 +72,7 @@ function MetricsPage1(props) {
           id="standard-basic"
           variant="outlined"
           autoComplete="false"
+          type="number"
           label="Возраст"
         />
       </Box>

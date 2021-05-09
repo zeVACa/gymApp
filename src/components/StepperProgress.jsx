@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -21,25 +21,20 @@ export default function ProgressMobileStepper({
   currentTrainingExercises,
   user,
   trainingPlan,
+  currentDayIndex,
 }) {
   const classes = useStyles();
-  const theme = useTheme();
 
   const handleSubmit = (exercises) => {
     const clone = exercises.slice().flat(2);
 
-    console.log('clone', clone);
-
     const filteredData = clone.filter((item) => (item ? true : false));
-    console.log('filtered', filteredData);
 
     const requestBody = {
-      trainingPlanId: trainingPlan.planId,
-      muscleGroupId: trainingPlan.muscleGroupId,
+      trainingPlanId: trainingPlan[currentDayIndex].planId,
+      muscleGroupId: trainingPlan[currentDayIndex].muscleGroupId,
       exercises: filteredData,
     };
-
-    console.log('requestBody', requestBody);
 
     fetch(
       `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
@@ -50,15 +45,7 @@ export default function ProgressMobileStepper({
         },
         body: JSON.stringify(requestBody),
       },
-    ).then((res) => {
-      console.log(res.status);
-      if (res.status === 200) {
-        // redirect
-        console.log('training send sucessfully');
-      } else {
-        console.log('something wents wrong', res.status);
-      }
-    });
+    );
   };
 
   return (

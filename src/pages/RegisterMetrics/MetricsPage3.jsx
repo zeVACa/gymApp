@@ -3,20 +3,22 @@ import { Box, FormControlLabel, Typography, Checkbox, RadioGroup } from '@materi
 
 function MetricsPage3(props) {
   let MetricHealth = [];
+
   // const [MetricHealth, setMetricHealth] = React.useState([]);
 
   const onClickHandle = (e) => {
     // e.preventDefault();
 
+    let collectingHealthMetricsInObject = {
+      Problem: e.target.value,
+    };
+
     if (e.target.checked) {
-      MetricHealth.push(e.target.value);
-      console.log(MetricHealth.indexOf(e.target.value));
+      MetricHealth.push(collectingHealthMetricsInObject);
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
-      console.log(props.DataMetricsUser);
     } else {
-      MetricHealth.splice(MetricHealth.indexOf(e.target.value), 1);
+      MetricHealth.splice(MetricHealth.indexOf(collectingHealthMetricsInObject), 1);
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
-      console.log(props.DataMetricsUser);
     }
 
     // console.log(e.target.value);
@@ -24,11 +26,6 @@ function MetricsPage3(props) {
 
     // console.log(MetricHealth);
   };
-
-  // React.useEffect(() => {
-  //   props.DataMetricsUser['MetricHealth'] = MetricHealth;
-  //   console.log(props.DataMetricsUser);
-  // }, [MetricHealth]);
 
   return (
     <div>
@@ -65,11 +62,6 @@ function MetricsPage3(props) {
               value="Руки"
               control={<Checkbox size="medium" onChange={onClickHandle} />}
               label="Руки"
-            />
-            <FormControlLabel
-              value="Отсутствуют"
-              control={<Checkbox size="medium" onChange={onClickHandle} />}
-              label="Отсутствуют"
             />
           </RadioGroup>
         </Box>
