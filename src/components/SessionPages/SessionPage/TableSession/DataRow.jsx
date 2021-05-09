@@ -13,7 +13,9 @@ const useStyles = makeStyles({
 });
 
 const makeDataRow = (kg = 0, quantity = 0, exerciseId) => {
-  const stamp = new Date();
+  let stamp = new Date();
+
+  stamp.setDate(stamp.getDate() + 7);
 
   const fullDate = `${stamp.getFullYear()}-${
     stamp.getMonth() + 1 < 10 ? '0' + stamp.getMonth() : stamp.getMonth()
@@ -108,7 +110,7 @@ export default function DataRow({
           InputProps={{
             inputProps: {
               max: 100,
-              min: 10,
+              min: 0,
             },
           }}
           variant="outlined"

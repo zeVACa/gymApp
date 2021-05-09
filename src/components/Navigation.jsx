@@ -1,18 +1,4 @@
-import {
-  AppBar,
-  Container,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Switch,
-  Button,
-  Box,
-} from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
+import { AppBar, Container, Toolbar, Typography, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 
