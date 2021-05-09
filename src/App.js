@@ -24,10 +24,8 @@ function App() {
     }
   }, []);
 
-  // console.log('isMetrics = ', user === null ? 'null' : user['isMetrics']);
   return (
     <div className="App" style={{ height: '100vh' }}>
-      {/* {user ? <SideMenu user={user} setUser={setUser} /> : <Navigation />} */}
       {user ? (
         user['isMetrics'] === true ? (
           <SideMenu user={user} setUser={setUser} />
