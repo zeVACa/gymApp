@@ -25,27 +25,37 @@ export default function ProgressMobileStepper({
 }) {
   const classes = useStyles();
 
-  const handleSubmit = (exercises) => {
-    const clone = exercises.slice().flat(2);
+  const handleSubmit = () => {
+    const clone = currentTrainingExercises.slice().flat(2);
 
     const filteredData = clone.filter((item) => (item ? true : false));
 
     const requestBody = {
       trainingPlanId: trainingPlan[currentDayIndex].planId,
       muscleGroupId: trainingPlan[currentDayIndex].muscleGroupId,
-      exercises: filteredData,
+      exercises: filteredData.map((el) => {
+        if (typeof el.kg === 'string') el.kg = 0;
+        if (typeof el.quantity === 'string') el.quantity = 0;
+        console.log(el);
+        return el;
+      }),
     };
 
-    fetch(
-      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
+    console.log('requestBody', requestBody);
+    try {
+      fetch(
+        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          body: JSON.stringify(requestBody),
         },
-        body: JSON.stringify(requestBody),
-      },
-    );
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -66,7 +76,10 @@ export default function ProgressMobileStepper({
           <Link to="/SessionResults">
             <Button
               size="small"
-              onClick={() => handleSubmit(currentTrainingExercises)}
+              onClick={() => {
+                // handleNext();
+                handleSubmit();
+              }}
               color="primary"
               variant="contained">
               Завершить
