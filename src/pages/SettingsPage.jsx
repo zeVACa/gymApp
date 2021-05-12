@@ -142,6 +142,7 @@ export default function SettingsPage({ user, setUser }) {
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  console.log('au', UserMetrics);
 
   const updateDataOfUSer = (label, e) => {
     switch (label) {

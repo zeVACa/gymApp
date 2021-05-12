@@ -27,12 +27,13 @@ function PreSessionPage({
     if (!trainingPlan[currentDayIndex]) {
       console.log('fetch here');
       fetch(
-        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/1/${
-          currentDayIndex + 1
-        }/${user.id}`,
+        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/${
+          user.activePlanId
+        }/${currentDayIndex + 1}/${user.id}`,
       )
         .then((res) => res.json())
         .then((data) => {
+          console.log('data', data);
           setTrainingPlan((prevState) => {
             const cloneState = JSON.parse(JSON.stringify(prevState));
             cloneState[currentDayIndex] = data;
@@ -43,6 +44,7 @@ function PreSessionPage({
   }, [currentDayIndex]);
 
   useEffect(() => {}, [currentDayIndex]);
+  console.log(user.activePlanId);
 
   return (
     <Container pt={10}>
