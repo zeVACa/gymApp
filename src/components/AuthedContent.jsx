@@ -241,7 +241,7 @@ export default function MiniDrawer({ setUser, user }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Route exact path="/progress" component={ProgressPage} />
+          <Route exact path="/progress" component={() => <ProgressPage user={user} />} />
           <Route
             exact
             path="/my-training-plan"
@@ -251,11 +251,19 @@ export default function MiniDrawer({ setUser, user }) {
                 setCurrentDayIndex={setCurrentDayIndex}
                 currentDayIndex={currentDayIndex}
                 setUser={setUser}
+                trainingPlan={trainingPlan}
+                setTrainingPlan={setTrainingPlan}
               />
             )}
           />
           <Route exact path="/training-history" component={() => <HistoryPage user={user} />} />
-          <Route exact path="/plan" component={PlanViewer} />
+          <Route
+            exact
+            path="/plan"
+            component={(props) => (
+              <PlanViewer {...props} setUser={setUser} setTrainingPlan={setTrainingPlan} />
+            )}
+          />
           <Route
             exact
             path="/settings"

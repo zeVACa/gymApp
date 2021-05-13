@@ -155,9 +155,17 @@ const useStyles = makeStyles((theme) => ({
 
 let isGoals = {
   Похудение: 'WeightLoss',
+  'Набор мышечной массы': 'MuscleGain',
 };
 
-export default function MyTrainingPlan({ user, setCurrentDayIndex, currentDayIndex, setUser }) {
+export default function MyTrainingPlan({
+  user,
+  setCurrentDayIndex,
+  currentDayIndex,
+  setUser,
+  trainingPlan,
+  setTrainingPlan,
+}) {
   const classes = useStyles();
 
   const [loading, SetLoading] = useState(false);
@@ -175,7 +183,7 @@ export default function MyTrainingPlan({ user, setCurrentDayIndex, currentDayInd
     })
       .then((res) => res.json())
       .then(
-        (data) => setIsGoal(data.metricGoal),
+        (data) => setIsGoal(data.metricGoal.toString()),
         setTimeout(() => SetLoading(true), 800),
       );
   }, []);
@@ -191,9 +199,10 @@ export default function MyTrainingPlan({ user, setCurrentDayIndex, currentDayInd
         },
         setTimeout(() => SetLoading2(true), 800),
       );
+    console.log('isGoals[isGoal]', isGoals[isGoal.toString()]);
+    console.log('isGoal', isGoal);
   }, [loading]);
 
-  console.log(plans);
   // if (!idPlan) {
   return (
     <div>
@@ -221,6 +230,8 @@ export default function MyTrainingPlan({ user, setCurrentDayIndex, currentDayInd
                     setCurrentDayIndex={setCurrentDayIndex}
                     currentDayIndex={currentDayIndex}
                     setUser={setUser}
+                    trainingPlan={trainingPlan}
+                    setTrainingPlan={setTrainingPlan}
                   />{' '}
                 </li>
               );

@@ -23,6 +23,7 @@ function PreSessionPage({
   currentDayIndex,
   setCurrentDayIndex,
 }) {
+  console.log('trainingPlan', trainingPlan);
   useEffect(() => {
     if (!trainingPlan[currentDayIndex]) {
       console.log('fetch here');
@@ -33,7 +34,6 @@ function PreSessionPage({
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log('data', data);
           setTrainingPlan((prevState) => {
             const cloneState = JSON.parse(JSON.stringify(prevState));
             cloneState[currentDayIndex] = data;
@@ -42,9 +42,6 @@ function PreSessionPage({
         });
     }
   }, [currentDayIndex]);
-
-  useEffect(() => {}, [currentDayIndex]);
-  console.log(user.activePlanId);
 
   return (
     <Container pt={10}>

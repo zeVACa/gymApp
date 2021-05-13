@@ -81,7 +81,6 @@ export default function MyTrainingPlan(props) {
           currentDayIndex: props.currentDayIndex,
           setCurrentDayIndex: props.setCurrentDayIndex,
           user: props.user,
-          setUser: props.setUser,
         }}>
         <div className={`${classes.Wrapper}`}>
           <span id={props.plan.id} onClick={handleClick} className={`${classes.descr} descr`}>

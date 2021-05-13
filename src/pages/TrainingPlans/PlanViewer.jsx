@@ -59,13 +59,20 @@ export default function PlanViewer(props) {
   };
 
   const handleActivePlan = (e) => {
-    // e.preventDefault();
     fetch(
       `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/ChangeUserActivePlan/${props.location.propsSearch.id}/${props.location.user.id}`,
       {
         method: 'POST',
       },
-    ).then((res) => {});
+    ).then((res) => {
+      console.log(res.status);
+    });
+    let newPlan = props.location.propsSearch.id;
+    props.location.user.activePlanId = newPlan;
+    let updateUser = props.location.user;
+    props.setUser(updateUser);
+
+    setTimeout(() => props.setTrainingPlan([]), 800);
 
     setOpen(true);
   };

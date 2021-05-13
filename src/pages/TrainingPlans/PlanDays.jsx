@@ -23,7 +23,6 @@ export default function PlanDays({ trainingPlan }) {
   return (
     <div>
       {days.map((day, index) => {
-        console.log(index);
         return <ExercisesInPlan index={index} day={day} trainingPlan={trainingPlan} />;
       })}
     </div>
