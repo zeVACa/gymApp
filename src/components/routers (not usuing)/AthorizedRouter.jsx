@@ -7,6 +7,8 @@ import SessionResults from '../../pages/SessionPages/SessionResults';
 import ProgressPage from '../../pages/ProgressPage';
 import MyTrainingPlan from '../../pages/MyTrainingPlan';
 import HistoryPage from '../../pages/HistoryPage';
+import trainingHistoryPage from '../trainingHistory/TrainingHistoryPage';
+
 import SettingsPage from '../../pages/SettingsPage';
 
 const AthorizedRouter = ({ user, setUser, setTrainingPlan, trainingPlan }) => {
@@ -14,7 +16,7 @@ const AthorizedRouter = ({ user, setUser, setTrainingPlan, trainingPlan }) => {
     <Switch>
       <Route exact path="/progress" component={ProgressPage} />
       <Route exact path="/my-training-plan" component={MyTrainingPlan} />
-      <Route exact path="/training-history" component={() => <HistoryPage user={user} />} />
+      <Route exact path="/training-history" component={() => <trainingHistoryPage user={user} />} />
       <Route exact path="/settings" component={() => <SettingsPage setUser={setUser} />} />
 
       <Route

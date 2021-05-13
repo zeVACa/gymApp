@@ -33,6 +33,7 @@ import HistoryPage from '../pages/HistoryPage';
 import SettingsPage from '../pages/SettingsPage';
 
 import { Link, Route, Switch } from 'react-router-dom';
+import TrainingHistoryPage from './trainingHistory/TrainingHistoryPage';
 
 const drawerWidth = 264;
 
@@ -242,7 +243,11 @@ export default function MiniDrawer({ setUser, user }) {
         <Switch>
           <Route exact path="/progress" component={ProgressPage} />
           <Route exact path="/my-training-plan" component={MyTrainingPlan} />
-          <Route exact path="/training-history" component={() => <HistoryPage user={user} />} />
+          <Route
+            exact
+            path="/training-history"
+            component={() => <TrainingHistoryPage user={user} />}
+          />
           <Route
             exact
             path="/settings"
