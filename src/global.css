@@ -10,3 +10,24 @@ a {
   text-decoration: none;
   color: #525252;
 }
+.wrapper {
+  display: flex;
+  justify-content: center;
+  min-height: 80%;
+  align-items: center;
+}
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic|Playfair+Display+SC:400,700&subset=latin,cyrillic);
+body {
+  background-color: #f5f5f5;
+  font-family: 'Playfair Display SC', serif;
+}
+input,
+h1,
+h2,
+h3,
+h4,
+a,
+h5,
+h6 {
+  font-family: 'Playfair Display SC', serif;
+}

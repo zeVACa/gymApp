@@ -36,10 +36,15 @@ function PreSessionPage({
           setTrainingPlan((prevState) => {
             const cloneState = JSON.parse(JSON.stringify(prevState));
             cloneState[currentDayIndex] = data;
+            console.log('todays training plan: ', cloneState[currentDayIndex]);
             return cloneState;
           });
         });
     }
+
+    // if (previousTraining.length === 0) {
+
+    // }
   }, [currentDayIndex]);
 
   useEffect(() => {}, [currentDayIndex]);
@@ -57,7 +62,6 @@ function PreSessionPage({
       <Typography variant="h6" component="h6" color="textSecondary">
         Дополнительные: трицепс, предплечье
       </Typography>
-      {/* <div>{JSON.stringify(test)}</div> */}
       <WeekdaysBar currentDayIndex={currentDayIndex} setCurrentDayIndex={setCurrentDayIndex} />
       <Grid
         container

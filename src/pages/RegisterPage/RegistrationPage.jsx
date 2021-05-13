@@ -1,11 +1,9 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, TextField, Box, Container, Checkbox, Card, Typography } from '@material-ui/core';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useState } from 'react';
+import { Button, TextField, Box, Container, Card, Typography } from '@material-ui/core';
 import './RegisterPageStyle/stylesheet.css';
-import ReactDOM from 'react-dom';
-import { Redirect, Route } from 'react-router';
+import { Redirect } from 'react-router';
+import { isEmailValid, isPasswordValid } from '../Validation/Valid';
 
 function RegistrationPage() {
   function handleSubmit(e) {
@@ -23,9 +21,8 @@ function RegistrationPage() {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(userData),
-    })
-      .then((res) => res.text())
-      .then((data) => console.log(data));
+    }).then((res) => res.text());
+    // .then((data) => console.log(data));
 
     setRedirect(true);
   }
@@ -42,12 +39,6 @@ function RegistrationPage() {
 
   const [redirect, setRedirect] = useState(false);
 
-  const isEmailValid = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // return re.test(String(email).toLowerCase());
-    return !re.test(String(email).toLowerCase());
-  };
-
   return (
     <Container>
       <div className="Card">
@@ -59,7 +50,7 @@ function RegistrationPage() {
             lineHeight: '50px',
             fontSize: '18px',
             padding: '50px 105px',
-            maxHeight: '487px',
+            maxHeight: '486px',
             maxWidth: '500px',
             display: 'flex',
             justifyContent: 'center',
@@ -138,6 +129,25 @@ function RegistrationPage() {
                 onChange={(e) => {
                   setinputPassword1(e.target.value);
                 }}
+                error={
+                  isPasswordValid(inputPassword1) ? (inputPassword1 === '' ? false : true) : false
+                }
+                helperText={
+                  isPasswordValid(inputPassword1) ? (
+                    inputPassword1 === '' ? (
+                      false
+                    ) : (
+                      <p>
+                        Пароль должен быть не короче
+                        <br /> 8 символов и содержать строч-
+                        <br />
+                        ную и заглавную буквы и цифру
+                      </p>
+                    )
+                  ) : (
+                    false
+                  )
+                }
                 type="password"
               />
             </Box>
@@ -153,8 +163,16 @@ function RegistrationPage() {
                   setinputPassword2(e.target.value);
                 }}
                 type="password"
-                error={inputPassword1 != inputPassword2 ? true : false}
-                helperText={inputPassword1 != inputPassword2 ? 'Пароли не совпадают' : false}
+                error={
+                  inputPassword1 !== inputPassword2 && inputPassword2.length > 0 ? true : false
+                }
+                helperText={
+                  inputPassword1 !== inputPassword2
+                    ? inputPassword2 !== ''
+                      ? 'Пароли не совпадают'
+                      : ''
+                    : false
+                }
               />
             </Box>
             <div>
@@ -163,7 +181,7 @@ function RegistrationPage() {
                 color="primary"
                 type="submit"
                 disabled={
-                  inputPassword1 != inputPassword2 ||
+                  inputPassword1 !== inputPassword2 ||
                   isValidLogin.length < 6 ||
                   inputPassword1.length < 1
                     ? true
@@ -187,7 +205,5 @@ function RegistrationPage() {
     </Container>
   );
 }
-
-const styleCard = {};
 
 export default RegistrationPage;
