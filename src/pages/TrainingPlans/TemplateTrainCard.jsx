@@ -1,6 +1,7 @@
 import { Card } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import '../TrainingPlans/TepmplateTrainCard.css';
 
@@ -57,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+let countBgImage = 0;
+let bgImage = [
+  'https://sun9-32.userapi.com/impf/c834304/v834304102/8f9b3/UBTEpiNTr5Y.jpg?size=1920x1080&quality=96&sign=8b133ac63cb03034809dea8196dabba2&type=album',
+  'https://sun9-16.userapi.com/impf/c846018/v846018553/45d58/_LoJna0OGqA.jpg?size=1920x1080&quality=96&sign=1c8dd4288fc1212d87d6f737e76ee87b&type=album',
+];
 export default function MyTrainingPlan(props) {
   const classes = useStyles();
 
@@ -67,31 +73,43 @@ export default function MyTrainingPlan(props) {
 
   return (
     <div>
-      <div className={`${classes.Wrapper}`}>
-        <span id={props.plan.id} onClick={handleClick} className={`${classes.descr} descr`}>
-          Нажмите, чтобы перейти к описанию палана
-        </span>
-        {props.plan.isActive ? (
-          <Card
-            className={classes.isActiveCard}
-            style={{
-              backgroundImage: `url(${props.plan.image})`,
-              backgroundSize: '100% 100%',
-              backgroundRepeat: 'no-repeat',
-            }}>
-            {/* <img url={props.plan.image} /> */}
-          </Card>
-        ) : (
-          <Card
-            className={classes.Card}
-            style={{
-              backgroundImage: `url(${props.plan.image})`,
-              backgroundSize: '100% 100%',
-              backgroundRepeat: 'no-repeat',
-            }}></Card>
-        )}
-      </div>
-      <span className={classes.PlanName}>{props.plan.name}</span>
+      <Link
+        to={{
+          pathname: '/plan',
+          propsSearch: props.plan,
+          PlanId: props.idPlan,
+          currentDayIndex: props.currentDayIndex,
+          setCurrentDayIndex: props.setCurrentDayIndex,
+          user: props.user,
+        }}>
+        <div className={`${classes.Wrapper}`}>
+          <span id={props.plan.id} onClick={handleClick} className={`${classes.descr} descr`}>
+            Нажмите, чтобы перейти к описанию плана
+          </span>
+          {props.plan.isActive ? (
+            <Card
+              className={classes.isActiveCard}
+              style={{
+                backgroundImage: `url(${bgImage[countBgImage++]})`,
+                backgroundSize: '100% 100%',
+                backgroundRepeat: 'no-repeat',
+              }}>
+              {/* <img url={props.plan.image} /> */}
+            </Card>
+          ) : (
+            <Card
+              className={classes.Card}
+              style={{
+                backgroundImage: `url(${
+                  bgImage[countBgImage === 1 ? --countBgImage : ++countBgImage]
+                })`,
+                backgroundSize: '100% 100%',
+                backgroundRepeat: 'no-repeat',
+              }}></Card>
+          )}
+        </div>
+        <span className={classes.PlanName}>{props.plan.name}</span>
+      </Link>
     </div>
   );
 }

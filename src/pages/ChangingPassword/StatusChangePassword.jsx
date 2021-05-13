@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function statusChangePassword({ status }) {
   return (
     <div className={'typewriter'}>

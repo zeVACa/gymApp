@@ -31,6 +31,7 @@ import ProgressPage from '../pages/ProgressPage';
 import MyTrainingPlan from '../pages/MyTrainingPlan';
 import HistoryPage from '../pages/HistoryPage';
 import SettingsPage from '../pages/SettingsPage';
+import PlanViewer from '../pages/TrainingPlans/PlanViewer';
 
 import { Link, Route, Switch } from 'react-router-dom';
 import TrainingHistoryPage from './trainingHistory/TrainingHistoryPage';
@@ -244,12 +245,33 @@ export default function MiniDrawer({ setUser, user }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Route exact path="/progress" component={ProgressPage} />
-          <Route exact path="/my-training-plan" component={MyTrainingPlan} />
           <Route
             exact
             path="/training-history"
             component={() => <TrainingHistoryPage user={user} />}
+          />
+          <Route exact path="/progress" component={() => <ProgressPage user={user} />} />
+          <Route
+            exact
+            path="/my-training-plan"
+            component={() => (
+              <MyTrainingPlan
+                user={user}
+                setCurrentDayIndex={setCurrentDayIndex}
+                currentDayIndex={currentDayIndex}
+                setUser={setUser}
+                trainingPlan={trainingPlan}
+                setTrainingPlan={setTrainingPlan}
+              />
+            )}
+          />
+
+          <Route
+            exact
+            path="/plan"
+            component={(props) => (
+              <PlanViewer {...props} setUser={setUser} setTrainingPlan={setTrainingPlan} />
+            )}
           />
           <Route
             exact
