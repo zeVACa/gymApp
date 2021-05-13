@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemplateHistoryTrain({ date, tonnage, excercises }) {
+export default function TemplateHistoryTrain({ date, tonnage, excercises, timeInSeconds }) {
   const classes = useStyles();
   return (
     <Accordion>
@@ -42,20 +42,11 @@ export default function TemplateHistoryTrain({ date, tonnage, excercises }) {
         id="panel1a-header">
         <Typography style={{ color: '#fff' }}>Число: {date}</Typography>
       </AccordionSummary>
-      <AccordionDetails style={{ padding: '24px' }}>
+      <AccordionDetails style={{ padding: '48px 56px' }}>
         <Grid container>
           <Box style={{ width: '100%' }}>
             <Box>
-              <Typography component="h6" variant="h4">
-                <AlarmIcon
-                  style={{ verticalAlign: 'initial', color: '#999', marginRight: '8px' }}
-                />
-                Общее время в минутах: {Math.floor(Math.random() * (90 - 45 + 1) + 45)}
-              </Typography>
-            </Box>
-
-            <Box my={2}>
-              <Typography component="h6" variant="h4">
+              <Typography component="h6" variant="h4" color="textSecondary">
                 <FitnessCenterTwoToneIcon
                   style={{ verticalAlign: 'initial', color: '#aaa', marginRight: '8px' }}
                 />
@@ -67,6 +58,16 @@ export default function TemplateHistoryTrain({ date, tonnage, excercises }) {
                 {/* <WhatshotTwoToneIcon /> Соженно калорий: */}
                 {/* <TimelapseTwoToneIcon /> Продолжительность тренировки: */}
                 {/* <TodayTwoToneIcon /> Дата : */}
+              </Typography>
+            </Box>
+            <Box my={2}>
+              <Typography component="h6" variant="h4" color="textSecondary">
+                <AlarmIcon
+                  style={{ verticalAlign: 'initial', color: '#999', marginRight: '8px' }}
+                />
+                {Math.floor(timeInSeconds / 3600)}:
+                {timeInSeconds / 60 >= 60 ? timeInSeconds / 60 - 60 : timeInSeconds / 60}:
+                {timeInSeconds.toString()[0] + timeInSeconds.toString()[1]}
               </Typography>
             </Box>
           </Box>

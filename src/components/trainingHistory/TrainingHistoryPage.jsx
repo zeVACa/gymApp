@@ -81,6 +81,7 @@ export default function TrainingHistoryPage({ user }) {
                   date={date}
                   tonnage={tonnage}
                   excercises={historyItem.excercises}
+                  timeInSeconds={Math.floor(Math.random() * (80 - 45 + 1) + 45) * 60}
                 />
               </Box>
             );
