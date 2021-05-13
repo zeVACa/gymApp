@@ -22,6 +22,7 @@ export default function ProgressMobileStepper({
   user,
   trainingPlan,
   currentDayIndex,
+  setTonnageAccum,
 }) {
   const classes = useStyles();
 
@@ -40,6 +41,14 @@ export default function ProgressMobileStepper({
         return el;
       }),
     };
+
+    const currentSessionTonnage = requestBody.exercises.reduce(
+      (accum, value) => accum + value.kg * value.quantity,
+      0,
+    );
+
+    console.log('tonnage', currentSessionTonnage);
+    setTonnageAccum(currentSessionTonnage);
 
     console.log('requestBody', requestBody);
     try {

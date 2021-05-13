@@ -113,6 +113,9 @@ export default function MiniDrawer({ setUser, user }) {
   const [trainingPlan, setTrainingPlan] = useState([]);
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
+  const [tonnageAccum, setTonnageAccum] = useState(0);
+  const [TrainingTimeInSeconds, setTrainingTimeInSeconds] = useState(0);
+
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
   const handleDrawerOpen = () => setOpen(true);
@@ -276,10 +279,21 @@ export default function MiniDrawer({ setUser, user }) {
                 setCurrentDayIndex={setCurrentDayIndex}
                 currentDayIndex={currentDayIndex}
                 user={user}
+                setTonnageAccum={setTonnageAccum}
+                setTrainingTimeInSeconds={setTrainingTimeInSeconds}
               />
             )}
           />
-          <Route exact path="/SessionResults" component={SessionResults} />
+          <Route
+            exact
+            path="/SessionResults"
+            component={() => (
+              <SessionResults
+                tonnageAccum={tonnageAccum}
+                TrainingTimeInSeconds={TrainingTimeInSeconds}
+              />
+            )}
+          />
         </Switch>
       </main>
     </div>
