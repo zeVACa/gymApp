@@ -6,8 +6,6 @@ import SessionResults from '../../pages/SessionPages/SessionResults';
 
 import ProgressPage from '../../pages/ProgressPage';
 import MyTrainingPlan from '../../pages/MyTrainingPlan';
-import HistoryPage from '../../pages/HistoryPage';
-import trainingHistoryPage from '../trainingHistory/TrainingHistoryPage';
 
 import SettingsPage from '../../pages/SettingsPage';
 

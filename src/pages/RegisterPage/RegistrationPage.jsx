@@ -22,19 +22,15 @@ function RegistrationPage() {
       },
       body: JSON.stringify(userData),
     }).then((res) => res.text());
-    // .then((data) => console.log(data));
 
     setRedirect(true);
   }
 
   const [inputPassword1, setinputPassword1] = useState('');
-
   const [inputPassword2, setinputPassword2] = useState('');
-
   const [inputName, setInputName] = useState('');
 
   const [isValidEmail, setValidEmail] = useState('');
-
   const [isValidLogin, setValidLogin] = useState('');
 
   const [redirect, setRedirect] = useState(false);
@@ -163,9 +159,7 @@ function RegistrationPage() {
                   setinputPassword2(e.target.value);
                 }}
                 type="password"
-                error={
-                  inputPassword1 !== inputPassword2 && inputPassword2.length > 0 ? true : false
-                }
+                error={inputPassword1 !== inputPassword2 && inputPassword2.length > 0}
                 helperText={
                   inputPassword1 !== inputPassword2
                     ? inputPassword2 !== ''
@@ -184,8 +178,6 @@ function RegistrationPage() {
                   inputPassword1 !== inputPassword2 ||
                   isValidLogin.length < 6 ||
                   inputPassword1.length < 1
-                    ? true
-                    : false
                 }
                 onClick={handleSubmit}
                 style={{ width: '200px', height: '45px', marginTop: '30px' }}>

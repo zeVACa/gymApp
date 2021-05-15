@@ -58,7 +58,7 @@ export default function SessionPage({
   const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
   const [currentTrainingExercises, setCurrentTrainingExercises] = useState(excercisesWithZeroValue);
 
-  const [previousTraining, setPreviousTraining] = useState([]);
+  const [previousTrainingExcercises, setPreviousTrainingExcercises] = useState([]);
 
   useEffect(() => {
     try {
@@ -68,7 +68,7 @@ export default function SessionPage({
         .then((res) => res.json())
         .then((data) => {
           console.log('prev training', data);
-          setPreviousTraining(data);
+          setPreviousTrainingExcercises(data);
         });
     } catch (error) {
       console.log('prev training error', error);
@@ -76,9 +76,6 @@ export default function SessionPage({
   }, []);
 
   const excerciseOnPage = trainingPlan[currentDayIndex].excercises[page];
-
-  console.log('current:', currentTrainingExercises);
-  console.log('trainingPlan', trainingPlan);
 
   return (
     <div>

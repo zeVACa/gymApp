@@ -129,7 +129,6 @@ const ProgressPage = ({ user }) => {
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-        setTimeout(() => SetLoading(true), 800);
 
         let arrayLabels = [];
         let arrayData = [];
@@ -138,11 +137,6 @@ const ProgressPage = ({ user }) => {
           arrayLabels.push(data[index].label);
           arrayData.push(data[index].value);
         }
-        console.log('data[0].label', data[0]);
-        // console.log('arrayLabels', arrayLabels);
-        // console.log('arrayData', arrayData);
-
-        console.log('data', data);
 
         state = {
           labels: arrayLabels,
@@ -159,6 +153,7 @@ const ProgressPage = ({ user }) => {
           ],
         };
         setTableStateWeight(state);
+        SetLoading(true);
       });
   }, [Period]);
 

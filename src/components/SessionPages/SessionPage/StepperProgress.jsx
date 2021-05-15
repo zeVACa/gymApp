@@ -37,7 +37,6 @@ export default function ProgressMobileStepper({
       exercises: filteredData.map((el) => {
         if (typeof el.kg === 'string') el.kg = 0;
         if (typeof el.quantity === 'string') el.quantity = 0;
-        console.log(el);
         return el;
       }),
     };
@@ -47,24 +46,19 @@ export default function ProgressMobileStepper({
       0,
     );
 
-    console.log('tonnage', currentSessionTonnage);
     setTonnageAccum(currentSessionTonnage);
 
-    console.log('requestBody', requestBody);
-    try {
-      fetch(
-        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify(requestBody),
+    // console.log('requestBody', requestBody);
+    fetch(
+      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
         },
-      );
-    } catch (error) {
-      console.log(error);
-    }
+        body: JSON.stringify(requestBody),
+      },
+    );
   };
 
   return (

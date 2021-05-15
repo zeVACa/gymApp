@@ -23,7 +23,7 @@ import { deepOrange } from '@material-ui/core/colors';
 import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone';
 import Image from 'material-ui-image';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import StatusChangePassword from './ChangingPassword/StatusChangePassword';
+import StatusChangePassword from './ChangePasswordPage/StatusChangePassword';
 
 import { isPasswordValid } from './Validation/Valid';
 
@@ -142,7 +142,6 @@ export default function SettingsPage({ user, setUser }) {
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  console.log('au', UserMetrics);
 
   const updateDataOfUSer = (label, e) => {
     switch (label) {

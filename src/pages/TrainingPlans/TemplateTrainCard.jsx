@@ -67,7 +67,6 @@ export default function MyTrainingPlan(props) {
   const classes = useStyles();
 
   const handleClick = (event) => {
-    // console.log(event.currentTarget.id);
     props.SetIdPlan(event.currentTarget.id);
   };
 

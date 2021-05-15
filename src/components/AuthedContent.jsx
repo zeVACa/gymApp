@@ -28,8 +28,7 @@ import SessionPage from './SessionPages/SessionPage/SessionPage';
 import SessionResults from './SessionPages/SessionResultsPage';
 
 import ProgressPage from '../pages/ProgressPage';
-import MyTrainingPlan from '../pages/MyTrainingPlan';
-import HistoryPage from '../pages/HistoryPage';
+import MyTrainingPlan from '../pages/TrainingPlans/MyTrainingPlan';
 import SettingsPage from '../pages/SettingsPage';
 import PlanViewer from '../pages/TrainingPlans/PlanViewer';
 

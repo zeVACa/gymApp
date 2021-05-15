@@ -64,9 +64,7 @@ export default function PlanViewer(props) {
       {
         method: 'POST',
       },
-    ).then((res) => {
-      console.log(res.status);
-    });
+    );
     let newPlan = props.location.propsSearch.id;
     props.location.user.activePlanId = newPlan;
     let updateUser = props.location.user;
@@ -80,18 +78,12 @@ export default function PlanViewer(props) {
   useEffect(() => {
     fetch(
       `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/GetPlanById/${props.location.propsSearch.id}/${props.location.user.id}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-      },
     )
       .then((res) => res.json())
-      .then(
-        (data) => setTrainingPlan(data),
-        setTimeout(() => SetLoading(true), 800),
-      );
+      .then((data) => {
+        setTrainingPlan(data);
+        SetLoading(true);
+      });
   }, []);
 
   return (
