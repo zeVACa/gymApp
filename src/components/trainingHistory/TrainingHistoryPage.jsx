@@ -42,7 +42,6 @@ export default function TrainingHistoryPage({ user }) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setTrainingDays(data);
         setIsLoaded(true);
       });

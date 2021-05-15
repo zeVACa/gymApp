@@ -28,9 +28,9 @@ import SessionPage from './SessionPages/SessionPage/SessionPage';
 import SessionResults from './SessionPages/SessionResultsPage';
 
 import ProgressPage from '../pages/ProgressPage';
-import MyTrainingPlan from '../pages/MyTrainingPlan';
-import HistoryPage from '../pages/HistoryPage';
+import MyTrainingPlan from '../pages/TrainingPlans/MyTrainingPlan';
 import SettingsPage from '../pages/SettingsPage';
+import PlanViewer from '../pages/TrainingPlans/PlanViewer';
 
 import { Link, Route, Switch } from 'react-router-dom';
 import TrainingHistoryPage from './trainingHistory/TrainingHistoryPage';
@@ -112,6 +112,9 @@ export default function MiniDrawer({ setUser, user }) {
 
   const [trainingPlan, setTrainingPlan] = useState([]);
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
+
+  const [tonnageAccum, setTonnageAccum] = useState(0);
+  const [TrainingTimeInSeconds, setTrainingTimeInSeconds] = useState(0);
 
   const [activeElementMenu, setActiveElementMenu] = React.useState('');
 
@@ -241,12 +244,33 @@ export default function MiniDrawer({ setUser, user }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Route exact path="/progress" component={ProgressPage} />
-          <Route exact path="/my-training-plan" component={MyTrainingPlan} />
           <Route
             exact
             path="/training-history"
             component={() => <TrainingHistoryPage user={user} />}
+          />
+          <Route exact path="/progress" component={() => <ProgressPage user={user} />} />
+          <Route
+            exact
+            path="/my-training-plan"
+            component={() => (
+              <MyTrainingPlan
+                user={user}
+                setCurrentDayIndex={setCurrentDayIndex}
+                currentDayIndex={currentDayIndex}
+                setUser={setUser}
+                trainingPlan={trainingPlan}
+                setTrainingPlan={setTrainingPlan}
+              />
+            )}
+          />
+
+          <Route
+            exact
+            path="/plan"
+            component={(props) => (
+              <PlanViewer {...props} setUser={setUser} setTrainingPlan={setTrainingPlan} />
+            )}
           />
           <Route
             exact
@@ -276,10 +300,21 @@ export default function MiniDrawer({ setUser, user }) {
                 setCurrentDayIndex={setCurrentDayIndex}
                 currentDayIndex={currentDayIndex}
                 user={user}
+                setTonnageAccum={setTonnageAccum}
+                setTrainingTimeInSeconds={setTrainingTimeInSeconds}
               />
             )}
           />
-          <Route exact path="/SessionResults" component={SessionResults} />
+          <Route
+            exact
+            path="/SessionResults"
+            component={() => (
+              <SessionResults
+                tonnageAccum={tonnageAccum}
+                TrainingTimeInSeconds={TrainingTimeInSeconds}
+              />
+            )}
+          />
         </Switch>
       </main>
     </div>

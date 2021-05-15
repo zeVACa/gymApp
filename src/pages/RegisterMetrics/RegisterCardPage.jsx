@@ -10,10 +10,6 @@ import SideMenu from '../../components/AuthedContent';
 
 function RegisterCardPage(props) {
   function handleSubmit(e) {
-    // console.log(e);
-    console.log(e.target.innerHTML);
-    // console.log('myUser', props.user);
-
     if (e.target.innerHTML !== 'Завершить') {
       props.setregistrationPage((prevregistrationPage) => {
         props.setValidPage(false);
@@ -30,10 +26,8 @@ function RegisterCardPage(props) {
           body: JSON.stringify(props.DataMetricsUser),
         },
       ).then((res) => {
-        // console.log('status', res.status);
         res.text();
       });
-      // .then((data) => console.log(data));
 
       props.user['isMetrics'] = true;
       props.setisMetricscollected(true);

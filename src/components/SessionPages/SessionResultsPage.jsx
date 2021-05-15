@@ -5,6 +5,8 @@ import WhatshotTwoToneIcon from '@material-ui/icons/WhatshotTwoTone';
 import TimelapseTwoToneIcon from '@material-ui/icons/TimelapseTwoTone';
 import FitnessCenterTwoToneIcon from '@material-ui/icons/FitnessCenterTwoTone';
 
+import { getTimeInSeconds } from './trainingTime';
+
 const motivationalHeadline = ['Превосходно', 'Замечательно', 'Потрясно'];
 
 const trainingResults = {
@@ -13,7 +15,7 @@ const trainingResults = {
   generalTonnage: '850 кг.',
 };
 
-export default function SesstionResults() {
+export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds }) {
   const [valueRating, setValueRating] = React.useState(4);
 
   return (
@@ -28,21 +30,27 @@ export default function SesstionResults() {
         <Box my={10}>
           <Typography variant="h5" gutterBottom>
             <TimelapseTwoToneIcon style={{ fontSize: 35 }} /> Общее время тренировки составило:{' '}
-            {trainingResults.time}
+            <Typography color="textSecondary" variant="span">
+              {Math.floor(getTimeInSeconds() / 3600)}:
+              {Math.floor(getTimeInSeconds() / 60) < 10
+                ? '0' + Math.floor(getTimeInSeconds() / 60)
+                : Math.floor(getTimeInSeconds() / 60)}
+              :{getTimeInSeconds() % 60}
+            </Typography>
           </Typography>
         </Box>
 
-        <Box mb={10}>
+        {/* <Box mb={10}>
           <Typography variant="h5" gutterBottom>
             <WhatshotTwoToneIcon style={{ fontSize: 35 }} /> Сожжено калорий:{' '}
             {trainingResults.calories}
           </Typography>
-        </Box>
+        </Box> */}
 
         <Box mb={10}>
           <Typography variant="h5" gutterBottom>
             <FitnessCenterTwoToneIcon style={{ fontSize: 35 }} /> Общий тоннаж тренировки:{' '}
-            {trainingResults.generalTonnage}
+            {tonnageAccum} кг
           </Typography>
         </Box>
         <Typography variant="subtitle2" gutterBottom style={{ textAlign: 'center' }}>

@@ -2,14 +2,9 @@ import { Paper, Typography } from '@material-ui/core';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import React, { useState, useEffect } from 'react';
 
-export default function Timer() {
-  // const [timeInSeconds, setTimeInSeconds] = useState(3600);
+import { incTimeInSeconds } from '../trainingTime';
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setTimeInSeconds((minutes) => minutes - 1);
-  //   }, 1000);
-  // }, [timeInSeconds]);
+export default function Timer({ setTrainingTimeInSeconds }) {
   const [hours, setHours] = useState(1);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(15);
@@ -33,9 +28,13 @@ export default function Timer() {
           setSeconds(59);
         }
       }
+      incTimeInSeconds();
+
+      // setTrainingTimeInSeconds((seconds) => seconds + 1);
     }, 1000);
     return () => {
       clearInterval(myInterval);
+      // setTrainingTimeInSeconds(swopWatchInSeconds);
     };
   });
 
@@ -58,15 +57,6 @@ export default function Timer() {
               style={{ verticalAlign: 'text-bottom', marginRight: '10px' }}
             />
             {hours}:{minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-            {/* {Math.floor(timeInSeconds / 3600)}:
-        {timeInSeconds / 60 >= 60
-          ? Math.floor(timeInSeconds / 60) - 60
-          : Math.floor(timeInSeconds / 60)}
-        :
-        {parseInt(timeInSeconds.toString()[2] + timeInSeconds.toString()[3]) > 61
-          ? parseInt(timeInSeconds.toString()[2] + timeInSeconds.toString()[3]) - 60
-          : parseInt(timeInSeconds.toString()[2] + timeInSeconds.toString()[3])} */}
-            {/* {time.hours}:{time.minutes}:{time.seconds} */}
           </Typography>,
         ]
       )}
