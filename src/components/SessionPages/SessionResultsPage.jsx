@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container, Typography, Box, Card } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import WhatshotTwoToneIcon from '@material-ui/icons/WhatshotTwoTone';
 import TimelapseTwoToneIcon from '@material-ui/icons/TimelapseTwoTone';
 import FitnessCenterTwoToneIcon from '@material-ui/icons/FitnessCenterTwoTone';
 
 const motivationalHeadline = ['Превосходно', 'Замечательно', 'Потрясно'];
 
+<<<<<<< Updated upstream
 const trainingResults = {
   time: '48 минут',
   calories: '900kk',
@@ -14,6 +14,9 @@ const trainingResults = {
 };
 
 export default function SesstionResults() {
+=======
+export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds }) {
+>>>>>>> Stashed changes
   const [valueRating, setValueRating] = React.useState(4);
 
   return (
