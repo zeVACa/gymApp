@@ -1,7 +1,6 @@
-import { Container } from '@material-ui/core';
+import { Container, InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
 import React from 'react';
-<<<<<<< Updated upstream
-=======
+
 import { useState, useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '1200px',
     minHeight: '500px',
     marginBottom: '50px',
-    // margin: '0 auto',
   },
   wrapper: {
     display: 'flex',
@@ -110,6 +108,7 @@ const ProgressPage = ({ user }) => {
           ],
         };
         setTableState(state);
+
         SetLoading(true);
       });
   }, [Period]);
@@ -158,12 +157,70 @@ const ProgressPage = ({ user }) => {
         SetLoading(true);
       });
   }, [Period]);
->>>>>>> Stashed changes
 
-export default function ProgressPage() {
   return (
-    <div>
-      <Container>Progress</Container>
+    <div class="wrapper">
+      {loading === true && Object.keys(data).length ? (
+        <div>
+          <Container className={classes.Header}>
+            <h1>Прогресс</h1>
+          </Container>
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-controlled-open-select-label">Period</InputLabel>
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={Period}
+                defaultValue={7}
+                onChange={handleChange}>
+                <MenuItem value={7}>Неделя</MenuItem>
+                <MenuItem value={30}>Месяц</MenuItem>
+                <MenuItem value={90}>Три месяца</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <Line
+            className={classes.Table}
+            data={tableState}
+            options={{
+              title: {
+                display: true,
+                text: 'Average Rainfall per month',
+                fontSize: 20,
+              },
+              legend: {
+                display: true,
+                position: 'right',
+              },
+            }}
+          />
+
+          <Line
+            className={classes.Table}
+            data={tableStateWeight}
+            options={{
+              title: {
+                display: true,
+                text: 'Average Rainfall per month',
+                fontSize: 20,
+              },
+              legend: {
+                display: true,
+                position: 'right',
+              },
+            }}
+          />
+        </div>
+      ) : (
+        <div className={classes.Loading}>
+          <CircularProgress className={classes.BootScreen} />
+        </div>
+      )}
     </div>
   );
-}
+};
+export default ProgressPage;

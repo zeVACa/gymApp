@@ -1,19 +1,10 @@
 import React from 'react';
 import classes from './LoginPage.module.css';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import { Link, Route } from 'react-router-dom';
-import {
-  Button,
-  TextField,
-  Box,
-  Container,
-  Checkbox,
-  InputAdornment,
-  IconButton,
-  Paper,
-} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Button, TextField, Box, Container, InputAdornment, IconButton } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
@@ -25,22 +16,12 @@ export default function LoginPage({ setUser }) {
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
   const [isPasswordShowing, setIsPasswordShowing] = useState(false);
 
-  const [isAuthed, setIsAuthed] = useState(false);
-
-  useEffect(() => {
-    if (isAuthed) {
-      // alert(1);
-    } else {
-      // alert(0);
-    }
-  }, [isAuthed]);
-
   const isPasswordValid = (password) => {
     return password.length >= 6;
   };
 
   const isLoginValid = (login) => {
-    return login.length > 6;
+    return login.length > 4;
   };
 
   const submitHandler = (e) => {
@@ -65,19 +46,11 @@ export default function LoginPage({ setUser }) {
         }
       })
       .then((data) => {
-        try {
-          const candidate = JSON.parse(data);
+        const candidate = JSON.parse(data);
 
-          if (candidate) {
-            setUser(candidate);
-            localStorage.setItem('user', JSON.stringify(candidate));
-          }
-
-          if (candidate.name) {
-            setIsAuthed(true);
-          }
-        } catch (error) {
-          throw error;
+        if (candidate) {
+          setUser(candidate);
+          localStorage.setItem('user', JSON.stringify(candidate));
         }
       });
   };
@@ -102,7 +75,7 @@ export default function LoginPage({ setUser }) {
                 isLoginDirty && loginValue === ''
                   ? 'введите логин'
                   : isLoginDirty && !isLoginValid(loginValue)
-                  ? 'Введите корректный логин'
+                  ? 'логен должен быть более 4 символов'
                   : ''
               }
               variant="outlined"

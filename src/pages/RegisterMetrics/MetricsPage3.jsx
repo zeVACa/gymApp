@@ -4,11 +4,7 @@ import { Box, FormControlLabel, Typography, Checkbox, RadioGroup } from '@materi
 function MetricsPage3(props) {
   let MetricHealth = [];
 
-  // const [MetricHealth, setMetricHealth] = React.useState([]);
-
   const onClickHandle = (e) => {
-    // e.preventDefault();
-
     let collectingHealthMetricsInObject = {
       Problem: e.target.value,
     };
@@ -20,11 +16,6 @@ function MetricsPage3(props) {
       MetricHealth.splice(MetricHealth.indexOf(collectingHealthMetricsInObject), 1);
       props.DataMetricsUser['MetricHealth'] = MetricHealth;
     }
-
-    // console.log(e.target.value);
-    // console.log(e.target.checked);
-
-    // console.log(MetricHealth);
   };
 
   return (

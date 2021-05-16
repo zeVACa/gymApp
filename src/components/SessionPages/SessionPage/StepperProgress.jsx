@@ -22,6 +22,7 @@ export default function ProgressMobileStepper({
   user,
   trainingPlan,
   currentDayIndex,
+  setTonnageAccum,
 }) {
   const classes = useStyles();
 
@@ -36,26 +37,27 @@ export default function ProgressMobileStepper({
       exercises: filteredData.map((el) => {
         if (typeof el.kg === 'string') el.kg = 0;
         if (typeof el.quantity === 'string') el.quantity = 0;
-        console.log(el);
         return el;
       }),
     };
 
-    console.log('requestBody', requestBody);
-    try {
-      fetch(
-        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify(requestBody),
+    const currentSessionTonnage = requestBody.exercises.reduce(
+      (accum, value) => accum + value.kg * value.quantity,
+      0,
+    );
+
+    setTonnageAccum(currentSessionTonnage);
+
+    fetch(
+      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
         },
-      );
-    } catch (error) {
-      console.log(error);
-    }
+        body: JSON.stringify(requestBody),
+      },
+    );
   };
 
   return (
@@ -77,7 +79,6 @@ export default function ProgressMobileStepper({
             <Button
               size="small"
               onClick={() => {
-                // handleNext();
                 handleSubmit();
               }}
               color="primary"

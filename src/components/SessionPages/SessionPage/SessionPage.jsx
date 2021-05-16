@@ -38,7 +38,14 @@ const makeDataRow = (kg = 0, quantity = 0, exerciseId, setsNumber) => {
   };
 };
 
-export default function SessionPage({ trainingPlan, user, setCurrentDayIndex, currentDayIndex }) {
+export default function SessionPage({
+  trainingPlan,
+  user,
+  setCurrentDayIndex,
+  currentDayIndex,
+  setTonnageAccum,
+  setTrainingTimeInSeconds,
+}) {
   let pageAmount = trainingPlan ? trainingPlan[currentDayIndex].excercises.length : 0;
 
   const excercisesWithZeroValue = trainingPlan[currentDayIndex].excercises.map((excerciseItem) => {
@@ -51,7 +58,7 @@ export default function SessionPage({ trainingPlan, user, setCurrentDayIndex, cu
   const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
   const [currentTrainingExercises, setCurrentTrainingExercises] = useState(excercisesWithZeroValue);
 
-  const [previousTraining, setPreviousTraining] = useState([]);
+  const [previousTrainingExcercises, setPreviousTrainingExcercises] = useState([]);
 
   useEffect(() => {
     try {
@@ -61,7 +68,7 @@ export default function SessionPage({ trainingPlan, user, setCurrentDayIndex, cu
         .then((res) => res.json())
         .then((data) => {
           console.log('prev training', data);
-          setPreviousTraining(data);
+          setPreviousTrainingExcercises(data);
         });
     } catch (error) {
       console.log('prev training error', error);
@@ -69,9 +76,6 @@ export default function SessionPage({ trainingPlan, user, setCurrentDayIndex, cu
   }, []);
 
   const excerciseOnPage = trainingPlan[currentDayIndex].excercises[page];
-
-  console.log('current:', currentTrainingExercises);
-  console.log('trainingPlan', trainingPlan);
 
   return (
     <div>
@@ -90,6 +94,7 @@ export default function SessionPage({ trainingPlan, user, setCurrentDayIndex, cu
                 pageAmount={pageAmount}
                 currentTrainingExercises={currentTrainingExercises}
                 trainingPlan={trainingPlan}
+                setTonnageAccum={setTonnageAccum}
               />
               <Typography component="h5" variant="h5" align="center" color="textSecondary">
                 Упражнение {page + 1} / {pageAmount}
@@ -97,7 +102,7 @@ export default function SessionPage({ trainingPlan, user, setCurrentDayIndex, cu
             </Grid>
             <Grid item md={1} implementation="css" smDown component={Hidden} />
             <Grid item md={4} style={{ height: '100%' }}>
-              <Timer />
+              <Timer setTrainingTimeInSeconds={setTrainingTimeInSeconds} />
             </Grid>
           </Grid>
           <Grid container>
