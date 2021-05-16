@@ -162,11 +162,9 @@ const ProgressPage = ({ user }) => {
       {loading === true && Object.keys(data).length ? (
         <div>
           <Container className={classes.Header}>
-            {' '}
             <h1>Прогресс</h1>
           </Container>
           <div>
-            {' '}
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-controlled-open-select-label">Period</InputLabel>
               <Select

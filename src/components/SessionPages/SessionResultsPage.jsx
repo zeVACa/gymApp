@@ -40,13 +40,6 @@ export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds })
           </Typography>
         </Box>
 
-        {/* <Box mb={10}>
-          <Typography variant="h5" gutterBottom>
-            <WhatshotTwoToneIcon style={{ fontSize: 35 }} /> Сожжено калорий:{' '}
-            {trainingResults.calories}
-          </Typography>
-        </Box> */}
-
         <Box mb={10}>
           <Typography variant="h5" gutterBottom>
             <FitnessCenterTwoToneIcon style={{ fontSize: 35 }} /> Общий тоннаж тренировки:{' '}
