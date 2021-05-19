@@ -2,7 +2,6 @@ import { Button, ButtonGroup } from '@material-ui/core';
 import React from 'react';
 
 export default function WeekdaysBar({ currentDayIndex, setCurrentDayIndex }) {
-  // const weekDays = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
   const weekDays = [
     { text: 'ПН', isPlanDay: true, isActive: true },
     { text: 'ВТ', isPlanDay: false, isActive: false },

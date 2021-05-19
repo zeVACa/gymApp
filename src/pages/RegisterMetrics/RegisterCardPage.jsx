@@ -5,7 +5,6 @@ import MetricsPage3 from './MetricsPage3';
 import MetricsPage4 from './MetricsPage4';
 import { Card, Button, Box } from '@material-ui/core';
 
-// import SideMenu from '.../components/AuthedContent';
 import SideMenu from '../../components/AuthedContent';
 
 function RegisterCardPage(props) {

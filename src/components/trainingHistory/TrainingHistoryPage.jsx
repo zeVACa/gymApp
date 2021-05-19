@@ -24,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TrainingHistoryPage({ user }) {
   const classes = useStyles();
-  const [periodValue, setPeriodValue] = useState(90);
-  const [value, setValue] = useState(2);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [trainingDays, setTrainingDays] = useState([]);
@@ -46,16 +44,6 @@ export default function TrainingHistoryPage({ user }) {
         setIsLoaded(true);
       });
   }, []);
-
-  let len = 1;
-
-  let CurrentDate = new Date();
-  let days = 86400000;
-  let FromDataFormated = new Date(CurrentDate - periodValue * days);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Container>

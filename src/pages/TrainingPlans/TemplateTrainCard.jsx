@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     textAlign: 'center',
     paddingTop: '80px',
-    // display: 'none',
     transition: 'all .5s',
     WebkitTransition: 'all .5s',
     opacity: 0,

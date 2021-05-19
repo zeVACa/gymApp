@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
@@ -12,9 +12,12 @@ import {
   CardContent,
   CardMedia,
   CardActionArea,
+  Box,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import WeekdaysBar from './WeekdaysBar';
+
+import ExcercisesSlider from './ExcercisesSlider';
 
 function PreSessionPage({
   user,
@@ -42,7 +45,7 @@ function PreSessionPage({
   }, [currentDayIndex]);
 
   return (
-    <Container pt={10}>
+    <Container pt={10} style={{ overflowX: 'none' }}>
       <Typography variant="h4" component="h4" color="textPrimary">
         <Typography component="span" variant="span" color="textSecondary">
           Большая мышечная группа:
@@ -55,7 +58,12 @@ function PreSessionPage({
         Дополнительные: трицепс, предплечье
       </Typography>
       <WeekdaysBar currentDayIndex={currentDayIndex} setCurrentDayIndex={setCurrentDayIndex} />
-      <Grid
+      <Grid container sm={12} xs={1} style={{ width: '100%', overflowX: 'none' }}>
+        <Box my={4} style={{ overflowX: 'hidden' }}>
+          <ExcercisesSlider trainingPlan={trainingPlan} currentDayIndex={currentDayIndex} />
+        </Box>
+      </Grid>
+      {/* <Grid
         container
         spacing={3}
         style={{ flexWrap: 'nowrap', overflowX: 'scroll', paddingTop: '48px' }}>
@@ -69,7 +77,6 @@ function PreSessionPage({
                   <CardMedia
                     component="img"
                     image
-                    // className={classes.media}
                     image={exerciseItem.photo}
                     title="Contemplative Reptile"
                     height="250px"
@@ -94,8 +101,8 @@ function PreSessionPage({
             );
           })
         )}
-      </Grid>
-      <div style={{ textAlign: 'center', padding: '64px 0' }}>
+      </Grid> */}
+      <div style={{ textAlign: 'center', padding: '0 0' }}>
         <Button variant="contained" color="primary">
           <Link style={{ color: 'inherit' }} to="/session">
             Начать тренировку

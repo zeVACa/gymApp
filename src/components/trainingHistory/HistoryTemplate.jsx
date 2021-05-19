@@ -11,12 +11,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import WhatshotTwoToneIcon from '@material-ui/icons/WhatshotTwoTone';
 import FitnessCenterTwoToneIcon from '@material-ui/icons/FitnessCenterTwoTone';
-import TimelapseTwoToneIcon from '@material-ui/icons/TimelapseTwoTone';
 
 import AlarmIcon from '@material-ui/icons/Alarm';
-import TodayTwoToneIcon from '@material-ui/icons/TodayTwoTone';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -50,14 +47,7 @@ export default function TemplateHistoryTrain({ date, tonnage, excercises, timeIn
                 <FitnessCenterTwoToneIcon
                   style={{ verticalAlign: 'initial', color: '#aaa', marginRight: '8px' }}
                 />
-                {/* <WhatshotTwoToneIcon />
-       <TimelapseTwoToneIcon />
-       <TodayTwoToneIcon /> */}
                 Общий вес: {tonnage} кг
-                {/* <FitnessCenterTwoToneIcon /> Мышечная группа: */}
-                {/* <WhatshotTwoToneIcon /> Соженно калорий: */}
-                {/* <TimelapseTwoToneIcon /> Продолжительность тренировки: */}
-                {/* <TodayTwoToneIcon /> Дата : */}
               </Typography>
             </Box>
             <Box my={2}>
@@ -74,7 +64,7 @@ export default function TemplateHistoryTrain({ date, tonnage, excercises, timeIn
 
           <Box style={{ width: '100%' }} px={4}>
             <TableContainer>
-              <Table className={classes.table} style={{ width: '100%' }} aria-label="simple table">
+              <Table style={{ width: '100%' }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell>Упражнение</TableCell>

@@ -75,7 +75,6 @@ export default function MyTrainingPlan({
   const classes = useStyles();
 
   const [loading, SetLoading] = useState(false);
-  const [loading2, SetLoading2] = useState(false);
   const [idPlan, SetIdPlan] = useState(false);
   const [isGoal, setIsGoal] = useState(false);
   const [plans, setPlans] = useState([]);
@@ -88,10 +87,10 @@ export default function MyTrainingPlan({
       },
     })
       .then((res) => res.json())
-      .then(
-        (data) => setIsGoal(data.metricGoal.toString()),
-        setTimeout(() => SetLoading(true), 800),
-      );
+      .then((data) => {
+        setIsGoal(data.metricGoal.toString());
+        SetLoading(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -101,7 +100,6 @@ export default function MyTrainingPlan({
       .then((res) => res.json())
       .then((data) => {
         setPlans(data);
-        SetLoading2(true);
       });
   }, [loading]);
 

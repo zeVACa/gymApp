@@ -1,5 +1,6 @@
 import { Container, InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
 import React from 'react';
+
 import { useState, useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: '1200px',
     minHeight: '500px',
     marginBottom: '50px',
-    // margin: '0 auto',
   },
   wrapper: {
     display: 'flex',
@@ -84,7 +84,6 @@ const ProgressPage = ({ user }) => {
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-        setTimeout(() => SetLoading(true), 800);
 
         let arrayLabels = [];
         let arrayData = [];
@@ -109,6 +108,8 @@ const ProgressPage = ({ user }) => {
           ],
         };
         setTableState(state);
+
+        SetLoading(true);
       });
   }, [Period]);
 
@@ -162,11 +163,9 @@ const ProgressPage = ({ user }) => {
       {loading === true && Object.keys(data).length ? (
         <div>
           <Container className={classes.Header}>
-            {' '}
             <h1>Прогресс</h1>
           </Container>
           <div>
-            {' '}
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-controlled-open-select-label">Period</InputLabel>
               <Select

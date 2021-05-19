@@ -48,7 +48,6 @@ export default function ProgressMobileStepper({
 
     setTonnageAccum(currentSessionTonnage);
 
-    // console.log('requestBody', requestBody);
     fetch(
       `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
       {
@@ -80,7 +79,6 @@ export default function ProgressMobileStepper({
             <Button
               size="small"
               onClick={() => {
-                // handleNext();
                 handleSubmit();
               }}
               color="primary"
