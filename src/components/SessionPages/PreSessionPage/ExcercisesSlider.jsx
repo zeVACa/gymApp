@@ -20,49 +20,6 @@ SwiperCore.use([Pagination, Navigation]);
 export default function ExcercisesSlider({ trainingPlan, currentDayIndex }) {
   return (
     <div>
-      {/* <Swiper
-        slidesPerView={4}
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSlideChange={() => console.log('slide change')}
-        spaceBetween={24}
-        pagination={{
-          clickable: true,
-        }}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 5,
-            spaceBetween: 50,
-          },
-        }}
-        className="mySwiper">
-        {Array(20)
-          .fill()
-          .map((item, index) => {
-            return (
-              <SwiperSlide>
-                <div
-                  style={{
-                    height: '600px',
-                    // minWidth: '400px',
-                    backgroundColor: 'tomato',
-                    border: '1px solid red',
-                    // marginRight: '10px',
-                  }}>
-                  Slide {index + 1}
-                </div>
-              </SwiperSlide>
-            );
-          })}
-      </Swiper>*/}
       <Swiper
         style={{ paddingBottom: '48px' }}
         grabCursor
@@ -105,8 +62,6 @@ export default function ExcercisesSlider({ trainingPlan, currentDayIndex }) {
                   }
                 }
                 className="swiper__slide">
-                {/* <Grid item sm={3}> */}
-
                 <Card>
                   <CardActionArea>
                     <CardMedia
@@ -130,7 +85,6 @@ export default function ExcercisesSlider({ trainingPlan, currentDayIndex }) {
                     </Typography>
                   </CardContent>
                 </Card>
-                {/* </Grid> */}
               </SwiperSlide>
             );
           })

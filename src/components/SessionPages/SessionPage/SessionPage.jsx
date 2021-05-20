@@ -68,7 +68,35 @@ export default function SessionPage({
         .then((res) => res.json())
         .then((data) => {
           console.log('prev training', data);
-          setPreviousTrainingExcercises(data);
+
+          const excercises = data.exercises;
+
+          let excercisesPerPage = [];
+          let excercisesGroup = [];
+
+          for (let i = 0; i < excercises.length; i++) {
+            const excercise = excercises[i];
+
+            if (excercisesGroup.length === 0) {
+              excercisesGroup.push(excercise);
+              continue;
+            }
+
+            if (
+              excercisesGroup.length !== 0 &&
+              excercisesGroup[excercisesGroup.length - 1].exserciseId !== excercise.exserciseId
+            ) {
+              excercisesPerPage.push(excercisesGroup);
+              excercisesGroup = [];
+              excercisesGroup.push(excercise);
+            } else {
+              excercisesGroup.push(excercise);
+            }
+          }
+
+          console.log('Переупакованная по страницам предыдущая тренировка ', excercisesPerPage);
+
+          setPreviousTrainingExcercises(excercisesPerPage);
         });
     } catch (error) {
       console.log('prev training error', error);
@@ -126,6 +154,7 @@ export default function SessionPage({
                   <TableSession
                     page={page}
                     trainingPlan={trainingPlan}
+                    previousTrainingExcercises={previousTrainingExcercises}
                     currentTrainingExercises={currentTrainingExercises}
                     setCurrentTrainingExercises={setCurrentTrainingExercises}
                     currentDayIndex={currentDayIndex}
