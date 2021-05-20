@@ -24,8 +24,8 @@ const makeDataRow = (kg = 0, quantity = 0, exerciseId) => {
 
 export default function DataRow({
   rowIndex,
-  prevWeight = 50,
-  prevQuantity = 12,
+  prevWeight = 0,
+  prevQuantity = 0,
   exerciseId,
   currentTrainingExercises,
   setCurrentTrainingExercises,
