@@ -60,9 +60,11 @@ export default function SessionPage({
   const [previousTrainingExcercises, setPreviousTrainingExcercises] = useState([]);
 
   useEffect(() => {
+    console.log('user', user);
+    console.log('trainingPlan', trainingPlan);
     try {
       fetch(
-        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/1/3/${user.id}`,
+        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPreviousTraining/${user.activePlanId}/3/${user.id}`,
       )
         .then((res) => res.json())
         .then((data) => {

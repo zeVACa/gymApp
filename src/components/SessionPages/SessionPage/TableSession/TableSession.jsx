@@ -35,7 +35,7 @@ export default function TableSession({
   }, [page]);
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Подход</TableCell>

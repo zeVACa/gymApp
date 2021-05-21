@@ -18,20 +18,27 @@ function PreSessionPage({
 }) {
   useEffect(() => {
     if (!trainingPlan[currentDayIndex]) {
-      fetch(
-        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/${
-          user.activePlanId
-        }/${currentDayIndex + 1}/${user.id}`,
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setTrainingPlan((prevState) => {
-            const cloneState = JSON.parse(JSON.stringify(prevState));
-            cloneState[currentDayIndex] = data;
-            console.log('todays training plan: ', cloneState[currentDayIndex]);
-            return cloneState;
+      try {
+        fetch(
+          `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/${
+            user.activePlanId
+          }/${currentDayIndex + 1}/${user.id}`,
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('/api/getPlan', data);
+
+            setTrainingPlan((prevState) => {
+              console.log('state before /api/getPlan', prevState);
+              const cloneState = JSON.parse(JSON.stringify(prevState));
+              console.log('training plan in set plan preSession', cloneState);
+              cloneState[currentDayIndex] = data;
+              return cloneState;
+            });
           });
-        });
+      } catch (err) {
+        console.log('fetch plan error: ', err);
+      }
     }
 
     // if (previousTraining.length === 0) {

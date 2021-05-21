@@ -106,7 +106,7 @@ export default function MiniDrawer({ setUser, user }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
-  const [trainingPlan, setTrainingPlan] = useState([]);
+  const [trainingPlan, setTrainingPlan] = useState({});
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
   const [tonnageAccum, setTonnageAccum] = useState(0);
