@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,7 +23,7 @@ import { deepOrange } from '@material-ui/core/colors';
 import HelpTwoToneIcon from '@material-ui/icons/HelpTwoTone';
 import Image from 'material-ui-image';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import StatusChangePassword from './ChangingPassword/StatusChangePassword';
+import StatusChangePassword from './ChangePasswordPage/StatusChangePassword';
 
 import { isPasswordValid } from './Validation/Valid';
 
@@ -142,7 +142,6 @@ export default function SettingsPage({ user, setUser }) {
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  console.log('au', UserMetrics);
 
   const updateDataOfUSer = (label, e) => {
     switch (label) {
@@ -262,16 +261,18 @@ export default function SettingsPage({ user, setUser }) {
                   Сменить пароль
                 </Button>
 
-                <Button
-                  className={classes.ButtonExit}
-                  onClick={() => {
-                    localStorage.setItem('user', null);
-                    setUser(null);
-                  }}
-                  variant="contained"
-                  color="primary">
-                  Выйти
-                </Button>
+                <Link to="/">
+                  <Button
+                    className={classes.ButtonExit}
+                    onClick={() => {
+                      localStorage.setItem('user', null);
+                      setUser(null);
+                    }}
+                    variant="contained"
+                    color="primary">
+                    Выйти
+                  </Button>
+                </Link>
               </div>
             </div>
 

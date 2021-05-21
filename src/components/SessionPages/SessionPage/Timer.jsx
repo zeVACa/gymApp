@@ -30,14 +30,10 @@ export default function Timer({ setTrainingTimeInSeconds }) {
           setSeconds(59);
         }
       }
-      setSwopWatchInSeconds((seconds) => seconds + 1);
       incTimeInSeconds();
-
-      // setTrainingTimeInSeconds((seconds) => seconds + 1);
     }, 1000);
     return () => {
       clearInterval(myInterval);
-      // setTrainingTimeInSeconds(swopWatchInSeconds);
     };
   });
 

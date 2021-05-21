@@ -1,19 +1,12 @@
 import React from 'react';
 import { Container, Typography, Box, Card } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import WhatshotTwoToneIcon from '@material-ui/icons/WhatshotTwoTone';
 import TimelapseTwoToneIcon from '@material-ui/icons/TimelapseTwoTone';
 import FitnessCenterTwoToneIcon from '@material-ui/icons/FitnessCenterTwoTone';
 
 import { getTimeInSeconds } from './trainingTime';
 
 const motivationalHeadline = ['Превосходно', 'Замечательно', 'Потрясно'];
-
-const trainingResults = {
-  time: '48 минут',
-  calories: '900kk',
-  generalTonnage: '850 кг.',
-};
 
 export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds }) {
   const [valueRating, setValueRating] = React.useState(4);
@@ -39,13 +32,6 @@ export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds })
             </Typography>
           </Typography>
         </Box>
-
-        {/* <Box mb={10}>
-          <Typography variant="h5" gutterBottom>
-            <WhatshotTwoToneIcon style={{ fontSize: 35 }} /> Сожжено калорий:{' '}
-            {trainingResults.calories}
-          </Typography>
-        </Box> */}
 
         <Box mb={10}>
           <Typography variant="h5" gutterBottom>

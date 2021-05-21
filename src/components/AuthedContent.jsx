@@ -28,8 +28,7 @@ import SessionPage from './SessionPages/SessionPage/SessionPage';
 import SessionResults from './SessionPages/SessionResultsPage';
 
 import ProgressPage from '../pages/ProgressPage';
-import MyTrainingPlan from '../pages/MyTrainingPlan';
-import HistoryPage from '../pages/HistoryPage';
+import MyTrainingPlan from '../pages/TrainingPlans/MyTrainingPlan';
 import SettingsPage from '../pages/SettingsPage';
 import PlanViewer from '../pages/TrainingPlans/PlanViewer';
 
@@ -57,9 +56,6 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  // menuButton: {
-  //   marginRight: 36,
-  // },
   hide: {
     display: 'none',
   },
@@ -91,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
@@ -245,6 +240,11 @@ export default function MiniDrawer({ setUser, user }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
+          <Route
+            exact
+            path="/training-history"
+            component={() => <TrainingHistoryPage user={user} />}
+          />
           <Route exact path="/progress" component={() => <ProgressPage user={user} />} />
           <Route
             exact
@@ -259,11 +259,6 @@ export default function MiniDrawer({ setUser, user }) {
                 setTrainingPlan={setTrainingPlan}
               />
             )}
-          />
-          <Route
-            exact
-            path="/training-history"
-            component={() => <TrainingHistoryPage user={user} />}
           />
           <Route
             exact

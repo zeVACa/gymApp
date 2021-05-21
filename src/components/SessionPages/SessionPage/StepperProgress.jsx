@@ -37,7 +37,6 @@ export default function ProgressMobileStepper({
       exercises: filteredData.map((el) => {
         if (typeof el.kg === 'string') el.kg = 0;
         if (typeof el.quantity === 'string') el.quantity = 0;
-        console.log(el);
         return el;
       }),
     };
@@ -45,6 +44,19 @@ export default function ProgressMobileStepper({
     const currentSessionTonnage = requestBody.exercises.reduce(
       (accum, value) => accum + value.kg * value.quantity,
       0,
+    );
+
+    setTonnageAccum(currentSessionTonnage);
+
+    fetch(
+      `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(requestBody),
+      },
     );
 
     console.log('tonnage', currentSessionTonnage);
@@ -86,7 +98,6 @@ export default function ProgressMobileStepper({
             <Button
               size="small"
               onClick={() => {
-                // handleNext();
                 handleSubmit();
               }}
               color="primary"

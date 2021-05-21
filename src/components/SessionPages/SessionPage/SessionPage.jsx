@@ -55,10 +55,9 @@ export default function SessionPage({
   });
 
   const [page, setPage] = useState(0);
-  const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
   const [currentTrainingExercises, setCurrentTrainingExercises] = useState(excercisesWithZeroValue);
 
-  const [previousTraining, setPreviousTraining] = useState([]);
+  const [previousTrainingExcercises, setPreviousTrainingExcercises] = useState([]);
 
   useEffect(() => {
     try {
@@ -68,7 +67,35 @@ export default function SessionPage({
         .then((res) => res.json())
         .then((data) => {
           console.log('prev training', data);
-          setPreviousTraining(data);
+
+          const excercises = data.exercises;
+
+          let excercisesPerPage = [];
+          let excercisesGroup = [];
+
+          for (let i = 0; i < excercises.length; i++) {
+            const excercise = excercises[i];
+
+            if (excercisesGroup.length === 0) {
+              excercisesGroup.push(excercise);
+              continue;
+            }
+
+            if (
+              excercisesGroup.length !== 0 &&
+              excercisesGroup[excercisesGroup.length - 1].exserciseId !== excercise.exserciseId
+            ) {
+              excercisesPerPage.push(excercisesGroup);
+              excercisesGroup = [];
+              excercisesGroup.push(excercise);
+            } else {
+              excercisesGroup.push(excercise);
+            }
+          }
+
+          console.log('Переупакованная по страницам предыдущая тренировка ', excercisesPerPage);
+
+          setPreviousTrainingExcercises(excercisesPerPage);
         });
     } catch (error) {
       console.log('prev training error', error);
@@ -76,9 +103,6 @@ export default function SessionPage({
   }, []);
 
   const excerciseOnPage = trainingPlan[currentDayIndex].excercises[page];
-
-  console.log('current:', currentTrainingExercises);
-  console.log('trainingPlan', trainingPlan);
 
   return (
     <div>
@@ -129,6 +153,7 @@ export default function SessionPage({
                   <TableSession
                     page={page}
                     trainingPlan={trainingPlan}
+                    previousTrainingExcercises={previousTrainingExcercises}
                     currentTrainingExercises={currentTrainingExercises}
                     setCurrentTrainingExercises={setCurrentTrainingExercises}
                     currentDayIndex={currentDayIndex}

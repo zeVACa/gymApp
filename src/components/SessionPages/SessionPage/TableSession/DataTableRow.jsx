@@ -1,14 +1,5 @@
-import { makeStyles, TableCell, TableRow, TextField } from '@material-ui/core';
+import { TableCell, TableRow, TextField } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-
-const useStyles = makeStyles({
-  customTextField: {
-    '& input::placeholder': {
-      color: 'green',
-      fontWeight: 'bolder',
-    },
-  },
-});
 
 const makeDataRow = (kg = 0, quantity = 0, exerciseId) => {
   let stamp = new Date();
@@ -33,8 +24,8 @@ const makeDataRow = (kg = 0, quantity = 0, exerciseId) => {
 
 export default function DataRow({
   rowIndex,
-  prevWeight = 50,
-  prevQuantity = 12,
+  prevWeight = 0,
+  prevQuantity = 0,
   exerciseId,
   currentTrainingExercises,
   setCurrentTrainingExercises,
@@ -42,8 +33,6 @@ export default function DataRow({
   isDisabled,
   setEnabledRows,
 }) {
-  const classes = useStyles();
-
   const rowData = currentTrainingExercises[page][rowIndex];
   const [weightValue, setWeightValue] = useState(rowData ? rowData.kg : '');
   const [quantityValue, setQuantityValue] = useState(rowData ? rowData.quantity : '');
@@ -67,7 +56,7 @@ export default function DataRow({
       <TableCell align="right">
         <TextField
           disabled={isDisabled}
-          onBlur={(e) => {
+          onBlur={() => {
             if (weightValue && quantityValue) {
               setEnabledRows((prevEnabledRows) => prevEnabledRows + 1);
             }

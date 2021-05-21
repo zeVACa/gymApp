@@ -1,9 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, TextField, Box, Container, Card, Typography } from '@material-ui/core';
+import { Button, TextField, Box, Container, Card, Typography, Snackbar } from '@material-ui/core';
 import './RegisterPageStyle/stylesheet.css';
 import { Redirect } from 'react-router';
+import MuiAlert from '@material-ui/lab/Alert';
 import { isEmailValid, isPasswordValid } from '../Validation/Valid';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function RegistrationPage() {
   function handleSubmit(e) {
@@ -22,22 +27,28 @@ function RegistrationPage() {
       },
       body: JSON.stringify(userData),
     }).then((res) => res.text());
-    // .then((data) => console.log(data));
 
-    setRedirect(true);
+    // setRedirect(true);
+    setOpen(true);
   }
 
   const [inputPassword1, setinputPassword1] = useState('');
-
   const [inputPassword2, setinputPassword2] = useState('');
-
   const [inputName, setInputName] = useState('');
 
   const [isValidEmail, setValidEmail] = useState('');
-
   const [isValidLogin, setValidLogin] = useState('');
 
+  const [open, setOpen] = useState(false);
   const [redirect, setRedirect] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <Container>
@@ -163,9 +174,7 @@ function RegistrationPage() {
                   setinputPassword2(e.target.value);
                 }}
                 type="password"
-                error={
-                  inputPassword1 !== inputPassword2 && inputPassword2.length > 0 ? true : false
-                }
+                error={inputPassword1 !== inputPassword2 && inputPassword2.length > 0}
                 helperText={
                   inputPassword1 !== inputPassword2
                     ? inputPassword2 !== ''
@@ -184,8 +193,6 @@ function RegistrationPage() {
                   inputPassword1 !== inputPassword2 ||
                   isValidLogin.length < 6 ||
                   inputPassword1.length < 1
-                    ? true
-                    : false
                 }
                 onClick={handleSubmit}
                 style={{ width: '200px', height: '45px', marginTop: '30px' }}>
@@ -199,6 +206,15 @@ function RegistrationPage() {
                 ''
               )}
             </div>
+            <Snackbar
+              open={open}
+              autoHideDuration={20000}
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Подтвердите регистрацию перейдя по ссылке отправленной на вашу почту
+              </Alert>
+            </Snackbar>
           </form>
         </Card>
       </div>

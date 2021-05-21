@@ -1,0 +1,57 @@
+/* @import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css'; */
+/* 
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css'; */
+
+@import '../../../../node_modules/swiper/swiper-bundle.css';
+* {
+  /* background-color: red; */
+}
+
+/* .swiper-container {
+  width: 600px;
+  height: 300px;
+} */
+
+.swiper-wrapper {
+  /* height: 100px; */
+  height: 570px;
+  /* display: flex; */
+  /* align-content: stretch; */
+  /* align-content: flex-end; */
+
+  align-items: stretch;
+  /* align-items: flex-end; */
+}
+
+.swiper-wrapper img {
+  height: 250px;
+}
+
+.swiper-wrapper div {
+  height: 100%;
+  /* align-self: stretch; */
+  /* align-self: flex-end; */
+  /* align-self: stretch; */
+}
+
+.swiper-wrapper div {
+  align-self: stretch;
+  /* height: 500px; */
+}
+
+/* .slider {
+  display: flex;
+} */
+
+.slider-item {
+  /* width: 100px; */
+  /* height: 100px; */
+  /* height: 100px; */
+  /* background: #6b6b6b; */
+  /* margin-bottom: 10px; */
+}
+
+.card-holder {
+}

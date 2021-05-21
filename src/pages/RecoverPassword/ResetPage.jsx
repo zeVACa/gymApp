@@ -42,7 +42,6 @@ export default function RecoverPasswordPage({ page, setPage, email }) {
       },
       body: JSON.stringify(body),
     }).then((res) => {
-      // console.log('status', console.log(res.status));
       setTimeout(() => setstatusSend(res.status), 600);
     });
 
@@ -95,19 +94,15 @@ export default function RecoverPasswordPage({ page, setPage, email }) {
               isPasswordValid(setinputPassword1(e.target.value));
             }}
             helperText={
-              isPasswordValid(inputPassword1) ? (
-                inputPassword1 === '' ? (
-                  false
-                ) : (
-                  <p>
-                    Пароль должен быть не короче
-                    <br /> 8 символов и содержать строч-
-                    <br />
-                    ную и заглавную буквы и цифру
-                  </p>
-                )
+              isPasswordValid(inputPassword1) && inputPassword1 !== '' ? (
+                <p>
+                  Пароль должен быть не короче
+                  <br /> 8 символов и содержать строч-
+                  <br />
+                  ную и заглавную буквы и цифру
+                </p>
               ) : (
-                false
+                ''
               )
             }
             value={inputPassword1}

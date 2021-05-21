@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 export default function TableSession({
   page,
   trainingPlan,
+  previousTrainingExcercises = [],
   currentTrainingExercises,
   setCurrentTrainingExercises,
   currentDayIndex,
@@ -26,6 +27,8 @@ export default function TableSession({
   const classes = useStyles();
 
   const [enabledRows, setEnabledRows] = useState(1);
+
+  const prevTrainingExcercises = previousTrainingExcercises[page];
 
   useEffect(() => {
     setEnabledRows(currentTrainingExercises[page].length + 1);
@@ -47,6 +50,8 @@ export default function TableSession({
                 exerciseId={trainingPlan[currentDayIndex].excercises[page].id}
                 rowIndex={index}
                 page={page}
+                prevWeight={prevTrainingExcercises ? prevTrainingExcercises[index].weight : 0}
+                prevQuantity={prevTrainingExcercises ? prevTrainingExcercises[index].quantity : 0}
                 currentTrainingExercises={currentTrainingExercises}
                 setCurrentTrainingExercises={setCurrentTrainingExercises}
                 isDisabled={index + 1 > enabledRows}

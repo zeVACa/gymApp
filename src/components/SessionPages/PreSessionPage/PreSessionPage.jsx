@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { bindActionCreators } from 'redux';
+import React, { useEffect } from 'react';
+// import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import {
-  Button,
-  Grid,
-  Typography,
-  Container,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-} from '@material-ui/core';
+import { Button, Grid, Typography, Container, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import WeekdaysBar from './WeekdaysBar';
+
+import ExcercisesSlider from './ExcercisesSlider';
 
 function PreSessionPage({
   user,
@@ -23,10 +16,8 @@ function PreSessionPage({
   currentDayIndex,
   setCurrentDayIndex,
 }) {
-  console.log('trainingPlan', trainingPlan);
   useEffect(() => {
     if (!trainingPlan[currentDayIndex]) {
-      console.log('fetch here');
       fetch(
         `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/${
           user.activePlanId
@@ -49,7 +40,7 @@ function PreSessionPage({
   }, [currentDayIndex]);
 
   return (
-    <Container pt={10}>
+    <Container pt={10} style={{ overflowX: 'none' }}>
       <Typography variant="h4" component="h4" color="textPrimary">
         <Typography component="span" variant="span" color="textSecondary">
           Большая мышечная группа:
@@ -62,53 +53,12 @@ function PreSessionPage({
         Дополнительные: трицепс, предплечье
       </Typography>
       <WeekdaysBar currentDayIndex={currentDayIndex} setCurrentDayIndex={setCurrentDayIndex} />
-      <Grid
-        container
-        spacing={3}
-        style={{ flexWrap: 'nowrap', overflowX: 'scroll', paddingTop: '48px' }}>
-        {!trainingPlan[currentDayIndex] ? (
-          <h1>План загружается</h1>
-        ) : (
-          trainingPlan[currentDayIndex].excercises.map((exerciseItem) => {
-            return (
-              <Grid style={{ minWidth: '400px' }} item sm={3}>
-                {/* <div style={{ height: 240, backgroundColor: '#ececec' }}>
-                    <img
-                      src="http://fitness-app.germanywestcentral.cloudapp.azure.com/Images/%D0%B0%D1%80%D0%B1%D1%83%D0%B7.jpg"
-                      alt=""
-                    />
-                  </div> */}
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image
-                    // className={classes.media}
-                    image={exerciseItem.photo}
-                    title="Contemplative Reptile"
-                    height="250px"
-                  />
-                </CardActionArea>
-
-                <Card style={{ height: '55%' }}>
-                  <CardContent style={{ padding: '24px 16px' }}>
-                    <Typography
-                      my={2}
-                      align="left"
-                      color="textPrimary"
-                      component="h5"
-                      variant="h5"
-                      paragraph>{`${exerciseItem.name}`}</Typography>
-                    <Typography align="left" paragraph color="textSecondary">
-                      {exerciseItem.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            );
-          })
-        )}
+      <Grid container sm={12} xs={1} style={{ width: '100%', overflowX: 'none' }}>
+        <Box my={4} style={{ overflowX: 'hidden' }}>
+          <ExcercisesSlider trainingPlan={trainingPlan} currentDayIndex={currentDayIndex} />
+        </Box>
       </Grid>
-      <div style={{ textAlign: 'center', padding: '64px 0' }}>
+      <div style={{ textAlign: 'center', padding: '0 0' }}>
         <Button variant="contained" color="primary">
           <Link style={{ color: 'inherit' }} to="/session">
             Начать тренировку

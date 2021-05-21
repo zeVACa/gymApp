@@ -12,16 +12,14 @@ const DataMetricsUser = {
   MetricPullUps: '',
 };
 
-function RegisterMetrics(props) {
+function RegisterMetrics({ user, setUser, isMetricscollected, setisMetricscollected }) {
   const [registrationPage, setregistrationPage] = React.useState(0);
   const [ButtonNextorEnd, SetButtonNextorEnd] = React.useState('Далее');
 
   const [validPage, setValidPage] = React.useState(false);
 
-  const [isMetricscollected, setisMetricscollected] = React.useState(false);
-
   return (
-    <Container
+    <div
       style={{
         display: ' flex',
         justifyContent: 'center',
@@ -35,12 +33,12 @@ function RegisterMetrics(props) {
         DataMetricsUser={DataMetricsUser}
         validPage={validPage}
         setValidPage={setValidPage}
-        user={props.user}
-        setUser={props.setUser}
+        user={user}
+        setUser={setUser}
         isMetricscollected={isMetricscollected}
         setisMetricscollected={setisMetricscollected}
       />
-    </Container>
+    </div>
   );
 }
 
