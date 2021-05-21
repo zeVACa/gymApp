@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { makeStyles, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import DataTableRow from './DataTableRow';
 
 const useStyles = makeStyles({
@@ -28,7 +28,6 @@ export default function TableSession({
   const [enabledRows, setEnabledRows] = useState(1);
 
   useEffect(() => {
-    console.log('exercises on page', currentTrainingExercises[page]);
     setEnabledRows(currentTrainingExercises[page].length + 1);
   }, [page]);
   return (
@@ -43,10 +42,10 @@ export default function TableSession({
         </TableHead>
         <TableBody>
           {Array.from({ length: trainingPlan[currentDayIndex].excercises[page].setsNumber }).map(
-            (row, index) => (
+            (_, index) => (
               <DataTableRow
                 exerciseId={trainingPlan[currentDayIndex].excercises[page].id}
-                index={index}
+                rowIndex={index}
                 page={page}
                 currentTrainingExercises={currentTrainingExercises}
                 setCurrentTrainingExercises={setCurrentTrainingExercises}

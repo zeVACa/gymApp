@@ -37,10 +37,15 @@ function PreSessionPage({
           setTrainingPlan((prevState) => {
             const cloneState = JSON.parse(JSON.stringify(prevState));
             cloneState[currentDayIndex] = data;
+            console.log('todays training plan: ', cloneState[currentDayIndex]);
             return cloneState;
           });
         });
     }
+
+    // if (previousTraining.length === 0) {
+
+    // }
   }, [currentDayIndex]);
 
   return (
@@ -56,7 +61,6 @@ function PreSessionPage({
       <Typography variant="h6" component="h6" color="textSecondary">
         Дополнительные: трицепс, предплечье
       </Typography>
-      {/* <div>{JSON.stringify(test)}</div> */}
       <WeekdaysBar currentDayIndex={currentDayIndex} setCurrentDayIndex={setCurrentDayIndex} />
       <Grid
         container
@@ -79,8 +83,9 @@ function PreSessionPage({
                     component="img"
                     image
                     // className={classes.media}
-                    image="http://fitness-app.germanywestcentral.cloudapp.azure.com/Images/%D0%B0%D1%80%D0%B1%D1%83%D0%B7.jpg"
+                    image={exerciseItem.photo}
                     title="Contemplative Reptile"
+                    height="250px"
                   />
                 </CardActionArea>
 

@@ -381,7 +381,7 @@ export default function SettingsPage({ user, setUser }) {
                 className={classes.child}
                 id="standard-basic"
                 label="Пол"
-                defaultValue={UserMetrics.metricGender}
+                defaultValue="Male"
                 fullWidth
               />
               <TextField

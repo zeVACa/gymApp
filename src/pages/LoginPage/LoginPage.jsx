@@ -18,10 +18,10 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginPage({ setUser }) {
-  const [loginValue, setLoginValue] = useState('Andrey');
+  const [loginValue, setLoginValue] = useState('');
   const [isLoginDirty, setIsLoginDirty] = useState(false);
 
-  const [passwordValue, setPasswordValue] = useState('Admin1.');
+  const [passwordValue, setPasswordValue] = useState('');
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
   const [isPasswordShowing, setIsPasswordShowing] = useState(false);
 
@@ -40,7 +40,7 @@ export default function LoginPage({ setUser }) {
   };
 
   const isLoginValid = (login) => {
-    return login.length > 6;
+    return login.length > 4;
   };
 
   const submitHandler = (e) => {
@@ -102,7 +102,7 @@ export default function LoginPage({ setUser }) {
                 isLoginDirty && loginValue === ''
                   ? 'введите логин'
                   : isLoginDirty && !isLoginValid(loginValue)
-                  ? 'Введите корректный логин'
+                  ? 'логен должен быть более 4 символов'
                   : ''
               }
               variant="outlined"
