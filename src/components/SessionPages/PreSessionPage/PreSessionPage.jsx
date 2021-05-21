@@ -1,19 +1,9 @@
 import React, { useEffect } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-import {
-  Button,
-  Grid,
-  Typography,
-  Container,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-  Box,
-} from '@material-ui/core';
+import { Button, Grid, Typography, Container, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import WeekdaysBar from './WeekdaysBar';
 
@@ -63,45 +53,6 @@ function PreSessionPage({
           <ExcercisesSlider trainingPlan={trainingPlan} currentDayIndex={currentDayIndex} />
         </Box>
       </Grid>
-      {/* <Grid
-        container
-        spacing={3}
-        style={{ flexWrap: 'nowrap', overflowX: 'scroll', paddingTop: '48px' }}>
-        {!trainingPlan[currentDayIndex] ? (
-          <h1>План загружается</h1>
-        ) : (
-          trainingPlan[currentDayIndex].excercises.map((exerciseItem) => {
-            return (
-              <Grid style={{ minWidth: '400px' }} item sm={3}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    image
-                    image={exerciseItem.photo}
-                    title="Contemplative Reptile"
-                    height="250px"
-                  />
-                </CardActionArea>
-
-                <Card style={{ height: '55%' }}>
-                  <CardContent style={{ padding: '24px 16px' }}>
-                    <Typography
-                      my={2}
-                      align="left"
-                      color="textPrimary"
-                      component="h5"
-                      variant="h5"
-                      paragraph>{`${exerciseItem.name}`}</Typography>
-                    <Typography align="left" paragraph color="textSecondary">
-                      {exerciseItem.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            );
-          })
-        )}
-      </Grid> */}
       <div style={{ textAlign: 'center', padding: '0 0' }}>
         <Button variant="contained" color="primary">
           <Link style={{ color: 'inherit' }} to="/session">

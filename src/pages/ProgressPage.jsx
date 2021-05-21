@@ -1,4 +1,4 @@
-import { Container, InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
+import { Container, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
@@ -159,7 +159,7 @@ const ProgressPage = ({ user }) => {
   }, [Period]);
 
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       {loading === true && Object.keys(data).length ? (
         <div>
           <Container className={classes.Header}>

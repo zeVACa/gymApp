@@ -55,7 +55,6 @@ export default function SessionPage({
   });
 
   const [page, setPage] = useState(0);
-  const [lastTrainingExercises, setLastTrainingExercises] = useState([]);
   const [currentTrainingExercises, setCurrentTrainingExercises] = useState(excercisesWithZeroValue);
 
   const [previousTrainingExcercises, setPreviousTrainingExcercises] = useState([]);
