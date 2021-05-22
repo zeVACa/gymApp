@@ -3,6 +3,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import '../../../../node_modules/swiper/swiper-bundle.css';
+import './excercisesSlider.css';
 
 import SwiperCore, { Pagination, Navigation } from 'swiper/core';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core';

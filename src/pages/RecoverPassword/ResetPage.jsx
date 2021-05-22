@@ -31,8 +31,8 @@ export default function RecoverPasswordPage({ page, setPage, email }) {
   const handleChangePassword = (e) => {
     let body = {
       Email: email,
-      Password: inputPassword1,
-      ConfirmPassword: inputPassword1,
+      Password: inputPassword1.replace(/[^a-zа-яё0-9\s]/gi, ' '),
+      ConfirmPassword: inputPassword1.replace(/[^a-zа-яё0-9\s]/gi, ' '),
       Code: inputCodeFromEmail,
     };
     fetch(`http://fitness-app.germanywestcentral.cloudapp.azure.com/api/ResetPassword`, {

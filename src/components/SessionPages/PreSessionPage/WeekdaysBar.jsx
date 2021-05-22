@@ -1,8 +1,8 @@
 import { Button, ButtonGroup } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function WeekdaysBar({ currentDayIndex, setCurrentDayIndex }) {
-  const weekDays = [
+  const [weekDays, setWeekDays] = useState([
     { text: 'ПН', isPlanDay: true, isActive: true },
     { text: 'ВТ', isPlanDay: false, isActive: false },
     { text: 'СР', isPlanDay: true, isActive: false },
@@ -10,7 +10,7 @@ export default function WeekdaysBar({ currentDayIndex, setCurrentDayIndex }) {
     { text: 'ПТ', isPlanDay: true, isActive: false },
     { text: 'СБ', isPlanDay: false, isActive: false },
     { text: 'ВС', isPlanDay: false, isActive: false },
-  ];
+  ]);
 
   return (
     <ButtonGroup
@@ -23,7 +23,25 @@ export default function WeekdaysBar({ currentDayIndex, setCurrentDayIndex }) {
         return (
           <Button
             key={item.text}
-            onClick={(e) => setCurrentDayIndex(index)}
+            onClick={(e) => {
+              setCurrentDayIndex(index);
+
+              // setWeekDays((prevDays) => {
+              //   const daysClone = JSON.parse(JSON.stringify(prevDays));
+
+              //   for (let i = 0; i < daysClone.length; i++) {
+              //     if (i === currentDayIndex) {
+              //       daysClone[i].isActive = true;
+              //     } else {
+              //       daysClone[i].isActive = false;
+              //     }
+              //   }
+
+              //   console.log('daysClone', daysClone);
+
+              //   return daysClone;
+              // });
+            }}
             style={
               item.isPlanDay
                 ? item.isActive

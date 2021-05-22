@@ -16,7 +16,8 @@
 
 .swiper-wrapper {
   /* height: 100px; */
-  height: 570px;
+  height: 600px;
+  /* height: 5700px; */
   /* display: flex; */
   /* align-content: stretch; */
   /* align-content: flex-end; */
@@ -37,7 +38,7 @@
 }
 
 .swiper-wrapper div {
-  align-self: stretch;
+  /* align-self: stretch; */
   /* height: 500px; */
 }
 
