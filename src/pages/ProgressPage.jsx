@@ -1,4 +1,11 @@
-import { Container, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
+import {
+  Container,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
@@ -178,7 +185,7 @@ const ProgressPage = ({ user }) => {
       {loading === true && Object.keys(data).length ? (
         <div>
           <Container className={classes.Header}>
-            <h1>Прогресс</h1>
+            <Typography variant="h3">Прогресс</Typography>
           </Container>
           <div>
             <FormControl className={classes.formControl}>

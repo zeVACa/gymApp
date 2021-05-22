@@ -54,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     marginTop: '15px',
     color: 'rgb(60 62 72)',
+    display: 'inline-block',
+    paddingTop: '8px',
   },
 }));
 

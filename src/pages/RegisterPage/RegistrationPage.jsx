@@ -64,8 +64,9 @@ function RegistrationPage() {
             maxHeight: '486px',
             maxWidth: '500px',
             display: 'flex',
-            justifyContent: 'center',
             flexDirection: 'column',
+            alignSelf: 'center',
+            justifyContent: 'center',
             textAlign: 'center',
           }}>
           <Typography variant="h5" component="h2" style={{ color: 'black' }}>

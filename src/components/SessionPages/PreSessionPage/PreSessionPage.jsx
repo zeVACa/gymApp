@@ -17,8 +17,9 @@ function PreSessionPage({
   setCurrentDayIndex,
 }) {
   useEffect(() => {
-    if (!trainingPlan[currentDayIndex]) {
-      try {
+    console.log('user', user);
+    try {
+      if (!trainingPlan[currentDayIndex]) {
         fetch(
           `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/getPlan/${
             user.activePlanId
@@ -36,42 +37,57 @@ function PreSessionPage({
               return cloneState;
             });
           });
-      } catch (err) {
-        console.log('fetch plan error: ', err);
       }
+    } catch (err) {
+      console.log('fetch plan error: ', err);
     }
-
-    // if (previousTraining.length === 0) {
-
-    // }
   }, [currentDayIndex]);
 
   return (
     <Container pt={10} style={{ overflowX: 'none' }}>
-      <Typography variant="h4" component="h4" color="textPrimary">
-        <Typography component="span" variant="span" color="textSecondary">
-          Большая мышечная группа:
-        </Typography>
-        {trainingPlan[currentDayIndex]
-          ? ' ' + trainingPlan[currentDayIndex].muscleGroupName
-          : ' Загрузка'}
-      </Typography>
-      <Typography variant="h6" component="h6" color="textSecondary">
-        Дополнительные: трицепс, предплечье
-      </Typography>
-      <WeekdaysBar currentDayIndex={currentDayIndex} setCurrentDayIndex={setCurrentDayIndex} />
-      <Grid container sm={12} xs={1} style={{ width: '100%', overflowX: 'none' }}>
-        <Box my={4} style={{ overflowX: 'hidden' }}>
-          <ExcercisesSlider trainingPlan={trainingPlan} currentDayIndex={currentDayIndex} />
+      {user.activePlanId === 0 ? (
+        <Box pt={12}>
+          <Typography variant="h3" align="center">
+            У вас нет активных планов тренировок
+          </Typography>
+          <Box my={4}>
+            <Typography variant="h4" color="textSecondary" align="center">
+              <Link to="/my-training-plan">
+                <Button variant="contained" color="primary">
+                  Перейти к планам
+                </Button>
+              </Link>
+            </Typography>
+          </Box>
         </Box>
-      </Grid>
-      <div style={{ textAlign: 'center', padding: '0 0' }}>
-        <Button variant="contained" color="primary">
-          <Link style={{ color: 'inherit' }} to="/session">
-            Начать тренировку
-          </Link>
-        </Button>
-      </div>
+      ) : (
+        <div>
+          <Typography variant="h4" component="h4" color="textPrimary">
+            <Typography component="span" variant="span" color="textSecondary">
+              Большая мышечная группа:
+            </Typography>
+            {trainingPlan[currentDayIndex]
+              ? ' ' + trainingPlan[currentDayIndex].muscleGroupName
+              : ' Загрузка'}
+          </Typography>
+          <Typography variant="h6" component="h6" color="textSecondary">
+            Дополнительные: трицепс, предплечье
+          </Typography>
+          <WeekdaysBar currentDayIndex={currentDayIndex} setCurrentDayIndex={setCurrentDayIndex} />
+          <Grid container sm={12} xs={1} style={{ width: '100%', overflowX: 'none' }}>
+            <Box my={4} style={{ overflowX: 'hidden' }}>
+              <ExcercisesSlider trainingPlan={trainingPlan} currentDayIndex={currentDayIndex} />
+            </Box>
+          </Grid>
+          <div style={{ textAlign: 'center', padding: '0 0' }}>
+            <Button variant="contained" color="primary">
+              <Link style={{ color: 'inherit' }} to="/session">
+                Начать тренировку
+              </Link>
+            </Button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 }

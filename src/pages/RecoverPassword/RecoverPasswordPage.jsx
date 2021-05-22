@@ -11,13 +11,13 @@ const useStyles = makeStyles((theme) => ({
   },
   Card: {
     margin: '0 auto',
-    color: '#8E8E8E',
+    // color: '#8E8E8E',
     fontFamily: 'Roboto',
     lineHeight: '50px',
-    padding: '40px',
+    padding: '30px 40px',
     maxWidth: '900px',
     textAlign: 'center',
-    height: '900px',
+    // height: '900px',
   },
 }));
 

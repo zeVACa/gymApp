@@ -141,7 +141,7 @@ export default function MiniDrawer({ setUser, user }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
-            Gym App
+            Gym Helper
           </Typography>
         </Toolbar>
       </AppBar>
@@ -197,7 +197,7 @@ export default function MiniDrawer({ setUser, user }) {
               <ListItemIcon>
                 <ExploreOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={'План тренировок'} />
+              <ListItemText primary={'Планы тренировок'} />
             </ListItem>
           </Link>
           <Link to="/training-history">

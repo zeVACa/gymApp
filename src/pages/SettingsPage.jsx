@@ -133,7 +133,7 @@ export default function SettingsPage({ user, setUser }) {
       .then((res) => res.json())
       .then(
         (data) => setUserMetrics(data),
-        setTimeout(() => SetLoading(true), 800),
+        setTimeout(() => SetLoading(true), 600),
       );
   }, [isComponentChangePassword]);
 
