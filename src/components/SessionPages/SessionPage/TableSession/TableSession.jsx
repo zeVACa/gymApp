@@ -31,12 +31,11 @@ export default function TableSession({
   const prevTrainingExcercises = previousTrainingExcercises[page];
 
   useEffect(() => {
-    console.log('предыдущая тренировка на текущей странице', prevTrainingExcercises);
     setEnabledRows(currentTrainingExercises[page].length + 1);
   }, [page]);
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Подход</TableCell>

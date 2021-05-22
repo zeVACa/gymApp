@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   PlanConstructor: {
     textAlign: 'center',
+    marginTop: '72px',
   },
 }));
 
@@ -87,10 +88,10 @@ export default function MyTrainingPlan({
       },
     })
       .then((res) => res.json())
-      .then((data) => {
-        setIsGoal(data.metricGoal.toString());
-        SetLoading(true);
-      });
+      .then(
+        (data) => setIsGoal(data.metricGoal.toString()),
+        setTimeout(() => SetLoading(true), 400),
+      );
   }, []);
 
   useEffect(() => {
@@ -109,11 +110,6 @@ export default function MyTrainingPlan({
         <div>
           <div className={classes.headerH1}>
             <h1 className={classes.Heading}>Планы тренировок</h1>
-          </div>
-          <div className={classes.PlanConstructor}>
-            <Button disabled size="large" variant="contained" color="primary" disableElevation>
-              Конструктор плана
-            </Button>
           </div>
           <Container className={`${classes.Container} ContainerLi`}>
             {plans.map((plan) => {
@@ -135,6 +131,11 @@ export default function MyTrainingPlan({
               );
             })}
           </Container>
+          <div className={classes.PlanConstructor}>
+            <Button disabled size="large" variant="contained" color="primary" disableElevation>
+              Конструктор плана
+            </Button>
+          </div>
         </div>
       ) : (
         <div className={classes.Loading}>

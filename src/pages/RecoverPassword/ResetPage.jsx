@@ -1,4 +1,4 @@
-import { Button, TextField, Box } from '@material-ui/core';
+import { Button, TextField, Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,17 +49,12 @@ export default function RecoverPasswordPage({ page, setPage, email }) {
   };
 
   return (
-    <div>
-      <Button
-        style={{ margin: '35px', background: 'slategray' }}
-        size="large"
-        onClick={() => setPage(page - 1)}
-        variant="contained"
-        color="primary">
-        Назад
-      </Button>
+    <div style={{ maxWidth: 600, padding: '48px 32px' }}>
+      <Typography variant="h4" color="textSecondary">
+        Проверьте свой почтовый ящик
+      </Typography>
       <form autoComplete="off">
-        <Box my={5}>
+        <Box mt={4}>
           <TextField
             onChange={(e) => {
               setInputCodeFromEmail(e.target.value);
@@ -145,6 +140,14 @@ export default function RecoverPasswordPage({ page, setPage, email }) {
           Изменить пароль
         </Button>
       </form>
+      <Button
+        style={{ marginTop: '42px' }}
+        size="large"
+        onClick={() => setPage(page - 1)}
+        variant="text"
+        color="primary">
+        Указать другой адресс
+      </Button>
     </div>
   );
 }

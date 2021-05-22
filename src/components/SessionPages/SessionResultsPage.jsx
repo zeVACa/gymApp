@@ -22,7 +22,10 @@ export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds })
       <Card style={{ padding: '80px', color: '#737473', fontFamily: 'sans-serif MS Sans Serif' }}>
         <Box my={10}>
           <Typography variant="h5" gutterBottom>
-            <TimelapseTwoToneIcon style={{ fontSize: 35 }} /> Общее время тренировки составило:{' '}
+            <TimelapseTwoToneIcon
+              style={{ verticalAlign: 'sub', marginRight: '10px', fontSize: 35 }}
+            />
+            Общее время тренировки составило:
             <Typography color="textSecondary" variant="span">
               {Math.floor(getTimeInSeconds() / 3600)}:
               {Math.floor(getTimeInSeconds() / 60) < 10
@@ -35,8 +38,10 @@ export default function SesstionResults({ tonnageAccum, TrainingTimeInSeconds })
 
         <Box mb={10}>
           <Typography variant="h5" gutterBottom>
-            <FitnessCenterTwoToneIcon style={{ fontSize: 35 }} /> Общий тоннаж тренировки:{' '}
-            {tonnageAccum} кг
+            <FitnessCenterTwoToneIcon
+              style={{ verticalAlign: 'sub', marginRight: '10px', fontSize: 35 }}
+            />
+            Общий тоннаж тренировки: {tonnageAccum} кг
           </Typography>
         </Box>
         <Typography variant="subtitle2" gutterBottom style={{ textAlign: 'center' }}>

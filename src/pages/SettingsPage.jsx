@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -133,7 +133,7 @@ export default function SettingsPage({ user, setUser }) {
       .then((res) => res.json())
       .then(
         (data) => setUserMetrics(data),
-        setTimeout(() => SetLoading(true), 800),
+        setTimeout(() => SetLoading(true), 600),
       );
   }, [isComponentChangePassword]);
 
@@ -261,16 +261,18 @@ export default function SettingsPage({ user, setUser }) {
                   Сменить пароль
                 </Button>
 
-                <Button
-                  className={classes.ButtonExit}
-                  onClick={() => {
-                    localStorage.setItem('user', null);
-                    setUser(null);
-                  }}
-                  variant="contained"
-                  color="primary">
-                  Выйти
-                </Button>
+                <Link to="/">
+                  <Button
+                    className={classes.ButtonExit}
+                    onClick={() => {
+                      localStorage.setItem('user', null);
+                      setUser(null);
+                    }}
+                    variant="contained"
+                    color="primary">
+                    Выйти
+                  </Button>
+                </Link>
               </div>
             </div>
 
@@ -380,7 +382,7 @@ export default function SettingsPage({ user, setUser }) {
                 className={classes.child}
                 id="standard-basic"
                 label="Пол"
-                defaultValue={UserMetrics.metricGender}
+                defaultValue="Male"
                 fullWidth
               />
               <TextField

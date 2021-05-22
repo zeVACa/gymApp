@@ -58,6 +58,25 @@ export default function ProgressMobileStepper({
         body: JSON.stringify(requestBody),
       },
     );
+
+    console.log('tonnage', currentSessionTonnage);
+    setTonnageAccum(currentSessionTonnage);
+
+    console.log('requestBody', requestBody);
+    try {
+      fetch(
+        `http://fitness-app.germanywestcentral.cloudapp.azure.com/api/trainingSubmit/${user.id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          body: JSON.stringify(requestBody),
+        },
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

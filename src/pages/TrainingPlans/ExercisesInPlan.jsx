@@ -1,19 +1,14 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { useState, useEffect } from 'react';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-
 import FitnessCenterOutlinedIcon from '@material-ui/icons/FitnessCenterOutlined';
-import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 
 import Paper from '@material-ui/core/Paper';
@@ -38,7 +33,7 @@ export default function ExercisesInPlan({ index, day, trainingPlan }) {
   const classes = useStyles();
 
   return (
-    <div class="content">
+    <div className="content">
       <TimelineItem>
         <TimelineSeparator>
           {trainingPlan.trainings[index].length !== 0 ? (

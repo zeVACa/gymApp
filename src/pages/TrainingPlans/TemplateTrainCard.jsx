@@ -54,13 +54,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     marginTop: '15px',
     color: 'rgb(60 62 72)',
+    display: 'inline-block',
+    paddingTop: '8px',
   },
 }));
 
 let countBgImage = 0;
 let bgImage = [
-  'https://sun9-32.userapi.com/impf/c834304/v834304102/8f9b3/UBTEpiNTr5Y.jpg?size=1920x1080&quality=96&sign=8b133ac63cb03034809dea8196dabba2&type=album',
-  'https://sun9-16.userapi.com/impf/c846018/v846018553/45d58/_LoJna0OGqA.jpg?size=1920x1080&quality=96&sign=1c8dd4288fc1212d87d6f737e76ee87b&type=album',
+  'https://1.bp.blogspot.com/_QhQHrMXYV40/TMMqWym0ptI/AAAAAAAAAN4/YcycJsbxH6Y/s320/129.jpg',
+  'https://myxperiencefitness.com/wp-content/uploads/2019/10/Oct-2-10-tips-for-flat-abs-feature-photo.jpg',
 ];
 export default function MyTrainingPlan(props) {
   const classes = useStyles();

@@ -9,6 +9,8 @@ export default function Timer({ setTrainingTimeInSeconds }) {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(15);
 
+  const [swopWatchInSeconds, setSwopWatchInSeconds] = useState(0);
+
   useEffect(() => {
     let myInterval = setInterval(() => {
       if (seconds > 0) {

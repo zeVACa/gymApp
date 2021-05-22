@@ -9,10 +9,10 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export default function LoginPage({ setUser }) {
-  const [loginValue, setLoginValue] = useState('Andrey');
+  const [loginValue, setLoginValue] = useState('');
   const [isLoginDirty, setIsLoginDirty] = useState(false);
 
-  const [passwordValue, setPasswordValue] = useState('Admin1.');
+  const [passwordValue, setPasswordValue] = useState('');
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
   const [isPasswordShowing, setIsPasswordShowing] = useState(false);
 

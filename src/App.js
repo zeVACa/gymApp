@@ -16,6 +16,7 @@ import RecoverPasswordPage from './pages/RecoverPassword/RecoverPasswordPage';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isMetricscollected, setisMetricscollected] = useState(false);
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
@@ -31,7 +32,12 @@ function App() {
         user['isMetrics'] === true ? (
           <SideMenu user={user} setUser={setUser} />
         ) : (
-          <RegisterMetrics user={user} setUser={setUser} />
+          <RegisterMetrics
+            user={user}
+            setUser={setUser}
+            isMetricscollected={isMetricscollected}
+            setisMetricscollected={setisMetricscollected}
+          />
         )
       ) : (
         <Navigation />

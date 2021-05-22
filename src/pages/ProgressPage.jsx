@@ -1,4 +1,11 @@
-import { Container, InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
+import {
+  Container,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
 
 import { useState, useEffect } from 'react';
@@ -52,11 +59,17 @@ const ProgressPage = ({ user }) => {
 
   const [loading, SetLoading] = useState(false);
 
-  const [Period, setPeriod] = React.useState(7);
+  const [step, setStep] = useState('Week');
+  const [Period, setPeriod] = React.useState(4);
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
 
   const handleChange = (event) => {
     setPeriod(event.target.value);
+  };
+
+  const handleChangestep = (event) => {
+    setStep(event.target.value);
   };
 
   const handleClose = () => {
@@ -71,7 +84,7 @@ const ProgressPage = ({ user }) => {
     let userData = {
       UserId: user.id,
       Period: Period,
-      Step: 'Day',
+      step: step,
     };
 
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/Tonnage', {
@@ -116,8 +129,17 @@ const ProgressPage = ({ user }) => {
   useEffect(() => {
     let userData = {
       UserId: user.id,
-      Period: Period,
-      Step: 'Day',
+      Period:
+        Period === 4
+          ? '30'
+          : Period === 12
+          ? '90'
+          : Period === 24
+          ? '183'
+          : Period === 48
+          ? '365'
+          : '30',
+      step: 'Day',
     };
 
     fetch('http://fitness-app.germanywestcentral.cloudapp.azure.com/api/GetWeight', {
@@ -159,11 +181,11 @@ const ProgressPage = ({ user }) => {
   }, [Period]);
 
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       {loading === true && Object.keys(data).length ? (
         <div>
           <Container className={classes.Header}>
-            <h1>Прогресс</h1>
+            <Typography variant="h3">Прогресс</Typography>
           </Container>
           <div>
             <FormControl className={classes.formControl}>
@@ -175,13 +197,30 @@ const ProgressPage = ({ user }) => {
                 onClose={handleClose}
                 onOpen={handleOpen}
                 value={Period}
-                defaultValue={7}
+                defaultValue={4}
                 onChange={handleChange}>
-                <MenuItem value={7}>Неделя</MenuItem>
-                <MenuItem value={30}>Месяц</MenuItem>
-                <MenuItem value={90}>Три месяца</MenuItem>
+                <MenuItem value={4}>Месяц</MenuItem>
+                <MenuItem value={12}>Три месяца </MenuItem>
+                <MenuItem value={24}>Пол года </MenuItem>
+                <MenuItem value={48}>Год</MenuItem>
               </Select>
             </FormControl>
+
+            {/* <FormControl className={classes.formControl}>
+              <InputLabel id="demo-controlled-open-select-label">step</InputLabel>
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                open={open2}
+                onClose={handleClose2}
+                onOpen={handleOpen2}
+                value={step}
+                defaultValue={'Week'}
+                onChange={handleChangestep}>
+                <MenuItem value={'Day'}>Дни</MenuItem>
+                <MenuItem value={'Week'}>Недели</MenuItem>
+              </Select>
+            </FormControl> */}
           </div>
           <Line
             className={classes.Table}

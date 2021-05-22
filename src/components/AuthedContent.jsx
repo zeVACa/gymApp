@@ -32,7 +32,7 @@ import MyTrainingPlan from '../pages/TrainingPlans/MyTrainingPlan';
 import SettingsPage from '../pages/SettingsPage';
 import PlanViewer from '../pages/TrainingPlans/PlanViewer';
 
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import TrainingHistoryPage from './trainingHistory/TrainingHistoryPage';
 
 const drawerWidth = 264;
@@ -106,7 +106,7 @@ export default function MiniDrawer({ setUser, user }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
-  const [trainingPlan, setTrainingPlan] = useState([]);
+  const [trainingPlan, setTrainingPlan] = useState({});
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
   const [tonnageAccum, setTonnageAccum] = useState(0);
@@ -141,7 +141,7 @@ export default function MiniDrawer({ setUser, user }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
-            Gym App
+            Gym Helper
           </Typography>
         </Toolbar>
       </AppBar>
@@ -197,7 +197,7 @@ export default function MiniDrawer({ setUser, user }) {
               <ListItemIcon>
                 <ExploreOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={'План тренировок'} />
+              <ListItemText primary={'Планы тренировок'} />
             </ListItem>
           </Link>
           <Link to="/training-history">
@@ -239,6 +239,8 @@ export default function MiniDrawer({ setUser, user }) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Redirect to="/pre-session" />
+
         <Switch>
           <Route
             exact
@@ -260,7 +262,6 @@ export default function MiniDrawer({ setUser, user }) {
               />
             )}
           />
-
           <Route
             exact
             path="/plan"

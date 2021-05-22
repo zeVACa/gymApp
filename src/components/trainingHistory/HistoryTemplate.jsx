@@ -8,8 +8,6 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FitnessCenterTwoToneIcon from '@material-ui/icons/FitnessCenterTwoTone';
 
@@ -22,14 +20,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
 export default function TemplateHistoryTrain({ date, tonnage, excercises, timeInSeconds }) {
-  const classes = useStyles();
   return (
     <Accordion>
       <AccordionSummary

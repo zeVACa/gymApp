@@ -1,9 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, TextField, Box, Container, Card, Typography } from '@material-ui/core';
+import { Button, TextField, Box, Container, Card, Typography, Snackbar } from '@material-ui/core';
 import './RegisterPageStyle/stylesheet.css';
 import { Redirect } from 'react-router';
+import MuiAlert from '@material-ui/lab/Alert';
 import { isEmailValid, isPasswordValid } from '../Validation/Valid';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function RegistrationPage() {
   function handleSubmit(e) {
@@ -23,7 +28,8 @@ function RegistrationPage() {
       body: JSON.stringify(userData),
     }).then((res) => res.text());
 
-    setRedirect(true);
+    // setRedirect(true);
+    setOpen(true);
   }
 
   const [inputPassword1, setinputPassword1] = useState('');
@@ -33,7 +39,16 @@ function RegistrationPage() {
   const [isValidEmail, setValidEmail] = useState('');
   const [isValidLogin, setValidLogin] = useState('');
 
+  const [open, setOpen] = useState(false);
   const [redirect, setRedirect] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <Container>
@@ -49,8 +64,9 @@ function RegistrationPage() {
             maxHeight: '486px',
             maxWidth: '500px',
             display: 'flex',
-            justifyContent: 'center',
             flexDirection: 'column',
+            alignSelf: 'center',
+            justifyContent: 'center',
             textAlign: 'center',
           }}>
           <Typography variant="h5" component="h2" style={{ color: 'black' }}>
@@ -191,6 +207,15 @@ function RegistrationPage() {
                 ''
               )}
             </div>
+            <Snackbar
+              open={open}
+              autoHideDuration={20000}
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Подтвердите регистрацию перейдя по ссылке отправленной на вашу почту
+              </Alert>
+            </Snackbar>
           </form>
         </Card>
       </div>

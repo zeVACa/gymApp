@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    // fontFamily: 'Roboto',
   },
 }));
 
@@ -26,7 +27,7 @@ const Navigation = () => {
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-                Gym App
+                Gym Helper
               </Link>
             </Typography>
             <Box mr={3}>
