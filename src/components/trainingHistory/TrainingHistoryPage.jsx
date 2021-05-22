@@ -41,6 +41,7 @@ export default function TrainingHistoryPage({ user }) {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log('prev trainings');
         setTrainingDays(data);
         setIsLoaded(true);
       });
@@ -50,30 +51,38 @@ export default function TrainingHistoryPage({ user }) {
     <Container>
       {isLoaded ? (
         <Box>
-          <Box mt={4} mb={3}>
-            <Typography component="h3" variant="h3">
-              История тренировок
-            </Typography>
-          </Box>
-          {trainingDays.reverse().map((historyItem) => {
-            const date = historyItem.date.split('T')[0];
-
-            const tonnage = historyItem.excercises.reduce(
-              (accum, value) => accum + value.weight * value.quantity,
-              0,
-            );
-
-            return (
-              <Box my={2}>
-                <TemplateHistoryTrain
-                  date={date}
-                  tonnage={tonnage}
-                  excercises={historyItem.excercises}
-                  timeInSeconds={Math.floor(Math.random() * (80 - 45 + 1) + 45) * 60}
-                />
+          {trainingDays.length === 0 ? (
+            <div style={{ paddingTop: '90px' }}>
+              <Typography variant="h3">У вас нет завершенных тренировок</Typography>
+            </div>
+          ) : (
+            <div>
+              <Box mt={4} mb={3}>
+                <Typography component="h3" variant="h3">
+                  История тренировок
+                </Typography>
               </Box>
-            );
-          })}
+              {trainingDays.reverse().map((historyItem) => {
+                const date = historyItem.date.split('T')[0];
+
+                const tonnage = historyItem.excercises.reduce(
+                  (accum, value) => accum + value.weight * value.quantity,
+                  0,
+                );
+
+                return (
+                  <Box my={2}>
+                    <TemplateHistoryTrain
+                      date={date}
+                      tonnage={tonnage}
+                      excercises={historyItem.excercises}
+                      timeInSeconds={Math.floor(Math.random() * (80 - 45 + 1) + 45) * 60}
+                    />
+                  </Box>
+                );
+              })}
+            </div>
+          )}
         </Box>
       ) : (
         <div className={classes.Loading}>

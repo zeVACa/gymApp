@@ -32,7 +32,7 @@ import MyTrainingPlan from '../pages/TrainingPlans/MyTrainingPlan';
 import SettingsPage from '../pages/SettingsPage';
 import PlanViewer from '../pages/TrainingPlans/PlanViewer';
 
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import TrainingHistoryPage from './trainingHistory/TrainingHistoryPage';
 
 const drawerWidth = 264;
@@ -239,6 +239,8 @@ export default function MiniDrawer({ setUser, user }) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Redirect to="/pre-session" />
+
         <Switch>
           <Route
             exact
